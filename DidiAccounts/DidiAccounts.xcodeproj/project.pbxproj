@@ -8,13 +8,16 @@
 
 /* Begin PBXBuildFile section */
 		579F1AD91D70374F002E9631 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 579F1AD81D70374F002E9631 /* main.m */; };
-		579F1ADC1D70374F002E9631 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 579F1ADB1D70374F002E9631 /* AppDelegate.m */; };
 		579F1ADF1D70374F002E9631 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 579F1ADE1D70374F002E9631 /* ViewController.m */; };
 		579F1AE21D70374F002E9631 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 579F1AE01D70374F002E9631 /* Main.storyboard */; };
 		579F1AE41D70374F002E9631 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 579F1AE31D70374F002E9631 /* Assets.xcassets */; };
 		579F1AE71D70374F002E9631 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 579F1AE51D70374F002E9631 /* LaunchScreen.storyboard */; };
 		579F1AEF1D704138002E9631 /* Realm.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 579F1AEE1D704138002E9631 /* Realm.framework */; };
 		579F1AF01D704138002E9631 /* Realm.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 579F1AEE1D704138002E9631 /* Realm.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		579F1AFA1D73E118002E9631 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 579F1AF71D73E117002E9631 /* AppDelegate.m */; };
+		579F1AFF1D73E1A4002E9631 /* Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 579F1AFE1D73E1A4002E9631 /* Info.plist */; };
+		579F1B021D73E229002E9631 /* RootViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 579F1B011D73E229002E9631 /* RootViewController.m */; };
+		79721813456B6DA00AB5329D /* Pods_DidiAccounts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 12B25F37D5156238D9105565 /* Pods_DidiAccounts.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -32,18 +35,23 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		12B25F37D5156238D9105565 /* Pods_DidiAccounts.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_DidiAccounts.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		353267DD4007386603591AAC /* Pods-DidiAccounts.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-DidiAccounts.debug.xcconfig"; path = "Pods/Target Support Files/Pods-DidiAccounts/Pods-DidiAccounts.debug.xcconfig"; sourceTree = "<group>"; };
 		579F1AD41D70374F002E9631 /* DidiAccounts.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = DidiAccounts.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		579F1AD81D70374F002E9631 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
-		579F1ADA1D70374F002E9631 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
-		579F1ADB1D70374F002E9631 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
 		579F1ADD1D70374F002E9631 /* ViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
 		579F1ADE1D70374F002E9631 /* ViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
 		579F1AE11D70374F002E9631 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		579F1AE31D70374F002E9631 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		579F1AE61D70374F002E9631 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
-		579F1AE81D70374F002E9631 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		579F1AEE1D704138002E9631 /* Realm.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Realm.framework; sourceTree = "<group>"; };
 		579F1AF41D7043F2002E9631 /* RealmConfig.sh */ = {isa = PBXFileReference; lastKnownFileType = text.script.sh; path = RealmConfig.sh; sourceTree = "<group>"; };
+		579F1AF61D73E117002E9631 /* AppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
+		579F1AF71D73E117002E9631 /* AppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
+		579F1AFE1D73E1A4002E9631 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		579F1B001D73E229002E9631 /* RootViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RootViewController.h; sourceTree = "<group>"; };
+		579F1B011D73E229002E9631 /* RootViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RootViewController.m; sourceTree = "<group>"; };
+		8B942C258AB5B456C569AAE1 /* Pods-DidiAccounts.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-DidiAccounts.release.xcconfig"; path = "Pods/Target Support Files/Pods-DidiAccounts/Pods-DidiAccounts.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -52,6 +60,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				579F1AEF1D704138002E9631 /* Realm.framework in Frameworks */,
+				79721813456B6DA00AB5329D /* Pods_DidiAccounts.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -65,6 +74,8 @@
 				579F1AEE1D704138002E9631 /* Realm.framework */,
 				579F1AD61D70374F002E9631 /* DidiAccounts */,
 				579F1AD51D70374F002E9631 /* Products */,
+				91C37323191292B74E4F0059 /* Pods */,
+				DF102870FAF5B14981AF18CE /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -79,14 +90,15 @@
 		579F1AD61D70374F002E9631 /* DidiAccounts */ = {
 			isa = PBXGroup;
 			children = (
-				579F1ADA1D70374F002E9631 /* AppDelegate.h */,
-				579F1ADB1D70374F002E9631 /* AppDelegate.m */,
+				579F1B041D743B97002E9631 /* ChatCell */,
+				579F1AFD1D73E11F002E9631 /* RootViewController */,
+				579F1AF51D73E117002E9631 /* AppConfigure */,
 				579F1ADD1D70374F002E9631 /* ViewController.h */,
 				579F1ADE1D70374F002E9631 /* ViewController.m */,
 				579F1AE01D70374F002E9631 /* Main.storyboard */,
 				579F1AE31D70374F002E9631 /* Assets.xcassets */,
 				579F1AE51D70374F002E9631 /* LaunchScreen.storyboard */,
-				579F1AE81D70374F002E9631 /* Info.plist */,
+				579F1AFE1D73E1A4002E9631 /* Info.plist */,
 				579F1AD71D70374F002E9631 /* Supporting Files */,
 			);
 			path = DidiAccounts;
@@ -100,6 +112,48 @@
 			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
+		579F1AF51D73E117002E9631 /* AppConfigure */ = {
+			isa = PBXGroup;
+			children = (
+				579F1AF61D73E117002E9631 /* AppDelegate.h */,
+				579F1AF71D73E117002E9631 /* AppDelegate.m */,
+			);
+			path = AppConfigure;
+			sourceTree = "<group>";
+		};
+		579F1AFD1D73E11F002E9631 /* RootViewController */ = {
+			isa = PBXGroup;
+			children = (
+				579F1B001D73E229002E9631 /* RootViewController.h */,
+				579F1B011D73E229002E9631 /* RootViewController.m */,
+			);
+			path = RootViewController;
+			sourceTree = "<group>";
+		};
+		579F1B041D743B97002E9631 /* ChatCell */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = ChatCell;
+			sourceTree = "<group>";
+		};
+		91C37323191292B74E4F0059 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				353267DD4007386603591AAC /* Pods-DidiAccounts.debug.xcconfig */,
+				8B942C258AB5B456C569AAE1 /* Pods-DidiAccounts.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
+		DF102870FAF5B14981AF18CE /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				12B25F37D5156238D9105565 /* Pods_DidiAccounts.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -107,11 +161,14 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 579F1AEB1D70374F002E9631 /* Build configuration list for PBXNativeTarget "DidiAccounts" */;
 			buildPhases = (
+				9B453647D60563D401422875 /* [CP] Check Pods Manifest.lock */,
 				579F1AD01D70374F002E9631 /* Sources */,
 				579F1AD11D70374F002E9631 /* Frameworks */,
 				579F1AD21D70374F002E9631 /* Resources */,
 				579F1AF11D704139002E9631 /* Embed Frameworks */,
 				579F1AF31D70439B002E9631 /* ShellScript */,
+				AED227380754BEA2026A559D /* [CP] Embed Pods Frameworks */,
+				5E59434B2DECB324E83142A1 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -133,6 +190,7 @@
 				TargetAttributes = {
 					579F1AD31D70374F002E9631 = {
 						CreatedOnToolsVersion = 7.3.1;
+						DevelopmentTeam = 45EWE4Y3CE;
 					};
 				};
 			};
@@ -159,6 +217,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				579F1AFF1D73E1A4002E9631 /* Info.plist in Resources */,
 				579F1AE71D70374F002E9631 /* LaunchScreen.storyboard in Resources */,
 				579F1AE41D70374F002E9631 /* Assets.xcassets in Resources */,
 				579F1AE21D70374F002E9631 /* Main.storyboard in Resources */,
@@ -182,6 +241,51 @@
 			shellPath = /bin/sh;
 			shellScript = "";
 		};
+		5E59434B2DECB324E83142A1 /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-DidiAccounts/Pods-DidiAccounts-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		9B453647D60563D401422875 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+		AED227380754BEA2026A559D /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-DidiAccounts/Pods-DidiAccounts-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
 /* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
@@ -189,8 +293,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				579F1AFA1D73E118002E9631 /* AppDelegate.m in Sources */,
 				579F1ADF1D70374F002E9631 /* ViewController.m in Sources */,
-				579F1ADC1D70374F002E9631 /* AppDelegate.m in Sources */,
+				579F1B021D73E229002E9631 /* RootViewController.m in Sources */,
 				579F1AD91D70374F002E9631 /* main.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -303,31 +408,39 @@
 		};
 		579F1AEC1D70374F002E9631 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 353267DD4007386603591AAC /* Pods-DidiAccounts.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)",
 				);
 				INFOPLIST_FILE = DidiAccounts/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = victor.DidiAccounts;
+				PRODUCT_BUNDLE_IDENTIFIER = com.shenxian.DidiAccounts;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
 			};
 			name = Debug;
 		};
 		579F1AED1D70374F002E9631 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 8B942C258AB5B456C569AAE1 /* Pods-DidiAccounts.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)",
 				);
 				INFOPLIST_FILE = DidiAccounts/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = victor.DidiAccounts;
+				PRODUCT_BUNDLE_IDENTIFIER = com.shenxian.DidiAccounts;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
 			};
 			name = Release;
 		};
@@ -350,6 +463,7 @@
 				579F1AED1D70374F002E9631 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

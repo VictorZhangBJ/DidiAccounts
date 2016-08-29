@@ -1,0 +1,10 @@
+platform :ios, '8.0'
+
+use_frameworks!
+
+target 'DidiAccounts' do
+
+pod 'AFNetworking'
+pod 'Masonry'
+
+end
