@@ -8,11 +8,15 @@
 
 #import "ViewController.h"
 #import <Realm/Realm.h>
+#import "MyTextCell.h"
+#import "SelfTextCell.h"
 
 @interface ViewController ()
 
 @property (nonatomic, strong) UIView *inputView;
 @property (nonatomic, strong) UITextField *textField;
+@property (nonatomic, strong) UITableView *tableView;
+@property (nonatomic, strong) NSMutableArray *dataSource;
 
 @end
 
@@ -22,15 +26,73 @@
     
     [super viewDidLoad];
     self.title = @"滴滴记账";
+    [self initTableView];
     [self initInputView];
+
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillChangeFrame:) name:UIKeyboardWillChangeFrameNotification object:nil];
     
     
 }
 
+-(void)initTableView{
+    self.tableView = [[UITableView alloc]initWithFrame:CGRectZero style:UITableViewStylePlain];
+    [self.view addSubview:self.tableView];
+    [self.tableView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.left.equalTo(self.view.mas_left);
+        make.right.equalTo(self.view.mas_right);
+        make.top.equalTo(self.view.mas_top);
+        make.bottom.mas_equalTo(self.view.mas_bottom).offset(-50);
+    }];
+
+    self.tableView.rowHeight = UITableViewAutomaticDimension;
+    self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
+    
+    self.tableView.delegate = self;
+    self.tableView.dataSource = self;
+    //[self.tableView registerClass:[MyTextCell class] forCellReuseIdentifier:@"MyTextCell"];
+    //[self.tableView registerNib:[[[NSBundle mainBundle] loadNibNamed:@"SelfTextCell" owner:nil options:nil] lastObject] forCellReuseIdentifier:@"SelfTextCell"];
+    [self.tableView registerNib:[UINib nibWithNibName:@"SelfTextCell" bundle:nil] forCellReuseIdentifier:@"SelfTextCell"];
+    self.dataSource = [[NSMutableArray alloc]init];
+}
+
+-(void)scrollViewDidEndDragging:(UIScrollView *)scrollView willDecelerate:(BOOL)decelerate
+{
+    [self.textField resignFirstResponder];
+}
+
+
+-(NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
+{
+    return  1;
+}
+
+-(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
+{
+    return  10;
+}
+
+-(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    SelfTextCell *cell = (SelfTextCell *)[tableView dequeueReusableCellWithIdentifier:@"SelfTextCell" forIndexPath:indexPath];
+   
+    cell.chatTextLabel.text = @"你米打开了几分拉斯加附件阿萨德来房间爱圣诞节福利卡时间段来房间爱上了贷款纠纷拉萨的发";
+    
+    return  cell;
+}
+
+-(CGFloat)tableView:(UITableView *)tableView estimatedHeightForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    return 60;
+}
+
+-(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    [tableView deselectRowAtIndexPath:indexPath animated:YES];
+}
 -(void)initInputView{
     self.inputView = [UIView new];
     [self.view addSubview:self.inputView];
+    [self.view bringSubviewToFront:self.inputView];
     self.inputView.backgroundColor = [UIColor lightGrayColor];
     [self.inputView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.height.equalTo(@50);
@@ -105,7 +167,7 @@
     CGRect keyFrame = [noti.userInfo[UIKeyboardFrameEndUserInfoKey] CGRectValue];
     
     //控制器view需要移动的距离
-    //CGFloat transformY = keyFrame.origin.y - self.view.frame.size.height;
+    CGFloat transformY = keyFrame.origin.y - self.view.frame.size.height;
 
     CGRect frame = self.view.frame;
     frame.size.height = keyFrame.origin.y;
@@ -114,14 +176,21 @@
     
     //执行动画
     [UIView animateWithDuration:duration animations:^{
-        //self.inputView.transform = CGAffineTransformMakeTranslation(0, transformY);
+//        self.inputView.transform = CGAffineTransformMakeTranslation(0, transformY);
+//        
+//        [UIView setAnimationCurve:curve];
+//        self.view.frame = frame;
+        NSLog(@"tranfromY = %f",transformY);
+        [self.inputView mas_updateConstraints:^(MASConstraintMaker *make) {
+            make.height.equalTo(@50);
+            make.bottom.equalTo(self.view.mas_bottom).offset(transformY);
+            make.centerX.equalTo(self.view.mas_centerX);
+            make.left.equalTo(self.view.mas_left);
+        }];
         
-        [UIView setAnimationCurve:curve];
-        self.view.frame = frame;
+        self.tableView.contentOffset = CGPointMake(0, -transformY);
         [self.view layoutIfNeeded];
     }];
-    
-    
     
 }
 -(void)viewWillDisappear:(BOOL)animated

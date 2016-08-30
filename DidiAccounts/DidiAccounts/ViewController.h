@@ -9,7 +9,7 @@
 #import <UIKit/UIKit.h>
 #import "RootViewController.h"
 
-@interface ViewController : RootViewController
+@interface ViewController : RootViewController<UITableViewDelegate, UITableViewDataSource, UIScrollViewDelegate>
 
 
 @end
