@@ -23,11 +23,11 @@
                         </constraints>
                     </imageView>
                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="sendTextNodeBkg" translatesAutoresizingMaskIntoConstraints="NO" id="wg7-sO-kzZ">
-                        <rect key="frame" x="53" y="24" width="211" height="110"/>
+                        <rect key="frame" x="186" y="24" width="78" height="110"/>
                         <rect key="contentStretch" x="0.5" y="0.5" width="0.10000000000000001" height="0.10000000000000001"/>
                     </imageView>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3fY-rk-CyL">
-                        <rect key="frame" x="78" y="36" width="168" height="76"/>
+                        <rect key="frame" x="206" y="36" width="40" height="76"/>
                         <rect key="contentStretch" x="0.25" y="0.25" width="0.5" height="0.5"/>
                         <fontDescription key="fontDescription" type="system" pointSize="16"/>
                         <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
@@ -37,12 +37,12 @@
                 <constraints>
                     <constraint firstAttribute="bottomMargin" secondItem="3fY-rk-CyL" secondAttribute="bottom" constant="10" id="2qY-ww-BK5"/>
                     <constraint firstItem="3fY-rk-CyL" firstAttribute="trailing" secondItem="wg7-sO-kzZ" secondAttribute="trailing" constant="-18" id="86f-Zi-PCY"/>
-                    <constraint firstItem="3fY-rk-CyL" firstAttribute="leading" secondItem="wg7-sO-kzZ" secondAttribute="leading" constant="25" id="CPD-nr-mo3"/>
+                    <constraint firstItem="3fY-rk-CyL" firstAttribute="leading" secondItem="wg7-sO-kzZ" secondAttribute="leading" constant="20" id="CPD-nr-mo3"/>
                     <constraint firstItem="3fY-rk-CyL" firstAttribute="bottom" secondItem="wg7-sO-kzZ" secondAttribute="bottom" constant="-22" id="Gg4-pf-5bs"/>
                     <constraint firstItem="b5F-ao-37w" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="topMargin" constant="18" id="Hyh-xB-vwi"/>
                     <constraint firstAttribute="bottomMargin" relation="greaterThanOrEqual" secondItem="b5F-ao-37w" secondAttribute="bottom" id="ZgX-Ys-uPl"/>
                     <constraint firstItem="b5F-ao-37w" firstAttribute="leading" secondItem="3fY-rk-CyL" secondAttribute="trailing" constant="25" id="ae3-Jc-1EQ"/>
-                    <constraint firstItem="3fY-rk-CyL" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leadingMargin" constant="70" id="d8g-V7-IVE"/>
+                    <constraint firstItem="3fY-rk-CyL" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="H2p-sc-9uM" secondAttribute="leadingMargin" constant="70" id="d8g-V7-IVE"/>
                     <constraint firstItem="3fY-rk-CyL" firstAttribute="top" secondItem="wg7-sO-kzZ" secondAttribute="top" constant="12" id="mhf-W3-UDT"/>
                     <constraint firstItem="3fY-rk-CyL" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="topMargin" constant="28" id="tKp-Hv-YBh"/>
                     <constraint firstItem="b5F-ao-37w" firstAttribute="trailing" secondItem="H2p-sc-9uM" secondAttribute="trailingMargin" constant="-5" id="whl-tH-0xz"/>

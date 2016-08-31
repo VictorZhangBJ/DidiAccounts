@@ -10,11 +10,16 @@
 #import <Realm/Realm.h>
 #import "MyTextCell.h"
 #import "SelfTextCell.h"
+#import "InputView/InputView.h"
 
 @interface ViewController ()
+{
+    IFlySpeechRecognizer *_iFlySpeechRecognizer;
+    NSURL *_audioPlayURL;
+    AVAudioRecorder *_audioRecorder;
+}
 
-@property (nonatomic, strong) UIView *inputView;
-@property (nonatomic, strong) UITextField *textField;
+@property (nonatomic, strong) InputView *inputView;
 @property (nonatomic, strong) UITableView *tableView;
 @property (nonatomic, strong) NSMutableArray *dataSource;
 
@@ -28,9 +33,102 @@
     self.title = @"滴滴记账";
     [self initTableView];
     [self initInputView];
+    //[self initAudio];
 
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillChangeFrame:) name:UIKeyboardWillChangeFrameNotification object:nil];
     
+    
+}
+
+//录音部分初始化
+-(void)initAudio
+{
+    NSError *error = nil;
+    
+    AVAudioSession *audioSession = [AVAudioSession sharedInstance];
+    [audioSession setCategory:AVAudioSessionCategoryPlayAndRecord error:&error];
+    if (error) {
+        NSLog(@"audioSesson %@ %ld %@",[error domain], [error code], [[error userInfo] description]);
+    }
+    
+    [audioSession setActive:YES error:&error];
+    if (error) {
+        NSLog(@"audioSesson %@ %ld %@",[error domain], [error code], [[error userInfo] description]);
+    }
+    
+    //通过可变字典进行配置项的加载
+    NSMutableDictionary *setAudioDic = [NSMutableDictionary new];
+    
+    //设置录音格式
+    [setAudioDic setValue:@(kAudioFormatMPEG4AAC) forKey:AVFormatIDKey];
+    
+    //设置录音采样率
+    [setAudioDic setValue:@(44100) forKey:AVSampleRateKey];
+    
+    //设置录音通道数
+    [setAudioDic setValue:@(2) forKey:AVNumberOfChannelsKey];
+    
+    //线性采样位数
+    [setAudioDic setValue:@(24) forKey:AVLinearPCMBitDepthKey];
+    
+    //录音的质量
+    [setAudioDic setValue:@(AVAudioQualityHigh) forKey:AVEncoderAudioQualityKey];
+    
+    NSString *cachesURLString = [NSSearchPathForDirectoriesInDomains(NSCachesDirectory, NSUserDomainMask, YES) objectAtIndex:0];
+    NSLog(@"caches = %@",cachesURLString);
+    
+    NSString *filePath = [cachesURLString stringByAppendingPathComponent:@"asreview.pcm"];
+    NSLog(@"filePath = %@",filePath);
+    
+    _audioPlayURL = [NSURL URLWithString:filePath];
+    _audioRecorder = [[AVAudioRecorder alloc]initWithURL:_audioPlayURL settings:setAudioDic error:&error];
+    if (error) {
+        NSLog(@"error = %@",error.description);
+    }
+    
+    //开启音量检测
+    _audioRecorder.meteringEnabled = YES;
+    _audioRecorder.delegate = self;
+    
+    
+}
+
+//初始化iFly SDK
+-(void)initFlySpeechRecognizer
+{
+    // 1.创建语言听写对象
+    _iFlySpeechRecognizer = [IFlySpeechRecognizer sharedInstance];
+    _iFlySpeechRecognizer.delegate = self;
+    //设置听写模式
+    [_iFlySpeechRecognizer setParameter:@"iat" forKey:[IFlySpeechConstant IFLY_DOMAIN]];
+    [_iFlySpeechRecognizer setParameter:@"asreview.pcm" forKey:[IFlySpeechConstant ASR_AUDIO_PATH]];
+    [_iFlySpeechRecognizer startListening];
+    
+}
+
+#pragma - iFly回调
+-(void)onResults:(NSArray *)results isLast:(BOOL)isLast
+{
+    
+}
+
+-(void)onError:(IFlySpeechError *)errorCode
+{
+    
+}
+
+-(void)onEndOfSpeech
+{
+    
+}
+
+-(void)onBeginOfSpeech
+{
+    
+}
+
+-(void)onVolumeChanged:(int)volume
+{
     
 }
 
@@ -57,7 +155,7 @@
 
 -(void)scrollViewDidEndDragging:(UIScrollView *)scrollView willDecelerate:(BOOL)decelerate
 {
-    [self.textField resignFirstResponder];
+    [self.inputView.textField resignFirstResponder];
 }
 
 
@@ -68,14 +166,14 @@
 
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    return  10;
+    return  self.dataSource.count;
 }
 
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     SelfTextCell *cell = (SelfTextCell *)[tableView dequeueReusableCellWithIdentifier:@"SelfTextCell" forIndexPath:indexPath];
    
-    cell.chatTextLabel.text = @"你米打开了几分拉斯加附件阿萨德来房间爱圣诞节福利卡时间段来房间爱上了贷款纠纷拉萨的发";
+    cell.chatTextLabel.text = self.dataSource[indexPath.row];
     
     return  cell;
 }
@@ -90,10 +188,8 @@
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
 }
 -(void)initInputView{
-    self.inputView = [UIView new];
+    self.inputView = [[InputView alloc] init];
     [self.view addSubview:self.inputView];
-    [self.view bringSubviewToFront:self.inputView];
-    self.inputView.backgroundColor = [UIColor lightGrayColor];
     [self.inputView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.height.equalTo(@50);
         make.bottom.equalTo(self.view.mas_bottom).offset(0);
@@ -101,43 +197,44 @@
         make.left.equalTo(self.view.mas_left);
     }];
     
-    self.textField = [UITextField new];
-    [self.inputView addSubview:self.textField];
-    self.textField.borderStyle = UITextBorderStyleRoundedRect;
-    self.textField.backgroundColor = [UIColor whiteColor];
-    self.textField.placeholder = @"请输入消费内容和金额";
-    
-    [self.textField mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.height.equalTo(@40);
-        make.centerX.equalTo(self.inputView.mas_centerX);
-        make.centerY.equalTo(self.inputView.mas_centerY);
-        make.left.equalTo(self.inputView.mas_left).offset(60);
-    }];
-    
-    //语言按钮
-    UIButton *speechBtn = [UIButton buttonWithType:UIButtonTypeSystem];
-    [speechBtn addTarget:self action:@selector(speechBtnClick) forControlEvents:UIControlEventTouchUpInside];
-    [self.inputView addSubview:speechBtn];
-    [speechBtn setTitle:@"语音" forState:UIControlStateNormal];
-    [speechBtn mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.centerY.equalTo(self.inputView.mas_centerY);
-        make.width.equalTo(@60);
-        make.height.equalTo(@40);
-        make.left.equalTo(self.inputView.mas_left);
-    }];
-    
-    //文字按钮
-    UIButton *textInputBtn = [UIButton buttonWithType:UIButtonTypeSystem];
-    [textInputBtn setTitle:@"文字" forState:UIControlStateNormal];
-    [textInputBtn addTarget:self action:@selector(textInputBtnClick) forControlEvents:UIControlEventTouchUpInside];
-    [self.inputView addSubview:textInputBtn];
-    [textInputBtn mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.width.equalTo(@60);
-        make.height.equalTo(@40);
-        make.centerY.equalTo(self.inputView.mas_centerY);
-        make.right.equalTo(self.inputView.mas_right);
-        
-    }];
+//    self.textField = [UITextField new];
+//    self.textField.clearButtonMode = UITextFieldViewModeWhileEditing;
+//    [self.inputView addSubview:self.textField];
+//    self.textField.borderStyle = UITextBorderStyleRoundedRect;
+//    self.textField.backgroundColor = [UIColor whiteColor];
+//    self.textField.placeholder = @"请输入消费内容和金额";
+//    
+//    [self.textField mas_makeConstraints:^(MASConstraintMaker *make) {
+//        make.height.equalTo(@40);
+//        make.centerX.equalTo(self.inputView.mas_centerX);
+//        make.centerY.equalTo(self.inputView.mas_centerY);
+//        make.left.equalTo(self.inputView.mas_left).offset(60);
+//    }];
+//    
+//    //语言按钮
+//    UIButton *speechBtn = [UIButton buttonWithType:UIButtonTypeSystem];
+//    [speechBtn addTarget:self action:@selector(speechBtnClick) forControlEvents:UIControlEventTouchUpInside];
+//    [self.inputView addSubview:speechBtn];
+//    [speechBtn setTitle:@"语音" forState:UIControlStateNormal];
+//    [speechBtn mas_makeConstraints:^(MASConstraintMaker *make) {
+//        make.centerY.equalTo(self.inputView.mas_centerY);
+//        make.width.equalTo(@60);
+//        make.height.equalTo(@40);
+//        make.left.equalTo(self.inputView.mas_left);
+//    }];
+//    
+//    //文字按钮
+//    UIButton *textInputBtn = [UIButton buttonWithType:UIButtonTypeSystem];
+//    [textInputBtn setTitle:@"文字" forState:UIControlStateNormal];
+//    [textInputBtn addTarget:self action:@selector(textInputBtnClick) forControlEvents:UIControlEventTouchUpInside];
+//    [self.inputView addSubview:textInputBtn];
+//    [textInputBtn mas_makeConstraints:^(MASConstraintMaker *make) {
+//        make.width.equalTo(@60);
+//        make.height.equalTo(@40);
+//        make.centerY.equalTo(self.inputView.mas_centerY);
+//        make.right.equalTo(self.inputView.mas_right);
+//        
+//    }];
     
     
 }
@@ -147,12 +244,14 @@
 }
 
 -(void)textInputBtnClick {
-    
+    [self.dataSource addObject:self.inputView.textField.text];
+    [self.tableView reloadData];
+    self.inputView.textField.text = @"";
 }
 
 -(void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event
 {
-    [self.textField resignFirstResponder];
+    [self.inputView.textField resignFirstResponder];
 }
 
 /*
@@ -188,14 +287,14 @@
             make.left.equalTo(self.view.mas_left);
         }];
         
-        self.tableView.contentOffset = CGPointMake(0, -transformY);
+        //self.tableView.contentOffset = CGPointMake(0, -transformY);
         [self.view layoutIfNeeded];
     }];
     
 }
 -(void)viewWillDisappear:(BOOL)animated
 {
-    [self.textField resignFirstResponder];
+    [self.inputView.textField resignFirstResponder];
 }
 
 - (void)didReceiveMemoryWarning {
