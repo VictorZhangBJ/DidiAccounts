@@ -31,6 +31,9 @@
 		579F1B491D76B12B002E9631 /* libz.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 579F1B481D76B12B002E9631 /* libz.tbd */; };
 		579F1B4C1D76B7ED002E9631 /* iflyMSC.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 579F1B341D76B067002E9631 /* iflyMSC.framework */; };
 		579F1B501D76DA20002E9631 /* InputView.m in Sources */ = {isa = PBXBuildFile; fileRef = 579F1B4F1D76DA20002E9631 /* InputView.m */; };
+		579F1B541D7833CF002E9631 /* IFlyManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 579F1B531D7833CF002E9631 /* IFlyManager.m */; };
+		579F1B571D783420002E9631 /* IATConfig.m in Sources */ = {isa = PBXBuildFile; fileRef = 579F1B561D783420002E9631 /* IATConfig.m */; };
+		579F1B5A1D783D48002E9631 /* ISRDataHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 579F1B591D783D48002E9631 /* ISRDataHelper.m */; };
 		79721813456B6DA00AB5329D /* Pods_DidiAccounts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 12B25F37D5156238D9105565 /* Pods_DidiAccounts.framework */; };
 /* End PBXBuildFile section */
 
@@ -83,6 +86,12 @@
 		579F1B4A1D76B1C8002E9631 /* iflyMSC.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = iflyMSC.framework; sourceTree = "<group>"; };
 		579F1B4E1D76DA20002E9631 /* InputView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = InputView.h; sourceTree = "<group>"; };
 		579F1B4F1D76DA20002E9631 /* InputView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = InputView.m; sourceTree = "<group>"; };
+		579F1B521D7833CF002E9631 /* IFlyManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IFlyManager.h; sourceTree = "<group>"; };
+		579F1B531D7833CF002E9631 /* IFlyManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IFlyManager.m; sourceTree = "<group>"; };
+		579F1B551D783420002E9631 /* IATConfig.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IATConfig.h; sourceTree = "<group>"; };
+		579F1B561D783420002E9631 /* IATConfig.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IATConfig.m; sourceTree = "<group>"; };
+		579F1B581D783D48002E9631 /* ISRDataHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ISRDataHelper.h; sourceTree = "<group>"; };
+		579F1B591D783D48002E9631 /* ISRDataHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ISRDataHelper.m; sourceTree = "<group>"; };
 		8B942C258AB5B456C569AAE1 /* Pods-DidiAccounts.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-DidiAccounts.release.xcconfig"; path = "Pods/Target Support Files/Pods-DidiAccounts/Pods-DidiAccounts.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -132,6 +141,7 @@
 		579F1AD61D70374F002E9631 /* DidiAccounts */ = {
 			isa = PBXGroup;
 			children = (
+				579F1B511D7833B5002E9631 /* iFly */,
 				579F1B4D1D76DA0D002E9631 /* InputView */,
 				579F1B041D743B97002E9631 /* ChatCell */,
 				579F1AFD1D73E11F002E9631 /* RootViewController */,
@@ -192,6 +202,19 @@
 				579F1B4F1D76DA20002E9631 /* InputView.m */,
 			);
 			path = InputView;
+			sourceTree = "<group>";
+		};
+		579F1B511D7833B5002E9631 /* iFly */ = {
+			isa = PBXGroup;
+			children = (
+				579F1B581D783D48002E9631 /* ISRDataHelper.h */,
+				579F1B591D783D48002E9631 /* ISRDataHelper.m */,
+				579F1B551D783420002E9631 /* IATConfig.h */,
+				579F1B561D783420002E9631 /* IATConfig.m */,
+				579F1B521D7833CF002E9631 /* IFlyManager.h */,
+				579F1B531D7833CF002E9631 /* IFlyManager.m */,
+			);
+			path = iFly;
 			sourceTree = "<group>";
 		};
 		91C37323191292B74E4F0059 /* Pods */ = {
@@ -364,10 +387,13 @@
 				579F1AFA1D73E118002E9631 /* AppDelegate.m in Sources */,
 				579F1B071D752BBA002E9631 /* MyTextCell.m in Sources */,
 				579F1B501D76DA20002E9631 /* InputView.m in Sources */,
+				579F1B571D783420002E9631 /* IATConfig.m in Sources */,
 				579F1ADF1D70374F002E9631 /* ViewController.m in Sources */,
 				579F1B021D73E229002E9631 /* RootViewController.m in Sources */,
 				579F1B2F1D75917F002E9631 /* SelfTextCell.m in Sources */,
 				579F1AD91D70374F002E9631 /* main.m in Sources */,
+				579F1B5A1D783D48002E9631 /* ISRDataHelper.m in Sources */,
+				579F1B541D7833CF002E9631 /* IFlyManager.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

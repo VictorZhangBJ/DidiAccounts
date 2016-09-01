@@ -8,11 +8,12 @@
 
 #import <UIKit/UIKit.h>
 #import "RootViewController.h"
-#import <iflyMSC/IFlyMSC.h>
 #import <AVFoundation/AVFoundation.h>
+#import "InputView/InputView.h"
 
 
-@interface ViewController : RootViewController<UITableViewDelegate, UITableViewDataSource, UIScrollViewDelegate, IFlySpeechRecognizerDelegate, AVAudioRecorderDelegate>
+@interface ViewController : RootViewController<UITableViewDelegate, UITableViewDataSource, UIScrollViewDelegate,
+                                                 AVAudioRecorderDelegate,InputViewDelegate>
 
 
 @end

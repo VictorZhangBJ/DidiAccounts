@@ -7,13 +7,27 @@
 //
 
 #import <UIKit/UIKit.h>
+#import <AVFoundation/AVFoundation.h>
 
 
-@interface InputView : UIView
+@protocol InputViewDelegate <NSObject>
+
+-(void)rightBtnClick;
+
+-(void)endRecord;
+
+-(void)startRecord;
+
+@end
+
+@interface InputView : UIView<AVAudioRecorderDelegate>
 
 @property (nonatomic, strong) UITextField *textField;
 @property (nonatomic, strong) UIButton *leftButton;
 @property (nonatomic, strong) UIButton *rightButton;
 @property (nonatomic, strong) UIButton *speechButton;
 @property (nonatomic) BOOL isInputTextMode;
+@property (nonatomic, weak) id<InputViewDelegate> delegate;
+@property (nonatomic, strong) AVAudioRecorder *audioRecorder;
+@property (nonatomic, strong) NSURL* audioPlayURL;
 @end

@@ -19,6 +19,7 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     // Override point for customization after application launch.
+    [self initiFlyMSC];
     return YES;
 }
 
@@ -27,8 +28,7 @@
  */
 -(void)initiFlyMSC
 {
-    NSString *initString = [NSString stringWithFormat:@"appid=%@",IFLY_APPID];
-    [IFlySpeechUtility createUtility: initString];
+    [IFlySpeechUtility createUtility: @"appid=57c64650"];
     
 }
 
@@ -53,5 +53,11 @@
 - (void)applicationWillTerminate:(UIApplication *)application {
     // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
 }
+
+- (BOOL)application:(UIApplication *)application openURL:(NSURL *)url sourceApplication:(NSString *)sourceApplication annotation:(id)annotation{
+    [[IFlySpeechUtility getUtility] handleOpenURL:url];
+    return YES;
+}
+
 
 @end
