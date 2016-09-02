@@ -9,6 +9,8 @@
 #import "AppDelegate.h"
 #import <iflyMSC/iflyMSC.h>
 #import "BaiduMobStat.h"
+#import "ViewController.h"
+#import "SlideMenuViewController.h"
 #define IFLY_APPID @"57c64650"
 
 @interface AppDelegate ()
@@ -20,6 +22,10 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     // Override point for customization after application launch.
+    SlideMenuViewController *svc = [[SlideMenuViewController alloc]init];
+    self.window.rootViewController = svc;
+    [self.window makeKeyAndVisible];
+    
     [self initiFlyMSC];
     [self initBaiduMob];
     return YES;

@@ -32,11 +32,10 @@
     self.title = @"滴滴记账";
     [self initTableView];
     [self initInputView];
-    //[self initAudio];
 
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillChangeFrame:) name:UIKeyboardWillChangeFrameNotification object:nil];
     
-    
+    self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc]initWithBarButtonSystemItem:UIBarButtonSystemItemDone target:self action:@selector(slideMenuClick)];
 }
 -(void)viewDidAppear:(BOOL)animated
 {
@@ -50,6 +49,10 @@
     [[BaiduMobStat defaultStat] pageviewEndWithName:@"记账页面"];
 }
 
+-(void)slideMenuClick
+{
+    
+}
 -(void)initTableView{
     self.tableView = [[UITableView alloc]initWithFrame:CGRectZero style:UITableViewStylePlain];
     [self.view addSubview:self.tableView];

@@ -38,6 +38,8 @@
 		579F1B601D792B06002E9631 /* JavaScriptCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 579F1B5F1D792B06002E9631 /* JavaScriptCore.framework */; };
 		579F1B621D792B14002E9631 /* libstdc++.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 579F1B611D792B14002E9631 /* libstdc++.tbd */; };
 		579F1B641D792B1E002E9631 /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 579F1B631D792B1E002E9631 /* Security.framework */; };
+		579F1B6A1D7953DA002E9631 /* LeftViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 579F1B691D7953DA002E9631 /* LeftViewController.m */; };
+		579F1B6D1D7957B7002E9631 /* SlideMenuViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 579F1B6C1D7957B7002E9631 /* SlideMenuViewController.m */; };
 		79721813456B6DA00AB5329D /* Pods_DidiAccounts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 12B25F37D5156238D9105565 /* Pods_DidiAccounts.framework */; };
 /* End PBXBuildFile section */
 
@@ -101,6 +103,10 @@
 		579F1B5F1D792B06002E9631 /* JavaScriptCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = JavaScriptCore.framework; path = System/Library/Frameworks/JavaScriptCore.framework; sourceTree = SDKROOT; };
 		579F1B611D792B14002E9631 /* libstdc++.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = "libstdc++.tbd"; path = "usr/lib/libstdc++.tbd"; sourceTree = SDKROOT; };
 		579F1B631D792B1E002E9631 /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
+		579F1B681D7953DA002E9631 /* LeftViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LeftViewController.h; sourceTree = "<group>"; };
+		579F1B691D7953DA002E9631 /* LeftViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LeftViewController.m; sourceTree = "<group>"; };
+		579F1B6B1D7957B7002E9631 /* SlideMenuViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SlideMenuViewController.h; sourceTree = "<group>"; };
+		579F1B6C1D7957B7002E9631 /* SlideMenuViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SlideMenuViewController.m; sourceTree = "<group>"; };
 		8B942C258AB5B456C569AAE1 /* Pods-DidiAccounts.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-DidiAccounts.release.xcconfig"; path = "Pods/Target Support Files/Pods-DidiAccounts/Pods-DidiAccounts.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -154,6 +160,8 @@
 		579F1AD61D70374F002E9631 /* DidiAccounts */ = {
 			isa = PBXGroup;
 			children = (
+				579F1B671D7953CB002E9631 /* LeftViewController */,
+				579F1B661D7953A3002E9631 /* SlideMenu */,
 				579F1B5B1D792AAC002E9631 /* BaiduMob */,
 				579F1B511D7833B5002E9631 /* iFly */,
 				579F1B4D1D76DA0D002E9631 /* InputView */,
@@ -238,6 +246,24 @@
 				579F1B5D1D792AAC002E9631 /* libBaiduMobStat.a */,
 			);
 			path = BaiduMob;
+			sourceTree = "<group>";
+		};
+		579F1B661D7953A3002E9631 /* SlideMenu */ = {
+			isa = PBXGroup;
+			children = (
+				579F1B6B1D7957B7002E9631 /* SlideMenuViewController.h */,
+				579F1B6C1D7957B7002E9631 /* SlideMenuViewController.m */,
+			);
+			path = SlideMenu;
+			sourceTree = "<group>";
+		};
+		579F1B671D7953CB002E9631 /* LeftViewController */ = {
+			isa = PBXGroup;
+			children = (
+				579F1B681D7953DA002E9631 /* LeftViewController.h */,
+				579F1B691D7953DA002E9631 /* LeftViewController.m */,
+			);
+			path = LeftViewController;
 			sourceTree = "<group>";
 		};
 		91C37323191292B74E4F0059 /* Pods */ = {
@@ -418,6 +444,8 @@
 				579F1B021D73E229002E9631 /* RootViewController.m in Sources */,
 				579F1B2F1D75917F002E9631 /* SelfTextCell.m in Sources */,
 				579F1AD91D70374F002E9631 /* main.m in Sources */,
+				579F1B6A1D7953DA002E9631 /* LeftViewController.m in Sources */,
+				579F1B6D1D7957B7002E9631 /* SlideMenuViewController.m in Sources */,
 				579F1B5A1D783D48002E9631 /* ISRDataHelper.m in Sources */,
 				579F1B541D7833CF002E9631 /* IFlyManager.m in Sources */,
 			);
