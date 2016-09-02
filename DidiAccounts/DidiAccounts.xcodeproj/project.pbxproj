@@ -34,6 +34,10 @@
 		579F1B541D7833CF002E9631 /* IFlyManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 579F1B531D7833CF002E9631 /* IFlyManager.m */; };
 		579F1B571D783420002E9631 /* IATConfig.m in Sources */ = {isa = PBXBuildFile; fileRef = 579F1B561D783420002E9631 /* IATConfig.m */; };
 		579F1B5A1D783D48002E9631 /* ISRDataHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 579F1B591D783D48002E9631 /* ISRDataHelper.m */; };
+		579F1B5E1D792AAC002E9631 /* libBaiduMobStat.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 579F1B5D1D792AAC002E9631 /* libBaiduMobStat.a */; };
+		579F1B601D792B06002E9631 /* JavaScriptCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 579F1B5F1D792B06002E9631 /* JavaScriptCore.framework */; };
+		579F1B621D792B14002E9631 /* libstdc++.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 579F1B611D792B14002E9631 /* libstdc++.tbd */; };
+		579F1B641D792B1E002E9631 /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 579F1B631D792B1E002E9631 /* Security.framework */; };
 		79721813456B6DA00AB5329D /* Pods_DidiAccounts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 12B25F37D5156238D9105565 /* Pods_DidiAccounts.framework */; };
 /* End PBXBuildFile section */
 
@@ -92,6 +96,11 @@
 		579F1B561D783420002E9631 /* IATConfig.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IATConfig.m; sourceTree = "<group>"; };
 		579F1B581D783D48002E9631 /* ISRDataHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ISRDataHelper.h; sourceTree = "<group>"; };
 		579F1B591D783D48002E9631 /* ISRDataHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ISRDataHelper.m; sourceTree = "<group>"; };
+		579F1B5C1D792AAC002E9631 /* BaiduMobStat.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BaiduMobStat.h; sourceTree = "<group>"; };
+		579F1B5D1D792AAC002E9631 /* libBaiduMobStat.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libBaiduMobStat.a; sourceTree = "<group>"; };
+		579F1B5F1D792B06002E9631 /* JavaScriptCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = JavaScriptCore.framework; path = System/Library/Frameworks/JavaScriptCore.framework; sourceTree = SDKROOT; };
+		579F1B611D792B14002E9631 /* libstdc++.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = "libstdc++.tbd"; path = "usr/lib/libstdc++.tbd"; sourceTree = SDKROOT; };
+		579F1B631D792B1E002E9631 /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
 		8B942C258AB5B456C569AAE1 /* Pods-DidiAccounts.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-DidiAccounts.release.xcconfig"; path = "Pods/Target Support Files/Pods-DidiAccounts/Pods-DidiAccounts.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -100,6 +109,9 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				579F1B641D792B1E002E9631 /* Security.framework in Frameworks */,
+				579F1B621D792B14002E9631 /* libstdc++.tbd in Frameworks */,
+				579F1B601D792B06002E9631 /* JavaScriptCore.framework in Frameworks */,
 				579F1B4C1D76B7ED002E9631 /* iflyMSC.framework in Frameworks */,
 				579F1B491D76B12B002E9631 /* libz.tbd in Frameworks */,
 				579F1B471D76B11E002E9631 /* libc++.tbd in Frameworks */,
@@ -108,6 +120,7 @@
 				579F1B3F1D76B0C6002E9631 /* SystemConfiguration.framework in Frameworks */,
 				579F1B3D1D76B0B9002E9631 /* AudioToolbox.framework in Frameworks */,
 				579F1B3B1D76B0A8002E9631 /* AVFoundation.framework in Frameworks */,
+				579F1B5E1D792AAC002E9631 /* libBaiduMobStat.a in Frameworks */,
 				579F1B391D76B09A002E9631 /* CoreTelephony.framework in Frameworks */,
 				579F1B371D76B08C002E9631 /* CoreLocation.framework in Frameworks */,
 				579F1AEF1D704138002E9631 /* Realm.framework in Frameworks */,
@@ -141,6 +154,7 @@
 		579F1AD61D70374F002E9631 /* DidiAccounts */ = {
 			isa = PBXGroup;
 			children = (
+				579F1B5B1D792AAC002E9631 /* BaiduMob */,
 				579F1B511D7833B5002E9631 /* iFly */,
 				579F1B4D1D76DA0D002E9631 /* InputView */,
 				579F1B041D743B97002E9631 /* ChatCell */,
@@ -217,6 +231,15 @@
 			path = iFly;
 			sourceTree = "<group>";
 		};
+		579F1B5B1D792AAC002E9631 /* BaiduMob */ = {
+			isa = PBXGroup;
+			children = (
+				579F1B5C1D792AAC002E9631 /* BaiduMobStat.h */,
+				579F1B5D1D792AAC002E9631 /* libBaiduMobStat.a */,
+			);
+			path = BaiduMob;
+			sourceTree = "<group>";
+		};
 		91C37323191292B74E4F0059 /* Pods */ = {
 			isa = PBXGroup;
 			children = (
@@ -229,6 +252,9 @@
 		DF102870FAF5B14981AF18CE /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				579F1B631D792B1E002E9631 /* Security.framework */,
+				579F1B611D792B14002E9631 /* libstdc++.tbd */,
+				579F1B5F1D792B06002E9631 /* JavaScriptCore.framework */,
 				579F1B481D76B12B002E9631 /* libz.tbd */,
 				579F1B461D76B11E002E9631 /* libc++.tbd */,
 				579F1B441D76B107002E9631 /* CoreGraphics.framework */,
@@ -518,6 +544,10 @@
 				);
 				INFOPLIST_FILE = DidiAccounts/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/DidiAccounts/BaiduMob",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.shenxian.DidiAccounts;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
@@ -539,6 +569,10 @@
 				);
 				INFOPLIST_FILE = DidiAccounts/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/DidiAccounts/BaiduMob",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.shenxian.DidiAccounts;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";

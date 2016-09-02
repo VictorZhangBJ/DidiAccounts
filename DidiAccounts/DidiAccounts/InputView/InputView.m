@@ -28,10 +28,19 @@
 {
     self = [super init];
     [self configureInputView];
-    _iFlyManager = [[IFlyManager alloc]init];
+    [self configureIFlyManager];
     return self;
 }
 
+-(void)configureIFlyManager
+{
+    _iFlyManager = [[IFlyManager alloc]init];
+    __weak typeof(self) weakSelf = self;
+    
+    _iFlyManager.resultBlcok = ^(NSString *resultString){
+        NSLog(@"语言回调的 resultString = %@",resultString);
+    };
+}
 -(void)configureInputView
 {
     self.isInputTextMode = YES;

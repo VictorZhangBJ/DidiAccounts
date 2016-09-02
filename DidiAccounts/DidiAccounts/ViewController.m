@@ -10,6 +10,7 @@
 #import <Realm/Realm.h>
 #import "MyTextCell.h"
 #import "SelfTextCell.h"
+#import "BaiduMobStat.h"
 
 @interface ViewController ()
 {
@@ -36,6 +37,17 @@
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillChangeFrame:) name:UIKeyboardWillChangeFrameNotification object:nil];
     
     
+}
+-(void)viewDidAppear:(BOOL)animated
+{
+    [super viewDidAppear:animated];
+    [[BaiduMobStat defaultStat] pageviewStartWithName:@"记账页面"];
+}
+
+-(void)viewDidDisappear:(BOOL)animated
+{
+    [super viewDidDisappear:animated];
+    [[BaiduMobStat defaultStat] pageviewEndWithName:@"记账页面"];
 }
 
 -(void)initTableView{

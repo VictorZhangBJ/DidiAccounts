@@ -17,6 +17,8 @@
 @property (nonatomic, strong) IFlySpeechRecognizer *iFlySpeechRecognizer;       //不带界面的语音识别对象
 @property (nonatomic, strong) NSString *result;
 
+@property (nonatomic, assign) void (^resultBlcok)(NSString *resultString);
+
 //启动听写
 -(void)startListening;
 

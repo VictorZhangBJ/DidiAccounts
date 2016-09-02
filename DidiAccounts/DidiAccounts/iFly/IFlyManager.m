@@ -23,6 +23,8 @@
 //启动听写
 -(void)startListening
 {
+    self.result = @"";
+    
     [_iFlySpeechRecognizer cancel];
     //设置音频来源为麦克风
     [_iFlySpeechRecognizer setParameter:IFLY_AUDIO_SOURCE_MIC forKey:@"audio_source"];
@@ -105,12 +107,16 @@
 
 -(void)onError:(IFlySpeechError *)errorCode
 {
-    NSLog(@"errorType = %d, errorCode = %d",errorCode.errorType,errorCode.errorCode);
-    NSLog(@"====================== error description = %@",errorCode.errorDesc);
+    if (errorCode.errorCode !=0) {
+        NSLog(@"识别错误 ： %d, %@",errorCode.errorCode, errorCode.errorDesc);
+    }
 }
 
 -(void)onResults:(NSArray *)results isLast:(BOOL)isLast
 {
+    if (!self.result) {
+        self.result = [NSString string];
+    }
     NSMutableString *resultString = [[NSMutableString alloc] init];
     NSDictionary *dic = results[0];
     for (NSString *key in dic) {
@@ -118,13 +124,14 @@
     }
     NSString * resultFromJson =  [ISRDataHelper stringFromJson:resultString];
     
-    _result = resultString;
+    self.result = [self.result stringByAppendingString:resultFromJson];
     if (isLast){
         NSLog(@"听写结果(json)：%@测试",  self.result);
+        _resultBlcok(self.result);
     }
-    NSLog(@"=====================================_result=%@",_result);
-    NSLog(@"=====================================resultFromJson=%@",resultFromJson);
-    NSLog(@"=====================================isLast=%d",isLast);
+//    NSLog(@"=====================================_result=%@",_result);
+//    NSLog(@"=====================================resultFromJson=%@",resultFromJson);
+//    NSLog(@"=====================================isLast=%d",isLast);
 }
 
 -(void)onBeginOfSpeech

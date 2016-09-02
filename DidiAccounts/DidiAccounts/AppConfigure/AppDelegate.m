@@ -8,6 +8,7 @@
 
 #import "AppDelegate.h"
 #import <iflyMSC/iflyMSC.h>
+#import "BaiduMobStat.h"
 #define IFLY_APPID @"57c64650"
 
 @interface AppDelegate ()
@@ -20,6 +21,7 @@
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     // Override point for customization after application launch.
     [self initiFlyMSC];
+    [self initBaiduMob];
     return YES;
 }
 
@@ -28,8 +30,20 @@
  */
 -(void)initiFlyMSC
 {
+    //设置sdk的log等级，log保存在下面设置的工作路径中
+    [IFlySetting setLogFile:LVL_ALL];
+    
+    //打开输出在console的log开关
+    [IFlySetting showLogcat:NO];
+
     [IFlySpeechUtility createUtility: @"appid=57c64650"];
     
+}
+-(void)initBaiduMob
+{
+    BaiduMobStat* statTracker = [BaiduMobStat defaultStat];
+    statTracker.shortAppVersion = [[[NSBundle mainBundle] infoDictionary] objectForKey:@"CFBundleShortVersionString"];
+    [statTracker startWithAppId:@"42852e1b8b"];
 }
 
 - (void)applicationWillResignActive:(UIApplication *)application {
