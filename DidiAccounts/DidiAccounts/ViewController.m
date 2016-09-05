@@ -11,6 +11,9 @@
 #import "MyTextCell.h"
 #import "SelfTextCell.h"
 #import "BaiduMobStat.h"
+#import "HeaderView.h"
+#import "AppConfigure/AppConfig.h"
+#import "SlideMenuViewController.h"
 
 @interface ViewController ()
 {
@@ -21,6 +24,7 @@
 @property (nonatomic, strong) InputView *inputView;
 @property (nonatomic, strong) UITableView *tableView;
 @property (nonatomic, strong) NSMutableArray *dataSource;
+@property (nonatomic, strong) HeaderView *headerView;
 
 @end
 
@@ -30,13 +34,15 @@
     
     [super viewDidLoad];
     self.title = @"滴滴记账";
+    [self initHeaderView];
     [self initTableView];
     [self initInputView];
+    [self initNavigation];
 
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillChangeFrame:) name:UIKeyboardWillChangeFrameNotification object:nil];
     
-    self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc]initWithBarButtonSystemItem:UIBarButtonSystemItemDone target:self action:@selector(slideMenuClick)];
 }
+
 -(void)viewDidAppear:(BOOL)animated
 {
     [super viewDidAppear:animated];
@@ -49,17 +55,47 @@
     [[BaiduMobStat defaultStat] pageviewEndWithName:@"记账页面"];
 }
 
+-(void)initNavigation
+{
+    //设置背景颜色
+    [self.navigationController.navigationBar setBackgroundImage:[AppConfig createImageWithColor:[AppConfig navigationTintColor]] forBarMetrics:UIBarMetricsDefault];
+    //去除navigationBar底部线
+    //[self.navigationController.navigationBar setShadowImage:[[UIImage alloc]init]];
+    //menu按钮颜色
+    [self.navigationController.navigationBar setTintColor:[UIColor whiteColor]];
+    //标题颜色
+    [self.navigationController.navigationBar setTitleTextAttributes:@{NSForegroundColorAttributeName: [UIColor whiteColor]}];
+    self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc]initWithImage:[UIImage imageNamed:@"menu"] style:UIBarButtonItemStylePlain target:self action:@selector(slideMenuClick)];
+}
+
 -(void)slideMenuClick
 {
-    
+    if (self.slide.isHidden) {
+        [self.slide showSideView];
+    }else{
+        [self.slide hideSideView];
+    }
 }
+
+-(void)initHeaderView
+{
+    self.headerView = [[HeaderView alloc]init];
+    [self.view addSubview:self.headerView];
+    [self.headerView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.top.equalTo(self.view.mas_top).offset(0);
+        make.left.equalTo(self.view.mas_left);
+        make.right.equalTo(self.view.mas_right);
+        make.height.mas_equalTo(100);
+    }];
+}
+
 -(void)initTableView{
     self.tableView = [[UITableView alloc]initWithFrame:CGRectZero style:UITableViewStylePlain];
     [self.view addSubview:self.tableView];
     [self.tableView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.equalTo(self.view.mas_left);
         make.right.equalTo(self.view.mas_right);
-        make.top.equalTo(self.view.mas_top);
+        make.top.equalTo(self.headerView.mas_bottom);
         make.bottom.mas_equalTo(self.view.mas_bottom).offset(-50);
     }];
 
@@ -157,7 +193,7 @@
     CGRect keyFrame = [noti.userInfo[UIKeyboardFrameEndUserInfoKey] CGRectValue];
     
     //控制器view需要移动的距离
-    CGFloat transformY = keyFrame.origin.y - self.view.frame.size.height;
+    CGFloat transformY = keyFrame.origin.y - self.view.frame.size.height - 64;
 
     CGRect frame = self.view.frame;
     frame.size.height = keyFrame.origin.y;

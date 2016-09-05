@@ -40,6 +40,8 @@
 		579F1B641D792B1E002E9631 /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 579F1B631D792B1E002E9631 /* Security.framework */; };
 		579F1B6A1D7953DA002E9631 /* LeftViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 579F1B691D7953DA002E9631 /* LeftViewController.m */; };
 		579F1B6D1D7957B7002E9631 /* SlideMenuViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 579F1B6C1D7957B7002E9631 /* SlideMenuViewController.m */; };
+		579F1B721D7D49A4002E9631 /* AppConfig.m in Sources */ = {isa = PBXBuildFile; fileRef = 579F1B711D7D49A4002E9631 /* AppConfig.m */; };
+		579F1B7B1D7D5583002E9631 /* HeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 579F1B7A1D7D5583002E9631 /* HeaderView.m */; };
 		79721813456B6DA00AB5329D /* Pods_DidiAccounts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 12B25F37D5156238D9105565 /* Pods_DidiAccounts.framework */; };
 /* End PBXBuildFile section */
 
@@ -107,6 +109,10 @@
 		579F1B691D7953DA002E9631 /* LeftViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LeftViewController.m; sourceTree = "<group>"; };
 		579F1B6B1D7957B7002E9631 /* SlideMenuViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SlideMenuViewController.h; sourceTree = "<group>"; };
 		579F1B6C1D7957B7002E9631 /* SlideMenuViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SlideMenuViewController.m; sourceTree = "<group>"; };
+		579F1B701D7D49A4002E9631 /* AppConfig.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AppConfig.h; sourceTree = "<group>"; };
+		579F1B711D7D49A4002E9631 /* AppConfig.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AppConfig.m; sourceTree = "<group>"; };
+		579F1B791D7D5583002E9631 /* HeaderView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HeaderView.h; sourceTree = "<group>"; };
+		579F1B7A1D7D5583002E9631 /* HeaderView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HeaderView.m; sourceTree = "<group>"; };
 		8B942C258AB5B456C569AAE1 /* Pods-DidiAccounts.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-DidiAccounts.release.xcconfig"; path = "Pods/Target Support Files/Pods-DidiAccounts/Pods-DidiAccounts.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -160,6 +166,7 @@
 		579F1AD61D70374F002E9631 /* DidiAccounts */ = {
 			isa = PBXGroup;
 			children = (
+				579F1B731D7D537A002E9631 /* HeaderView */,
 				579F1B671D7953CB002E9631 /* LeftViewController */,
 				579F1B661D7953A3002E9631 /* SlideMenu */,
 				579F1B5B1D792AAC002E9631 /* BaiduMob */,
@@ -192,6 +199,8 @@
 			children = (
 				579F1AF61D73E117002E9631 /* AppDelegate.h */,
 				579F1AF71D73E117002E9631 /* AppDelegate.m */,
+				579F1B701D7D49A4002E9631 /* AppConfig.h */,
+				579F1B711D7D49A4002E9631 /* AppConfig.m */,
 			);
 			path = AppConfigure;
 			sourceTree = "<group>";
@@ -264,6 +273,15 @@
 				579F1B691D7953DA002E9631 /* LeftViewController.m */,
 			);
 			path = LeftViewController;
+			sourceTree = "<group>";
+		};
+		579F1B731D7D537A002E9631 /* HeaderView */ = {
+			isa = PBXGroup;
+			children = (
+				579F1B791D7D5583002E9631 /* HeaderView.h */,
+				579F1B7A1D7D5583002E9631 /* HeaderView.m */,
+			);
+			path = HeaderView;
 			sourceTree = "<group>";
 		};
 		91C37323191292B74E4F0059 /* Pods */ = {
@@ -443,8 +461,10 @@
 				579F1ADF1D70374F002E9631 /* ViewController.m in Sources */,
 				579F1B021D73E229002E9631 /* RootViewController.m in Sources */,
 				579F1B2F1D75917F002E9631 /* SelfTextCell.m in Sources */,
+				579F1B7B1D7D5583002E9631 /* HeaderView.m in Sources */,
 				579F1AD91D70374F002E9631 /* main.m in Sources */,
 				579F1B6A1D7953DA002E9631 /* LeftViewController.m in Sources */,
+				579F1B721D7D49A4002E9631 /* AppConfig.m in Sources */,
 				579F1B6D1D7957B7002E9631 /* SlideMenuViewController.m in Sources */,
 				579F1B5A1D783D48002E9631 /* ISRDataHelper.m in Sources */,
 				579F1B541D7833CF002E9631 /* IFlyManager.m in Sources */,

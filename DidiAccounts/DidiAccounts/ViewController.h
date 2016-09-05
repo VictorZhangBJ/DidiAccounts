@@ -11,10 +11,11 @@
 #import <AVFoundation/AVFoundation.h>
 #import "InputView/InputView.h"
 
-
+@class SlideMenuViewController;
 @interface ViewController : RootViewController<UITableViewDelegate, UITableViewDataSource, UIScrollViewDelegate,
                                                  AVAudioRecorderDelegate,InputViewDelegate>
 
+@property (nonatomic, strong) SlideMenuViewController* slide;
 
 @end
 

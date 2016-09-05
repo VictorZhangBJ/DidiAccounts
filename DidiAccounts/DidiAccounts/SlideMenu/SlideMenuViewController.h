@@ -12,6 +12,7 @@
 
 @property (nonatomic, strong) UIViewController *leftViewController;
 @property (nonatomic, strong) UIViewController *centerViewController;
+@property (nonatomic, assign) BOOL isHidden;
 
 -(void)showSideView;
 

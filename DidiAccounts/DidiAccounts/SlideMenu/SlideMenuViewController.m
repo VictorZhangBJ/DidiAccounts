@@ -25,6 +25,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     ViewController *vc = [[ViewController alloc]init];
+    vc.slide = self;
     UINavigationController *nav = [[UINavigationController alloc]initWithRootViewController:vc];
     self.centerViewController = nav;
     [self.centerViewController.view setTag:1];
@@ -50,7 +51,12 @@
     
     _prevX = 0;
     _maxOffsetX = self.view.frame.size.width / 3.0 * 2.0;
-    
+    self.isHidden = YES;
+}
+
+-(UIStatusBarStyle)preferredStatusBarStyle
+{
+    return UIStatusBarStyleLightContent;
 }
 
 -(void)handleTap
@@ -102,6 +108,7 @@
     } completion:^(BOOL finished) {
         
     }];
+    self.isHidden = NO;
 }
 
 -(void)hideSideView
@@ -112,7 +119,9 @@
         
     } completion:^(BOOL finished) {
         
-    }];}
+    }];
+    self.isHidden = YES;
+}
 
 
 - (void)didReceiveMemoryWarning {
