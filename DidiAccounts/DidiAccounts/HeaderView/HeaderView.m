@@ -14,6 +14,7 @@
 
 @property (nonatomic, strong) UIView *topView;
 @property (nonatomic, strong) UIView *bottomView;
+@property (nonatomic, strong) UIView *scoresView;
 
 @end
 
@@ -37,7 +38,6 @@
 }
 -(void)configureView
 {
-    self.backgroundColor = [UIColor blueColor];
     self.topView = [UIView new];
     self.topView.backgroundColor = [AppConfig navigationTintColor];
     [self addSubview:self.topView];
@@ -140,6 +140,48 @@
         make.right.equalTo(self.topView.mas_right);
         make.width.mas_equalTo(@60);
     }];
+    
+    self.bottomView = [UIView new];
+    [self addSubview:self.bottomView];
+    self.bottomView.backgroundColor = [UIColor whiteColor];
+    [self.bottomView  mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.top.equalTo(self.topView.mas_bottom);
+        make.left.equalTo(self.mas_left);
+        make.right.equalTo(self.mas_right);
+        make.bottom.equalTo(self.mas_bottom);
+    }];
+    //绘制梯形
+    self.scoresView = [UIView new];
+    self.scoresView.frame = CGRectMake(11, 0, 134, 24);
+    self.scoresView.backgroundColor = [UIColor whiteColor];
+    [self.bottomView addSubview:self.scoresView];
+    
+    
+    CAShapeLayer *shapeLayer = [CAShapeLayer new];
+    UIBezierPath *path = [UIBezierPath bezierPath];
+    shapeLayer.frame = self.scoresView.bounds;
+    
+    CGRect rect = self.scoresView.bounds;
+    
+    CGPoint leftTopPoint = CGPointMake(rect.origin.x, rect.origin.y);
+    CGPoint rightTopPoint = CGPointMake(rect.origin.x + rect.size.width, rect.origin.y);
+    CGPoint rightBottomPoint = CGPointMake(rect.origin.x + rect.size.width - 12, rect.origin.y + 24);
+    CGPoint leftBottomPoint =  CGPointMake(rect.origin.x+12, rect.origin.y + 24);
+    
+    [path moveToPoint:leftTopPoint];
+    [path addLineToPoint:rightTopPoint];
+    [path addLineToPoint:rightBottomPoint];
+    [path addLineToPoint:leftBottomPoint];
+    [path addLineToPoint:leftTopPoint];
+    shapeLayer.path = path.CGPath;
+    shapeLayer.fillColor = [AppConfig navigationTintColor].CGColor;
+    [self.scoresView.layer addSublayer:shapeLayer];
+    [self.scoresView layoutIfNeeded];
+   
+    
 }
+
+
+
 
 @end

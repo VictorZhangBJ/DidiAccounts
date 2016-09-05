@@ -60,7 +60,7 @@
     //设置背景颜色
     [self.navigationController.navigationBar setBackgroundImage:[AppConfig createImageWithColor:[AppConfig navigationTintColor]] forBarMetrics:UIBarMetricsDefault];
     //去除navigationBar底部线
-    //[self.navigationController.navigationBar setShadowImage:[[UIImage alloc]init]];
+    [self.navigationController.navigationBar setShadowImage:[[UIImage alloc]init]];
     //menu按钮颜色
     [self.navigationController.navigationBar setTintColor:[UIColor whiteColor]];
     //标题颜色
@@ -85,7 +85,7 @@
         make.top.equalTo(self.view.mas_top).offset(0);
         make.left.equalTo(self.view.mas_left);
         make.right.equalTo(self.view.mas_right);
-        make.height.mas_equalTo(100);
+        make.height.mas_equalTo(106);
     }];
 }
 
