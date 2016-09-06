@@ -62,6 +62,18 @@
     
     [self.layer addSublayer:trapeziumLayer];
     
+    //日历
+    UIButton *calenderBtn = [UIButton buttonWithType:UIButtonTypeCustom];
+    [calenderBtn setImage:[UIImage imageNamed:@"calender"] forState:UIControlStateNormal];
+    
+    calenderBtn.frame = CGRectMake(11 + 6, 13, 32, 32);
+    [self addSubview:calenderBtn];
+    calenderBtn.backgroundColor = icon_red_color;
+    calenderBtn.layer.cornerRadius = 16;
+    
+    //日历 label
+    
+    
 }
 
 @end

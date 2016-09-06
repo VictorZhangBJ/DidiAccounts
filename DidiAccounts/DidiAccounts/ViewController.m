@@ -113,7 +113,7 @@
     self.dataSource = [[NSMutableArray alloc]init];
     [self.dataSource addObject:@[@"买衣服200" ,@"吃饭 390"]];
     [self.dataSource addObject:@[@"打车 88", @"水电费 200"]];
-    [self.dataSource addObject:@[@"打车 88", @"水电费 200"]];
+    [self.dataSource addObject:@[@"打车 88", @"水电费 200", @"外卖 18"]];
 
     [self.dataSource addObject:@[@"打车 88", @"水电费 200"]];
     [self.dataSource addObject:@[@"打车 88", @"水电费 200"]];

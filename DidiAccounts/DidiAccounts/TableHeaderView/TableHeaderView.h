@@ -9,6 +9,9 @@
 #import <UIKit/UIKit.h>
 
 @interface TableHeaderView : UIView
+
+@property (nonatomic, strong) UILabel *calenderLabel;
+
 -(void)configureViewWith:(NSInteger)section;
 
 @end
