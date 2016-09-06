@@ -14,6 +14,7 @@
 #import "HeaderView.h"
 #import "AppConfigure/AppConfig.h"
 #import "SlideMenuViewController.h"
+#import "TableHeaderView/TableHeaderView.h"
 
 @interface ViewController ()
 {
@@ -33,6 +34,7 @@
 - (void)viewDidLoad {
     
     [super viewDidLoad];
+    self.view.backgroundColor = tableViewBcakColor_1;
     self.title = @"滴滴记账";
     [self initHeaderView];
     [self initTableView];
@@ -90,7 +92,8 @@
 }
 
 -(void)initTableView{
-    self.tableView = [[UITableView alloc]initWithFrame:CGRectZero style:UITableViewStylePlain];
+    self.tableView = [[UITableView alloc]initWithFrame:CGRectZero style:UITableViewStyleGrouped];
+    self.tableView.backgroundColor = tableViewBcakColor_1  ;
     [self.view addSubview:self.tableView];
     [self.tableView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.equalTo(self.view.mas_left);
@@ -108,6 +111,21 @@
     //[self.tableView registerNib:[[[NSBundle mainBundle] loadNibNamed:@"SelfTextCell" owner:nil options:nil] lastObject] forCellReuseIdentifier:@"SelfTextCell"];
     [self.tableView registerNib:[UINib nibWithNibName:@"SelfTextCell" bundle:nil] forCellReuseIdentifier:@"SelfTextCell"];
     self.dataSource = [[NSMutableArray alloc]init];
+    [self.dataSource addObject:@[@"买衣服200" ,@"吃饭 390"]];
+    [self.dataSource addObject:@[@"打车 88", @"水电费 200"]];
+    [self.dataSource addObject:@[@"打车 88", @"水电费 200"]];
+
+    [self.dataSource addObject:@[@"打车 88", @"水电费 200"]];
+    [self.dataSource addObject:@[@"打车 88", @"水电费 200"]];
+    [self.dataSource addObject:@[@"打车 88", @"水电费 200"]];
+
+}
+
+-(UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section
+{
+    TableHeaderView *headerView = [[TableHeaderView alloc]init];
+    [headerView configureViewWith:section];
+    return headerView;
 }
 
 -(void)scrollViewDidEndDragging:(UIScrollView *)scrollView willDecelerate:(BOOL)decelerate
@@ -118,21 +136,35 @@
 
 -(NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
-    return  1;
+    return  self.dataSource.count;
 }
 
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    return  self.dataSource.count;
+    return  [[self.dataSource objectAtIndex:section] count];
 }
 
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     SelfTextCell *cell = (SelfTextCell *)[tableView dequeueReusableCellWithIdentifier:@"SelfTextCell" forIndexPath:indexPath];
    
-    cell.chatTextLabel.text = self.dataSource[indexPath.row];
-    
+    cell.chatTextLabel.text = [[self.dataSource objectAtIndex:indexPath.section] objectAtIndex:indexPath.row];
+    if (indexPath.section % 2 ==0) {
+        cell.backgroundColor = tableViewBackColor_2;
+    }else{
+        cell.backgroundColor = tableViewBcakColor_1;
+    }
     return  cell;
+}
+
+-(CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
+{
+    return 50;
+}
+
+-(CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section
+{
+    return 0.01;
 }
 
 -(CGFloat)tableView:(UITableView *)tableView estimatedHeightForRowAtIndexPath:(NSIndexPath *)indexPath

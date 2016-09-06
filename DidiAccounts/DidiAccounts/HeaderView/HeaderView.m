@@ -38,6 +38,7 @@
 }
 -(void)configureView
 {
+    self.backgroundColor = [UIColor clearColor];
     self.topView = [UIView new];
     self.topView.backgroundColor = [AppConfig navigationTintColor];
     [self addSubview:self.topView];
@@ -143,7 +144,7 @@
     
     self.bottomView = [UIView new];
     [self addSubview:self.bottomView];
-    self.bottomView.backgroundColor = [UIColor whiteColor];
+    self.bottomView.backgroundColor = [UIColor clearColor];
     [self.bottomView  mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.equalTo(self.topView.mas_bottom);
         make.left.equalTo(self.mas_left);
@@ -152,8 +153,8 @@
     }];
     //绘制梯形
     self.scoresView = [UIView new];
-    self.scoresView.frame = CGRectMake(11, 0, 134, 24);
-    self.scoresView.backgroundColor = [UIColor whiteColor];
+    self.scoresView.frame = CGRectMake(11, 0, trapezium_upperLine, 24);
+    self.scoresView.backgroundColor = [UIColor clearColor];
     [self.bottomView addSubview:self.scoresView];
     
     
@@ -179,9 +180,83 @@
     [self.scoresView layoutIfNeeded];
    
     
+    UIView *spaceOneView = [UIView new];
+    //spaceOneView.backgroundColor = [UIColor blueColor];
+    UIView *spaceTwoView = [UIView new];
+    //spaceTwoView.backgroundColor = [UIColor blueColor];
+    [self.scoresView addSubview:spaceOneView];
+    [self.scoresView addSubview:spaceTwoView];
+    
+    [spaceOneView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.left.equalTo(self.scoresView.mas_left);
+        make.top.equalTo(self.scoresView.mas_top);
+        make.bottom.equalTo(self.scoresView.mas_bottom);
+        make.width.greaterThanOrEqualTo(@8);
+    }];
+    
+    UIImageView *scoresImageView = [[UIImageView alloc]initWithImage:[UIImage imageNamed:@"scores"]];
+    [self.scoresView addSubview:scoresImageView];
+    [scoresImageView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.centerY.equalTo(self.scoresView.mas_centerY);
+        make.left.equalTo(spaceOneView.mas_right).offset(0);
+        make.height.equalTo(@12);
+        make.width.equalTo(@12);
+    }];
+    
+    self.scoresLabel = [UILabel new];
+    self.scoresLabel.textColor = [AppConfig headerLineColor];
+    self.scoresLabel.font = [UIFont systemFontOfSize:11];
+    self.scoresLabel.textAlignment = NSTextAlignmentLeft;
+    self.scoresLabel.text = @"积分: 128494";
+    [self.scoresView addSubview: self.scoresLabel];
+    [self.scoresLabel mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.centerY.equalTo(self.scoresView.mas_centerY);
+        make.left.equalTo(scoresImageView.mas_right).offset(5);
+    }];
+    
+    [spaceTwoView  mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.top.equalTo(self.scoresView.mas_top);
+        make.bottom.equalTo(self.scoresView.mas_bottom);
+        make.left.equalTo(self.scoresLabel.mas_right);
+        make.width.equalTo(spaceOneView.mas_width);
+        make.right.equalTo(self.scoresView.mas_right);
+    }];
 }
 
 
 
 
 @end
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

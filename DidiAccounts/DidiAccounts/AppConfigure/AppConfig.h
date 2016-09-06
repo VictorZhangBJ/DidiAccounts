@@ -11,6 +11,20 @@
 
 #define payLabel_color [UIColor colorWithWhite: 0.85 alpha: 1.0]
 
+#define trapezium_upperLine 116         //梯形上底
+#define trapezium_lowerLine 92         //梯形下底
+#define trapezium_height 24             //梯形高
+#define right_trapezium_upperLine 134   //右边梯形上底
+
+#define header_radius 22     //圆形半径                  
+
+#define screen_width [UIScreen mainScreen].bounds.size.width    //屏幕宽度
+
+#define tableViewBcakColor_1 [UIColor colorWithRed:0.93 green:0.94 blue:0.96 alpha:1.00]
+#define tableViewBackColor_2 [UIColor colorWithRed:0.89 green:0.91 blue:0.95 alpha:1.00]
+
+#define tableHeader_height 50    //tableview header 高度
+
 @interface AppConfig : NSObject
 
 //navigationBar tintColor

@@ -42,6 +42,7 @@
 		579F1B6D1D7957B7002E9631 /* SlideMenuViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 579F1B6C1D7957B7002E9631 /* SlideMenuViewController.m */; };
 		579F1B721D7D49A4002E9631 /* AppConfig.m in Sources */ = {isa = PBXBuildFile; fileRef = 579F1B711D7D49A4002E9631 /* AppConfig.m */; };
 		579F1B7B1D7D5583002E9631 /* HeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 579F1B7A1D7D5583002E9631 /* HeaderView.m */; };
+		579F1B7F1D7E67BA002E9631 /* TableHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 579F1B7E1D7E67BA002E9631 /* TableHeaderView.m */; };
 		79721813456B6DA00AB5329D /* Pods_DidiAccounts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 12B25F37D5156238D9105565 /* Pods_DidiAccounts.framework */; };
 /* End PBXBuildFile section */
 
@@ -113,6 +114,8 @@
 		579F1B711D7D49A4002E9631 /* AppConfig.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AppConfig.m; sourceTree = "<group>"; };
 		579F1B791D7D5583002E9631 /* HeaderView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HeaderView.h; sourceTree = "<group>"; };
 		579F1B7A1D7D5583002E9631 /* HeaderView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HeaderView.m; sourceTree = "<group>"; };
+		579F1B7D1D7E67BA002E9631 /* TableHeaderView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TableHeaderView.h; sourceTree = "<group>"; };
+		579F1B7E1D7E67BA002E9631 /* TableHeaderView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TableHeaderView.m; sourceTree = "<group>"; };
 		8B942C258AB5B456C569AAE1 /* Pods-DidiAccounts.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-DidiAccounts.release.xcconfig"; path = "Pods/Target Support Files/Pods-DidiAccounts/Pods-DidiAccounts.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -166,6 +169,7 @@
 		579F1AD61D70374F002E9631 /* DidiAccounts */ = {
 			isa = PBXGroup;
 			children = (
+				579F1B7C1D7E67A9002E9631 /* TableHeaderView */,
 				579F1B731D7D537A002E9631 /* HeaderView */,
 				579F1B671D7953CB002E9631 /* LeftViewController */,
 				579F1B661D7953A3002E9631 /* SlideMenu */,
@@ -282,6 +286,15 @@
 				579F1B7A1D7D5583002E9631 /* HeaderView.m */,
 			);
 			path = HeaderView;
+			sourceTree = "<group>";
+		};
+		579F1B7C1D7E67A9002E9631 /* TableHeaderView */ = {
+			isa = PBXGroup;
+			children = (
+				579F1B7D1D7E67BA002E9631 /* TableHeaderView.h */,
+				579F1B7E1D7E67BA002E9631 /* TableHeaderView.m */,
+			);
+			path = TableHeaderView;
 			sourceTree = "<group>";
 		};
 		91C37323191292B74E4F0059 /* Pods */ = {
@@ -459,6 +472,7 @@
 				579F1B501D76DA20002E9631 /* InputView.m in Sources */,
 				579F1B571D783420002E9631 /* IATConfig.m in Sources */,
 				579F1ADF1D70374F002E9631 /* ViewController.m in Sources */,
+				579F1B7F1D7E67BA002E9631 /* TableHeaderView.m in Sources */,
 				579F1B021D73E229002E9631 /* RootViewController.m in Sources */,
 				579F1B2F1D75917F002E9631 /* SelfTextCell.m in Sources */,
 				579F1B7B1D7D5583002E9631 /* HeaderView.m in Sources */,

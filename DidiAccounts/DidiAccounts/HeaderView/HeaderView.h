@@ -12,4 +12,5 @@
 @property (nonatomic, strong) UILabel *payLabel;
 @property (nonatomic, strong) UILabel *incomeLabel;
 @property (nonatomic, strong) UIButton *detailBtn;
+@property (nonatomic, strong) UILabel *scoresLabel;
 @end
