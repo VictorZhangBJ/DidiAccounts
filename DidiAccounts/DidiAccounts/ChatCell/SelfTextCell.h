@@ -11,7 +11,10 @@
 @interface SelfTextCell : UITableViewCell
 
 @property (weak, nonatomic) IBOutlet UIImageView *headImageView;
-@property (weak, nonatomic) IBOutlet UILabel *chatTextLabel;
 @property (weak, nonatomic) IBOutlet UIImageView *chatBkgImageView;
+@property (weak, nonatomic) IBOutlet UILabel *contentLabel;
+@property (weak, nonatomic) IBOutlet UIButton *headerBtn;
+@property (weak, nonatomic) IBOutlet UILabel *categoryNameLabel;
+@property (weak, nonatomic) IBOutlet UILabel *amountLabel;
 
 @end

@@ -8,7 +8,7 @@
 
 #import "TableHeaderView.h"
 #import "AppConfig.h"
-
+#import "RootViewController.h"
 @implementation TableHeaderView
 
 /*
@@ -72,6 +72,69 @@
     calenderBtn.layer.cornerRadius = 16;
     
     //日历 label
+    self.calenderLabel = [UILabel new];
+    self.calenderLabel.textColor = [UIColor lightGrayColor];
+    self.calenderLabel.textAlignment = NSTextAlignmentCenter;
+    self.calenderLabel.font = [UIFont systemFontOfSize:12];
+    self.calenderLabel.text = @"09月05日";
+    [self addSubview:self.calenderLabel];
+    [self.calenderLabel mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.left.equalTo(calenderBtn.mas_right).offset(3);
+        make.centerY.equalTo(calenderBtn.mas_centerY).offset(-3);
+        make.width.equalTo(@70);
+    }];
+    
+    
+    //合计view
+    UIView *totalView = [UIView new];
+    [self addSubview:totalView];
+    [totalView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.height.equalTo(@17);
+        make.top.equalTo(self.mas_top).offset(15);
+        make.right.equalTo(self.mas_right).offset(-11);
+        make.width.mas_equalTo(right_trapezium_upperLine);
+    }];
+    
+    UIView *spaceOne = [UIView new];
+    UIView *spaceTwo = [UIView new];
+    [totalView addSubview:spaceOne];
+    [totalView addSubview:spaceTwo];
+    
+    [spaceOne mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.centerY.equalTo(totalView.mas_centerY);
+        make.left.equalTo(totalView.mas_left);
+        make.width.greaterThanOrEqualTo(@8);
+    }];
+    
+    UIButton *pigBtn = [UIButton buttonWithType:UIButtonTypeCustom];
+    [pigBtn setImage:[UIImage imageNamed:@"pig_red"] forState:UIControlStateNormal];
+    [totalView addSubview:pigBtn];
+    [pigBtn mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.left.equalTo(spaceOne.mas_right);
+        make.centerY.equalTo(totalView.mas_centerY);
+        make.size.mas_equalTo(CGSizeMake(11, 11));
+        
+    }];
+    
+    self.totalLabel = [UILabel new];
+    self.totalLabel.textColor = [UIColor lightGrayColor];
+    self.totalLabel.font = [UIFont systemFontOfSize:12];
+    self.totalLabel.textAlignment = NSTextAlignmentLeft;
+    self.totalLabel.text = @"+114,23.00";
+    [totalView addSubview:self.totalLabel];
+    [self.totalLabel mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.left.equalTo(pigBtn.mas_right).offset(5);
+        make.centerY.equalTo(totalView.mas_centerY);
+    }];
+    
+    [spaceTwo mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.left.equalTo(self.totalLabel.mas_right);
+        make.centerY.equalTo(totalView.mas_centerY);
+        make.width.equalTo(spaceOne.mas_width);
+        make.right.equalTo(totalView.mas_right);
+    }];
+    
+    
     
     
 }

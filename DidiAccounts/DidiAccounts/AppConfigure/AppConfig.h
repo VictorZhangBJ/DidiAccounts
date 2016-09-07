@@ -26,7 +26,7 @@
 #define tableHeader_height 50    //tableview header 高度
 
 #define icon_red_color [UIColor colorWithRed:0.91 green:0.60 blue:0.60 alpha:1.00]
-#define icon_green_color 
+#define icon_green_color [UIColor colorWithRed:0.45 green:0.78 blue:0.76 alpha:1.00]
 
 @interface AppConfig : NSObject
 

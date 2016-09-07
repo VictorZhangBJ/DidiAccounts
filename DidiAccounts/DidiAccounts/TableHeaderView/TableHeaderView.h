@@ -11,6 +11,7 @@
 @interface TableHeaderView : UIView
 
 @property (nonatomic, strong) UILabel *calenderLabel;
+@property (nonatomic, strong) UILabel *totalLabel;
 
 -(void)configureViewWith:(NSInteger)section;
 

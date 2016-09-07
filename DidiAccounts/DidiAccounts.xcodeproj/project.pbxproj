@@ -43,6 +43,10 @@
 		579F1B721D7D49A4002E9631 /* AppConfig.m in Sources */ = {isa = PBXBuildFile; fileRef = 579F1B711D7D49A4002E9631 /* AppConfig.m */; };
 		579F1B7B1D7D5583002E9631 /* HeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 579F1B7A1D7D5583002E9631 /* HeaderView.m */; };
 		579F1B7F1D7E67BA002E9631 /* TableHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 579F1B7E1D7E67BA002E9631 /* TableHeaderView.m */; };
+		579F1B831D7EC869002E9631 /* MessageItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 579F1B821D7EC869002E9631 /* MessageItem.m */; };
+		579F1B8E1D7FF6EE002E9631 /* PopView.m in Sources */ = {isa = PBXBuildFile; fileRef = 579F1B8D1D7FF6EE002E9631 /* PopView.m */; };
+		579F1B921D8022DB002E9631 /* PopViewFirstCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 579F1B901D8022DB002E9631 /* PopViewFirstCell.m */; };
+		579F1B931D8022DB002E9631 /* PopViewFirstCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 579F1B911D8022DB002E9631 /* PopViewFirstCell.xib */; };
 		79721813456B6DA00AB5329D /* Pods_DidiAccounts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 12B25F37D5156238D9105565 /* Pods_DidiAccounts.framework */; };
 /* End PBXBuildFile section */
 
@@ -116,6 +120,13 @@
 		579F1B7A1D7D5583002E9631 /* HeaderView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HeaderView.m; sourceTree = "<group>"; };
 		579F1B7D1D7E67BA002E9631 /* TableHeaderView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TableHeaderView.h; sourceTree = "<group>"; };
 		579F1B7E1D7E67BA002E9631 /* TableHeaderView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TableHeaderView.m; sourceTree = "<group>"; };
+		579F1B811D7EC869002E9631 /* MessageItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MessageItem.h; sourceTree = "<group>"; };
+		579F1B821D7EC869002E9631 /* MessageItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MessageItem.m; sourceTree = "<group>"; };
+		579F1B8C1D7FF6EE002E9631 /* PopView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PopView.h; sourceTree = "<group>"; };
+		579F1B8D1D7FF6EE002E9631 /* PopView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PopView.m; sourceTree = "<group>"; };
+		579F1B8F1D8022DB002E9631 /* PopViewFirstCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PopViewFirstCell.h; sourceTree = "<group>"; };
+		579F1B901D8022DB002E9631 /* PopViewFirstCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PopViewFirstCell.m; sourceTree = "<group>"; };
+		579F1B911D8022DB002E9631 /* PopViewFirstCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PopViewFirstCell.xib; sourceTree = "<group>"; };
 		8B942C258AB5B456C569AAE1 /* Pods-DidiAccounts.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-DidiAccounts.release.xcconfig"; path = "Pods/Target Support Files/Pods-DidiAccounts/Pods-DidiAccounts.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -169,6 +180,8 @@
 		579F1AD61D70374F002E9631 /* DidiAccounts */ = {
 			isa = PBXGroup;
 			children = (
+				579F1B8B1D7FF6E1002E9631 /* PopView */,
+				579F1B801D7EC85A002E9631 /* Model */,
 				579F1B7C1D7E67A9002E9631 /* TableHeaderView */,
 				579F1B731D7D537A002E9631 /* HeaderView */,
 				579F1B671D7953CB002E9631 /* LeftViewController */,
@@ -297,6 +310,27 @@
 			path = TableHeaderView;
 			sourceTree = "<group>";
 		};
+		579F1B801D7EC85A002E9631 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				579F1B811D7EC869002E9631 /* MessageItem.h */,
+				579F1B821D7EC869002E9631 /* MessageItem.m */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		579F1B8B1D7FF6E1002E9631 /* PopView */ = {
+			isa = PBXGroup;
+			children = (
+				579F1B8C1D7FF6EE002E9631 /* PopView.h */,
+				579F1B8D1D7FF6EE002E9631 /* PopView.m */,
+				579F1B8F1D8022DB002E9631 /* PopViewFirstCell.h */,
+				579F1B901D8022DB002E9631 /* PopViewFirstCell.m */,
+				579F1B911D8022DB002E9631 /* PopViewFirstCell.xib */,
+			);
+			name = PopView;
+			sourceTree = "<group>";
+		};
 		91C37323191292B74E4F0059 /* Pods */ = {
 			isa = PBXGroup;
 			children = (
@@ -396,6 +430,7 @@
 				579F1AE41D70374F002E9631 /* Assets.xcassets in Resources */,
 				579F1B301D75917F002E9631 /* SelfTextCell.xib in Resources */,
 				579F1AE21D70374F002E9631 /* Main.storyboard in Resources */,
+				579F1B931D8022DB002E9631 /* PopViewFirstCell.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -472,6 +507,8 @@
 				579F1B501D76DA20002E9631 /* InputView.m in Sources */,
 				579F1B571D783420002E9631 /* IATConfig.m in Sources */,
 				579F1ADF1D70374F002E9631 /* ViewController.m in Sources */,
+				579F1B921D8022DB002E9631 /* PopViewFirstCell.m in Sources */,
+				579F1B8E1D7FF6EE002E9631 /* PopView.m in Sources */,
 				579F1B7F1D7E67BA002E9631 /* TableHeaderView.m in Sources */,
 				579F1B021D73E229002E9631 /* RootViewController.m in Sources */,
 				579F1B2F1D75917F002E9631 /* SelfTextCell.m in Sources */,
@@ -479,6 +516,7 @@
 				579F1AD91D70374F002E9631 /* main.m in Sources */,
 				579F1B6A1D7953DA002E9631 /* LeftViewController.m in Sources */,
 				579F1B721D7D49A4002E9631 /* AppConfig.m in Sources */,
+				579F1B831D7EC869002E9631 /* MessageItem.m in Sources */,
 				579F1B6D1D7957B7002E9631 /* SlideMenuViewController.m in Sources */,
 				579F1B5A1D783D48002E9631 /* ISRDataHelper.m in Sources */,
 				579F1B541D7833CF002E9631 /* IFlyManager.m in Sources */,

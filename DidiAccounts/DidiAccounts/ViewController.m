@@ -15,7 +15,9 @@
 #import "AppConfigure/AppConfig.h"
 #import "SlideMenuViewController.h"
 #import "TableHeaderView/TableHeaderView.h"
-
+#import "MessageItem.h"
+#import "PopView.h"
+#import "AppDelegate.h"
 @interface ViewController ()
 {
     NSURL *_audioPlayURL;
@@ -26,6 +28,8 @@
 @property (nonatomic, strong) UITableView *tableView;
 @property (nonatomic, strong) NSMutableArray *dataSource;
 @property (nonatomic, strong) HeaderView *headerView;
+@property (nonatomic, strong) PopView *popView;
+@property (nonatomic, strong) UIView *grayBackControl;
 
 @end
 
@@ -40,6 +44,7 @@
     [self initTableView];
     [self initInputView];
     [self initNavigation];
+    [self initPopView];
 
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillChangeFrame:) name:UIKeyboardWillChangeFrameNotification object:nil];
     
@@ -111,13 +116,16 @@
     //[self.tableView registerNib:[[[NSBundle mainBundle] loadNibNamed:@"SelfTextCell" owner:nil options:nil] lastObject] forCellReuseIdentifier:@"SelfTextCell"];
     [self.tableView registerNib:[UINib nibWithNibName:@"SelfTextCell" bundle:nil] forCellReuseIdentifier:@"SelfTextCell"];
     self.dataSource = [[NSMutableArray alloc]init];
-    [self.dataSource addObject:@[@"买衣服200" ,@"吃饭 390"]];
-    [self.dataSource addObject:@[@"打车 88", @"水电费 200"]];
-    [self.dataSource addObject:@[@"打车 88", @"水电费 200", @"外卖 18"]];
+    MessageItem *item1 = [MessageItem new];
+    item1.createDate = [NSDate date];
+    item1.content = @"星巴克拿铁";
+    item1.amounts = 293.00;
+    item1.categoryName = @"餐饮娱乐";
+    
+    [self.dataSource addObject:@[item1, item1,item1]];
+    
+    [self.dataSource addObject:@[item1, item1,item1]];
 
-    [self.dataSource addObject:@[@"打车 88", @"水电费 200"]];
-    [self.dataSource addObject:@[@"打车 88", @"水电费 200"]];
-    [self.dataSource addObject:@[@"打车 88", @"水电费 200"]];
 
 }
 
@@ -148,12 +156,14 @@
 {
     SelfTextCell *cell = (SelfTextCell *)[tableView dequeueReusableCellWithIdentifier:@"SelfTextCell" forIndexPath:indexPath];
    
-    cell.chatTextLabel.text = [[self.dataSource objectAtIndex:indexPath.section] objectAtIndex:indexPath.row];
+    MessageItem* item = [[self.dataSource objectAtIndex:indexPath.section] objectAtIndex:indexPath.row];
+    //cell.contentLabel.text = item.content;
     if (indexPath.section % 2 ==0) {
         cell.backgroundColor = tableViewBackColor_2;
     }else{
         cell.backgroundColor = tableViewBcakColor_1;
     }
+    cell.selectionStyle = UITableViewCellSelectionStyleNone;
     return  cell;
 }
 
@@ -176,6 +186,148 @@
 {
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
 }
+
+-(void)initPopView
+{
+    
+        
+    self.grayBackControl = [[UIView alloc]initWithFrame:self.view.bounds];
+    AppDelegate *delegate = [[UIApplication sharedApplication] delegate];
+    UIWindow *window = delegate.window;
+    
+    UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(grayBackControlClick)];
+    [self.grayBackControl addGestureRecognizer:tap];
+    self.grayBackControl.userInteractionEnabled = YES;
+    
+    [window addSubview:self.grayBackControl];
+    self.grayBackControl.hidden = YES;
+    self.grayBackControl.backgroundColor = [UIColor colorWithWhite:0 alpha:0.0];
+    
+    
+    
+    self.popView = [PopView new];
+    self.popView.backgroundColor = [UIColor whiteColor];
+    [window addSubview:self.popView];
+    [self.popView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.left.equalTo(window.mas_left).offset(20);
+        make.right.equalTo(window.mas_right).offset(-20);
+        make.height.equalTo(@300);
+        make.top.equalTo(window.mas_top).offset(160);
+    }];
+    self.popView.hidden = YES;
+    
+   
+}
+
+-(void)grayBackControlClick
+{
+    NSLog(@"隐藏");
+    [self hidePopView];
+}
+
+//弹出视图
+-(void)showPopView
+{
+    self.grayBackControl.hidden = NO;
+    [UIView animateWithDuration:0.2 delay:0 options:UIViewAnimationOptionCurveEaseInOut animations:^{
+        [self.popView mas_updateConstraints:^(MASConstraintMaker *make) {
+            //make.bottom.equalTo(self.view.mas_bottom).offset(-100);
+            self.grayBackControl.backgroundColor = [UIColor colorWithWhite:0 alpha:0.7];
+            //[self.view layoutIfNeeded];
+        }];
+    } completion:^(BOOL finished) {
+        
+    }];
+    
+    
+    self.popView.hidden = NO;
+    CAKeyframeAnimation * animation;
+    
+    animation = [CAKeyframeAnimation animationWithKeyPath:@"transform"];
+    
+    animation.duration = 0.5;
+    
+    
+    animation.removedOnCompletion = NO;
+    
+    animation.fillMode = kCAFillModeForwards;
+    
+    
+    
+    NSMutableArray *values = [NSMutableArray array];
+    
+    [values addObject:[NSValue valueWithCATransform3D:CATransform3DMakeScale(0.1, 0.1, 1.0)]];
+    
+    [values addObject:[NSValue valueWithCATransform3D:CATransform3DMakeScale(1.1, 1.1, 1.1)]];
+    
+    [values addObject:[NSValue valueWithCATransform3D:CATransform3DMakeScale(0.9, 0.9, 0.9)]];
+    
+    [values addObject:[NSValue valueWithCATransform3D:CATransform3DMakeScale(1.0, 1.0, 1.0)]];
+    
+    
+    
+    animation.values = values;
+    
+    animation.timingFunction = [CAMediaTimingFunction functionWithName: @"easeInEaseOut"];
+    
+    [self.popView.layer addAnimation:animation forKey:nil];
+}
+
+//隐藏弹出视图
+-(void)hidePopView
+{
+    [UIView animateWithDuration:0.2 delay:0 options:UIViewAnimationOptionCurveEaseInOut animations:^{
+        [self.popView mas_updateConstraints:^(MASConstraintMaker *make) {
+            //make.bottom.equalTo(self.view.mas_bottom).offset(200);
+            self.grayBackControl.backgroundColor = [UIColor colorWithWhite:0 alpha:0.0];
+            //[self.view layoutIfNeeded];
+        }];
+    } completion:^(BOOL finished) {
+        self.grayBackControl.hidden = YES;
+
+    }];
+    
+    CAKeyframeAnimation * animation;
+    
+    animation = [CAKeyframeAnimation animationWithKeyPath:@"transform"];
+    
+    animation.duration = 0.3;
+    
+    animation.delegate = self;
+    
+    animation.removedOnCompletion = NO;
+    
+    animation.fillMode = kCAFillModeForwards;
+    
+    
+    
+    NSMutableArray *values = [NSMutableArray array];
+    
+    
+    
+    
+    [values addObject:[NSValue valueWithCATransform3D:CATransform3DMakeScale(1.0, 1.0, 1.0)]];
+    
+    [values addObject:[NSValue valueWithCATransform3D:CATransform3DMakeScale(0.9, 0.9, 0.9)]];
+    
+
+    [values addObject:[NSValue valueWithCATransform3D:CATransform3DMakeScale(1.1, 1.1, 1.1)]];
+
+    [values addObject:[NSValue valueWithCATransform3D:CATransform3DMakeScale(0.01, 0.01, 0.01)]];
+
+
+    animation.values = values;
+    
+    animation.timingFunction = [CAMediaTimingFunction functionWithName: @"easeInEaseOut"];
+    
+    [self.popView.layer addAnimation:animation forKey:nil];
+}
+
+-(void)animationDidStop:(CAAnimation *)anim finished:(BOOL)flag
+{
+    NSLog(@"动画结束");
+    self.popView.hidden = YES;
+}
 -(void)initInputView{
     self.inputView = [[InputView alloc] init];
     self.inputView.delegate = self;
@@ -189,12 +341,12 @@
     
 }
 
+
+
 #pragma mark - InputViewDelegate
 -(void)rightBtnClick
 {
-    [self.dataSource addObject:self.inputView.textField.text];
-    [self.tableView reloadData];
-    self.inputView.textField.text = @"";
+    [self showPopView];
 }
 
 -(void)endRecord
@@ -210,6 +362,8 @@
 
 -(void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event
 {
+    NSLog(@"touches begin");
+    [self hidePopView];
     [self.inputView.textField resignFirstResponder];
 }
 

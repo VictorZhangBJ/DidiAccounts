@@ -62,6 +62,7 @@
 -(void)handleTap
 {
     [self hideSideView];
+    NSLog(@"slide 单击");
 }
 
 -(BOOL)gestureRecognizerShouldBegin:(UIGestureRecognizer *)gestureRecognizer

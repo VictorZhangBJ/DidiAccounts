@@ -7,12 +7,29 @@
 //
 
 #import "SelfTextCell.h"
+#import "AppConfig.h"
+#import "RootViewController.h"
 
 @implementation SelfTextCell
 
 - (void)awakeFromNib {
     [super awakeFromNib];
     // Initialization code
+    self.headerBtn.layer.cornerRadius = self.headerBtn.bounds.size.width / 2.0;
+    self.headerBtn.adjustsImageWhenHighlighted = NO;
+    self.headerBtn.backgroundColor = icon_red_color;
+    
+    //分割线
+    UIView *line = [UIView new];
+    line.backgroundColor = [UIColor colorWithWhite:0.8 alpha:0.8];
+    [self.contentView addSubview:line];
+    [line mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.width.equalTo(@0.5);
+        make.height.equalTo(@30);
+        make.centerY.equalTo(self.contentView.mas_centerY);
+        make.left.equalTo(self.contentLabel.mas_right).offset(10);
+        make.left.greaterThanOrEqualTo(self.categoryNameLabel.mas_right).offset(10);
+    }];
 }
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {

@@ -93,12 +93,12 @@
         make.left.equalTo(self.mas_left);
     }];
     
-    //文字按钮
-    UIButton *textInputBtn = [UIButton buttonWithType:UIButtonTypeSystem];
-    [textInputBtn setTitle:@"文字" forState:UIControlStateNormal];
-    [textInputBtn addTarget:self action:@selector(textInputBtnClick) forControlEvents:UIControlEventTouchUpInside];
-    [self addSubview:textInputBtn];
-    [textInputBtn mas_makeConstraints:^(MASConstraintMaker *make) {
+    //右边按钮
+    UIButton *rightBtn = [UIButton buttonWithType:UIButtonTypeCustom];
+    [rightBtn setImage:[UIImage imageNamed:@"payBtn"] forState:UIControlStateNormal];
+    [rightBtn addTarget:self action:@selector(rightBtnClick) forControlEvents:UIControlEventTouchUpInside];
+    [self addSubview:rightBtn];
+    [rightBtn mas_makeConstraints:^(MASConstraintMaker *make) {
         make.width.equalTo(@60);
         make.height.equalTo(@40);
         make.centerY.equalTo(self.mas_centerY);
@@ -127,7 +127,7 @@
     self.isInputTextMode = !self.isInputTextMode;
 }
 
--(void)textInputBtnClick
+-(void)rightBtnClick
 {
     
     
@@ -152,18 +152,6 @@
     [_iFlyManager stopListening];
     
     
-//    double cTime = self.audioRecorder.currentTime;
-//    if (cTime > 1) {
-//        NSLog(@"发出去");
-//        
-//    }else{
-//        NSLog(@"录音时间太短，不发送");
-//        //删除文件
-//        [self.audioRecorder deleteRecording];
-//    }
-//    
-//    [self.audioRecorder stop];
-//    [_timer invalidate];
 }
 
 -(void)speechBtnTouchDragExit
@@ -172,11 +160,6 @@
     [self endAudio];
     [_iFlyManager cancelListening];
     
-    
-//    //删除录音文件
-//    [self.audioRecorder deleteRecording];
-//    [self.audioRecorder stop];
-//    [_timer invalidate];
 }
 
 
