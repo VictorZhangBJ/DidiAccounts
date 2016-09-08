@@ -47,6 +47,8 @@
 		579F1B8E1D7FF6EE002E9631 /* PopView.m in Sources */ = {isa = PBXBuildFile; fileRef = 579F1B8D1D7FF6EE002E9631 /* PopView.m */; };
 		579F1B921D8022DB002E9631 /* PopViewFirstCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 579F1B901D8022DB002E9631 /* PopViewFirstCell.m */; };
 		579F1B931D8022DB002E9631 /* PopViewFirstCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 579F1B911D8022DB002E9631 /* PopViewFirstCell.xib */; };
+		579F1B971D81093F002E9631 /* PopViewSecondCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 579F1B951D81093F002E9631 /* PopViewSecondCell.m */; };
+		579F1B981D81093F002E9631 /* PopViewSecondCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 579F1B961D81093F002E9631 /* PopViewSecondCell.xib */; };
 		79721813456B6DA00AB5329D /* Pods_DidiAccounts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 12B25F37D5156238D9105565 /* Pods_DidiAccounts.framework */; };
 /* End PBXBuildFile section */
 
@@ -127,6 +129,9 @@
 		579F1B8F1D8022DB002E9631 /* PopViewFirstCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PopViewFirstCell.h; sourceTree = "<group>"; };
 		579F1B901D8022DB002E9631 /* PopViewFirstCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PopViewFirstCell.m; sourceTree = "<group>"; };
 		579F1B911D8022DB002E9631 /* PopViewFirstCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PopViewFirstCell.xib; sourceTree = "<group>"; };
+		579F1B941D81093F002E9631 /* PopViewSecondCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PopViewSecondCell.h; sourceTree = "<group>"; };
+		579F1B951D81093F002E9631 /* PopViewSecondCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PopViewSecondCell.m; sourceTree = "<group>"; };
+		579F1B961D81093F002E9631 /* PopViewSecondCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PopViewSecondCell.xib; sourceTree = "<group>"; };
 		8B942C258AB5B456C569AAE1 /* Pods-DidiAccounts.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-DidiAccounts.release.xcconfig"; path = "Pods/Target Support Files/Pods-DidiAccounts/Pods-DidiAccounts.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -327,6 +332,9 @@
 				579F1B8F1D8022DB002E9631 /* PopViewFirstCell.h */,
 				579F1B901D8022DB002E9631 /* PopViewFirstCell.m */,
 				579F1B911D8022DB002E9631 /* PopViewFirstCell.xib */,
+				579F1B941D81093F002E9631 /* PopViewSecondCell.h */,
+				579F1B951D81093F002E9631 /* PopViewSecondCell.m */,
+				579F1B961D81093F002E9631 /* PopViewSecondCell.xib */,
 			);
 			name = PopView;
 			sourceTree = "<group>";
@@ -428,6 +436,7 @@
 				579F1AFF1D73E1A4002E9631 /* Info.plist in Resources */,
 				579F1AE71D70374F002E9631 /* LaunchScreen.storyboard in Resources */,
 				579F1AE41D70374F002E9631 /* Assets.xcassets in Resources */,
+				579F1B981D81093F002E9631 /* PopViewSecondCell.xib in Resources */,
 				579F1B301D75917F002E9631 /* SelfTextCell.xib in Resources */,
 				579F1AE21D70374F002E9631 /* Main.storyboard in Resources */,
 				579F1B931D8022DB002E9631 /* PopViewFirstCell.xib in Resources */,
@@ -504,6 +513,7 @@
 			files = (
 				579F1AFA1D73E118002E9631 /* AppDelegate.m in Sources */,
 				579F1B071D752BBA002E9631 /* MyTextCell.m in Sources */,
+				579F1B971D81093F002E9631 /* PopViewSecondCell.m in Sources */,
 				579F1B501D76DA20002E9631 /* InputView.m in Sources */,
 				579F1B571D783420002E9631 /* IATConfig.m in Sources */,
 				579F1ADF1D70374F002E9631 /* ViewController.m in Sources */,

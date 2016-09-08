@@ -10,6 +10,7 @@
 #import "RootViewController/RootViewController.h"
 #import "AppConfigure/AppConfig.h"
 #import "PopViewFirstCell.h"
+#import "PopViewSecondCell.h"
 
 @implementation PopView
 
@@ -132,7 +133,7 @@
     [self.tableView registerClass:[UITableViewCell class] forCellReuseIdentifier:@"Cell"];
     
     [self.tableView registerNib:[UINib nibWithNibName:@"PopViewFirstCell" bundle:nil] forCellReuseIdentifier:@"PopViewFirstCell"];
-
+    [self.tableView registerNib:[UINib nibWithNibName:@"PopViewSecondCell" bundle:nil] forCellReuseIdentifier:@"PopViewSecondCell"];
     
     [self addSubview:self.tableView];
     [self.tableView mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -151,6 +152,11 @@
         make.right.equalTo(self.mas_right);
         make.bottom.equalTo(self.tableView.mas_top).offset(-1);
     }];
+    
+    
+    UIView *footerView = [UIView new];
+    footerView.frame = CGRectMake(0, 1, screen_width - 40, 1);
+    self.tableView.tableFooterView = footerView;
 }
 
 -(NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
@@ -168,11 +174,29 @@
     if (indexPath.row == 0) {
         PopViewFirstCell *cell = (PopViewFirstCell *)[tableView dequeueReusableCellWithIdentifier:@"PopViewFirstCell" forIndexPath:indexPath];
         return cell;
-    }else
-    {
-        UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"Cell" forIndexPath:indexPath];
+    }else if(indexPath.row == 1){
+        PopViewSecondCell *cell = (PopViewSecondCell *)[tableView dequeueReusableCellWithIdentifier:@"PopViewSecondCell" forIndexPath:indexPath];
         return  cell;
+    }else{
+        UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"Cell" forIndexPath:indexPath];
+        
+            //保存按钮
+            UIButton *saveBtn = [UIButton buttonWithType:UIButtonTypeSystem];
+            [saveBtn setTitle:@"保存" forState:UIControlStateNormal];
+            [saveBtn setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+            saveBtn.layer.cornerRadius = 5.0;
+            saveBtn.backgroundColor = [UIColor colorWithRed:0.92 green:0.31 blue:0.29 alpha:1.00];
+            [cell.contentView addSubview:saveBtn];
+            [saveBtn mas_makeConstraints:^(MASConstraintMaker *make) {
+                make.left.equalTo(cell.contentView.mas_left).offset(20);
+                make.right.equalTo(cell.contentView.mas_right).offset(-20);
+                make.height.equalTo(@35);
+                make.top.equalTo(cell.contentView.mas_top).offset(20);
+                make.bottom.equalTo(cell.contentView.mas_bottom).offset(-20);
+            }];
+        return cell;
     }
+   
     
 }
 
