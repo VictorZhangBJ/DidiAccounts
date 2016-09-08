@@ -49,6 +49,7 @@
 		579F1B931D8022DB002E9631 /* PopViewFirstCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 579F1B911D8022DB002E9631 /* PopViewFirstCell.xib */; };
 		579F1B971D81093F002E9631 /* PopViewSecondCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 579F1B951D81093F002E9631 /* PopViewSecondCell.m */; };
 		579F1B981D81093F002E9631 /* PopViewSecondCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 579F1B961D81093F002E9631 /* PopViewSecondCell.xib */; };
+		579F1B9B1D8171D0002E9631 /* GridViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 579F1B9A1D8171D0002E9631 /* GridViewCell.m */; };
 		79721813456B6DA00AB5329D /* Pods_DidiAccounts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 12B25F37D5156238D9105565 /* Pods_DidiAccounts.framework */; };
 /* End PBXBuildFile section */
 
@@ -132,6 +133,8 @@
 		579F1B941D81093F002E9631 /* PopViewSecondCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PopViewSecondCell.h; sourceTree = "<group>"; };
 		579F1B951D81093F002E9631 /* PopViewSecondCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PopViewSecondCell.m; sourceTree = "<group>"; };
 		579F1B961D81093F002E9631 /* PopViewSecondCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PopViewSecondCell.xib; sourceTree = "<group>"; };
+		579F1B991D8171D0002E9631 /* GridViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GridViewCell.h; sourceTree = "<group>"; };
+		579F1B9A1D8171D0002E9631 /* GridViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GridViewCell.m; sourceTree = "<group>"; };
 		8B942C258AB5B456C569AAE1 /* Pods-DidiAccounts.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-DidiAccounts.release.xcconfig"; path = "Pods/Target Support Files/Pods-DidiAccounts/Pods-DidiAccounts.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -335,6 +338,8 @@
 				579F1B941D81093F002E9631 /* PopViewSecondCell.h */,
 				579F1B951D81093F002E9631 /* PopViewSecondCell.m */,
 				579F1B961D81093F002E9631 /* PopViewSecondCell.xib */,
+				579F1B991D8171D0002E9631 /* GridViewCell.h */,
+				579F1B9A1D8171D0002E9631 /* GridViewCell.m */,
 			);
 			name = PopView;
 			sourceTree = "<group>";
@@ -529,6 +534,7 @@
 				579F1B831D7EC869002E9631 /* MessageItem.m in Sources */,
 				579F1B6D1D7957B7002E9631 /* SlideMenuViewController.m in Sources */,
 				579F1B5A1D783D48002E9631 /* ISRDataHelper.m in Sources */,
+				579F1B9B1D8171D0002E9631 /* GridViewCell.m in Sources */,
 				579F1B541D7833CF002E9631 /* IFlyManager.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

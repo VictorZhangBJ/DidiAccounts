@@ -15,6 +15,8 @@
 
 -(void)deleteBtnClick;
 
+-(void)updateHeight:(CGFloat)height;
+
 @end
 
 @interface PopView : UIView<UITableViewDelegate, UITableViewDataSource>
@@ -25,5 +27,5 @@
 @property (nonatomic, strong) UIButton *incomeBtn;
 
 @property (nonatomic, strong) UITableView *tableView;
-
+@property (nonatomic, strong) NSMutableArray *dataSource;
 @end

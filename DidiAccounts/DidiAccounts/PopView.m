@@ -11,6 +11,7 @@
 #import "AppConfigure/AppConfig.h"
 #import "PopViewFirstCell.h"
 #import "PopViewSecondCell.h"
+#import "GridViewCell.h"
 
 @implementation PopView
 
@@ -134,17 +135,22 @@
     
     [self.tableView registerNib:[UINib nibWithNibName:@"PopViewFirstCell" bundle:nil] forCellReuseIdentifier:@"PopViewFirstCell"];
     [self.tableView registerNib:[UINib nibWithNibName:@"PopViewSecondCell" bundle:nil] forCellReuseIdentifier:@"PopViewSecondCell"];
+    [self.tableView registerClass:[GridViewCell class] forCellReuseIdentifier:@"GridViewCell"];
     
     [self addSubview:self.tableView];
     [self.tableView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.equalTo(self.payBtn.mas_bottom).offset(20);
         make.left.equalTo(self.mas_left);
         make.right.equalTo(self.mas_right);
-        make.bottom.equalTo(self.mas_bottom);
+        make.bottom.greaterThanOrEqualTo(self.mas_bottom).offset(3);
     }];
+    self.dataSource = [NSMutableArray new];
+    [self.dataSource addObject:@"1"];
+    [self.dataSource addObject:@"2"];
+    [self.dataSource addObject:@"3"];
     
     UIView *hLine = [UIView new];
-    hLine.backgroundColor = [UIColor colorWithRed:0.88 green:0.89 blue:0.90 alpha:1.00];
+    hLine.backgroundColor = PopViewSepratorLine_color;
     [self addSubview:hLine];
     [hLine mas_makeConstraints:^(MASConstraintMaker *make) {
         make.height.equalTo(@1);
@@ -166,38 +172,108 @@
 
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    return 3;
+    return self.dataSource.count;
 }
 
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
+    NSUInteger offset = 0;
+    if (self.dataSource.count >= 3) {
+        offset = self.dataSource.count - 3;
+    }
     if (indexPath.row == 0) {
+        
         PopViewFirstCell *cell = (PopViewFirstCell *)[tableView dequeueReusableCellWithIdentifier:@"PopViewFirstCell" forIndexPath:indexPath];
+        cell.selectionStyle = UITableViewCellSelectionStyleNone;
         return cell;
-    }else if(indexPath.row == 1){
+        
+    }else if(indexPath.row == 1 + offset){
         PopViewSecondCell *cell = (PopViewSecondCell *)[tableView dequeueReusableCellWithIdentifier:@"PopViewSecondCell" forIndexPath:indexPath];
         return  cell;
-    }else{
+    }else if(indexPath.row == self.dataSource.count - 1){
         UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"Cell" forIndexPath:indexPath];
         
-            //保存按钮
-            UIButton *saveBtn = [UIButton buttonWithType:UIButtonTypeSystem];
-            [saveBtn setTitle:@"保存" forState:UIControlStateNormal];
-            [saveBtn setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
-            saveBtn.layer.cornerRadius = 5.0;
-            saveBtn.backgroundColor = [UIColor colorWithRed:0.92 green:0.31 blue:0.29 alpha:1.00];
-            [cell.contentView addSubview:saveBtn];
-            [saveBtn mas_makeConstraints:^(MASConstraintMaker *make) {
-                make.left.equalTo(cell.contentView.mas_left).offset(20);
-                make.right.equalTo(cell.contentView.mas_right).offset(-20);
-                make.height.equalTo(@35);
-                make.top.equalTo(cell.contentView.mas_top).offset(20);
-                make.bottom.equalTo(cell.contentView.mas_bottom).offset(-20);
-            }];
+        //保存按钮
+        UIButton *saveBtn = [UIButton buttonWithType:UIButtonTypeSystem];
+        [saveBtn setTitle:@"保存" forState:UIControlStateNormal];
+        [saveBtn setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+        [saveBtn addTarget:self action:@selector(saveBtnClick) forControlEvents:UIControlEventTouchUpInside];
+        saveBtn.layer.cornerRadius = 5.0;
+        saveBtn.backgroundColor = [UIColor colorWithRed:0.92 green:0.31 blue:0.29 alpha:1.00];
+        [cell.contentView addSubview:saveBtn];
+        [saveBtn mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.left.equalTo(cell.contentView.mas_left).offset(20);
+            make.right.equalTo(cell.contentView.mas_right).offset(-20);
+            make.height.equalTo(@35);
+            make.top.equalTo(cell.contentView.mas_top).offset(20);
+            make.bottom.equalTo(cell.contentView.mas_bottom).offset(-20);
+        }];
         return cell;
+    }else{
+        GridViewCell *cell = (GridViewCell *)[tableView dequeueReusableCellWithIdentifier:@"GridViewCell" forIndexPath:indexPath];
+        cell.selectionStyle = UITableViewCellSelectionStyleNone;
+        return cell;
+
     }
    
     
+}
+-(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    if (indexPath.row == 0) {
+        
+        PopViewFirstCell *cell = (PopViewFirstCell *)[tableView cellForRowAtIndexPath:indexPath];
+        cell.separatorInset = UIEdgeInsetsZero;
+        if (self.dataSource.count > 3) {
+            //删除操作
+            
+            self.tableView.separatorColor = PopViewSepratorLine_color;
+            
+            [UIView animateWithDuration:0.3 delay:0 options:UIViewAnimationOptionCurveEaseOut animations:^{
+                [self mas_updateConstraints:^(MASConstraintMaker *make) {
+                    make.height.equalTo(@300);
+                }];
+                [self layoutIfNeeded];
+            } completion:^(BOOL finished) {
+                
+                
+            }];
+            
+            [self.tableView beginUpdates];
+            [self.dataSource removeLastObject];
+            NSIndexPath *indexPath = [NSIndexPath indexPathForRow:1 inSection:0];
+            [self.tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationBottom];
+            [self.tableView endUpdates];
+            
+            [_delegate updateHeight:300];
+            
+        }else{
+            //插入操作
+            
+            [_delegate updateHeight:472];
+            
+            self.tableView.separatorColor = GridViewCell_backColor;
+
+
+            [UIView animateWithDuration:0.3 delay:0 options:UIViewAnimationOptionCurveEaseOut animations:^{
+                [self mas_updateConstraints:^(MASConstraintMaker *make) {
+                    make.height.equalTo(@472);
+                    
+                }];
+                [self layoutIfNeeded];
+            } completion:^(BOOL finished) {
+                
+            }];
+            
+            [self.tableView beginUpdates];
+            [self.dataSource addObject:@"100"];
+            NSIndexPath *indexPath = [NSIndexPath indexPathForRow:1 inSection:0];
+            [self.tableView insertRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationTop];
+            [self.tableView endUpdates];
+        }
+        
+        //[self.tableView reloadData];
+    }
 }
 
 -(CGFloat)tableView:(UITableView *)tableView estimatedHeightForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -205,14 +281,19 @@
     return 45;
 }
 
+-(void)saveBtnClick
+{
+    
+}
 
 -(void)deleteBtnClick
 {
     NSLog(@"popView 删除按钮点击");
+    [_delegate deleteBtnClick];
 }
 
 -(void)closeBtnClick
 {
-    
+    [_delegate closePopView];
 }
 @end

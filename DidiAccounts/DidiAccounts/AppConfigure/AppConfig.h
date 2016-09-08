@@ -28,6 +28,9 @@
 #define icon_red_color [UIColor colorWithRed:0.91 green:0.60 blue:0.60 alpha:1.00]
 #define icon_green_color [UIColor colorWithRed:0.45 green:0.78 blue:0.76 alpha:1.00]
 
+#define GridViewCell_backColor [UIColor colorWithRed:0.96 green:0.97 blue:0.98 alpha:1.00]
+#define PopViewSepratorLine_color [UIColor colorWithRed:0.88 green:0.89 blue:0.90 alpha:1.00]
+
 @interface AppConfig : NSObject
 
 //navigationBar tintColor

@@ -16,7 +16,6 @@
 #import "SlideMenuViewController.h"
 #import "TableHeaderView/TableHeaderView.h"
 #import "MessageItem.h"
-#import "PopView.h"
 #import "AppDelegate.h"
 @interface ViewController ()
 {
@@ -206,13 +205,14 @@
     
     
     self.popView = [PopView new];
+    self.popView.delegate = self;
     self.popView.backgroundColor = [UIColor whiteColor];
     [window addSubview:self.popView];
     [self.popView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.equalTo(window.mas_left).offset(20);
         make.right.equalTo(window.mas_right).offset(-20);
         make.height.equalTo(@300);
-        make.top.equalTo(window.mas_top).offset(160);
+        make.centerY.equalTo(window.mas_centerY);
     }];
     self.popView.hidden = YES;
     
@@ -222,6 +222,16 @@
 -(void)grayBackControlClick
 {
     NSLog(@"隐藏");
+    //放心键盘
+    [self.popView endEditing:YES];
+}
+-(void)updateHeight:(CGFloat)height
+{
+    
+    
+}
+
+-(void)closePopView{
     [self hidePopView];
 }
 
