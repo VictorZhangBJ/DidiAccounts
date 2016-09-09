@@ -12,8 +12,13 @@
 @property (weak, nonatomic) IBOutlet UILabel *amountLabel;
 @property (weak, nonatomic) IBOutlet UIButton *categoryBtn;
 @property (weak, nonatomic) IBOutlet UITextView *contentTextView;
+@property (weak, nonatomic) IBOutlet UITextView *amountTextView;
+@property (weak, nonatomic) IBOutlet UIButton *arrowBtn;
 
 @property (weak, nonatomic) IBOutlet UILabel *categoryLabel;
--(void)configureCell;
+
+@property (weak, nonatomic) IBOutlet UIView *triangleView;
+
+-(void)configureCellWithDirecton:(BOOL)isDown;
 
 @end

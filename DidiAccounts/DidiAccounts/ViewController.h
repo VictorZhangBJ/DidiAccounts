@@ -14,7 +14,7 @@
 
 @class SlideMenuViewController;
 @interface ViewController : RootViewController<UITableViewDelegate, UITableViewDataSource, UIScrollViewDelegate,
-                                                 AVAudioRecorderDelegate,InputViewDelegate,PopViewDelegate>
+                                                 AVAudioRecorderDelegate,InputViewDelegate,PopViewDelegate,UITextFieldDelegate>
 
 @property (nonatomic, strong) SlideMenuViewController* slide;
 

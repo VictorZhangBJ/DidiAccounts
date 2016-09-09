@@ -228,7 +228,15 @@
             //删除操作
             
             self.tableView.separatorColor = PopViewSepratorLine_color;
+            //改变cell箭头方向，改为向下
+            [cell configureCellWithDirecton:NO];
             
+            [self.tableView beginUpdates];
+            [self.dataSource removeLastObject];
+            NSIndexPath *indexPath = [NSIndexPath indexPathForRow:1 inSection:0];
+            [self.tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationTop];
+            [self.tableView endUpdates];
+
             [UIView animateWithDuration:0.3 delay:0 options:UIViewAnimationOptionCurveEaseOut animations:^{
                 [self mas_updateConstraints:^(MASConstraintMaker *make) {
                     make.height.equalTo(@300);
@@ -236,14 +244,8 @@
                 [self layoutIfNeeded];
             } completion:^(BOOL finished) {
                 
-                
             }];
             
-            [self.tableView beginUpdates];
-            [self.dataSource removeLastObject];
-            NSIndexPath *indexPath = [NSIndexPath indexPathForRow:1 inSection:0];
-            [self.tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationBottom];
-            [self.tableView endUpdates];
             
             [_delegate updateHeight:300];
             
@@ -252,9 +254,12 @@
             
             [_delegate updateHeight:472];
             
+            //改变cell箭头方向，改为向上
+            [cell configureCellWithDirecton:YES];
+            
+           
+            
             self.tableView.separatorColor = GridViewCell_backColor;
-
-
             [UIView animateWithDuration:0.3 delay:0 options:UIViewAnimationOptionCurveEaseOut animations:^{
                 [self mas_updateConstraints:^(MASConstraintMaker *make) {
                     make.height.equalTo(@472);
@@ -270,6 +275,7 @@
             NSIndexPath *indexPath = [NSIndexPath indexPathForRow:1 inSection:0];
             [self.tableView insertRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationTop];
             [self.tableView endUpdates];
+            
         }
         
         //[self.tableView reloadData];

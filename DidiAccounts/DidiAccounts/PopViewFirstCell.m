@@ -11,7 +11,9 @@
 #import "RootViewController/RootViewController.h"
 
 @implementation PopViewFirstCell
-
+{
+    BOOL _isDown;
+}
 - (void)awakeFromNib {
     [super awakeFromNib];
     // Initialization code
@@ -19,6 +21,13 @@
     self.categoryBtn.layer.backgroundColor = icon_green_color.CGColor;
     
     self.contentTextView.delegate = self;
+    //设置页边距
+    self.contentTextView.textContainerInset = UIEdgeInsetsMake(0, 0, 0, 0);
+    self.contentTextView.contentInset = UIEdgeInsetsMake(0, 0, 0, 0);
+    
+    self.amountTextView.textContainerInset = UIEdgeInsetsMake(0, 0, 0, 0);
+    
+    [self drawTriangle];
 }
 
 //根据文字改变cell大小
@@ -50,34 +59,47 @@
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {
     [super setSelected:selected animated:animated];
-
+    
+    
+    
     // Configure the view for the selected state
 }
 
--(void)configureCell
+-(void)configureCellWithDirecton:(BOOL)isDown
 {
-//    UIView *gridView = [UIView new];
-//    gridView.backgroundColor = [UIColor blueColor];
-//    [self.contentView addSubview:gridView];
-//    [gridView mas_makeConstraints:^(MASConstraintMaker *make) {
-//        make.top.equalTo(self.categoryLabel.mas_bottom).offset(5);
-//        make.height.equalTo(@100);
-//        make.left.equalTo(self.contentView.mas_left).offset(10);
-//        make.right.equalTo(self.contentView.mas_right).offset(-10);
-//        make.bottom.equalTo(self.contentView.mas_bottom);
-//    }];
-//    [self layoutIfNeeded];
-    
-//    [self.categoryLabel mas_updateConstraints:^(MASConstraintMaker *make) {
-//        make.bottom.greaterThanOrEqualTo(self.contentView.mas_bottom).offset(-100);
-//    }];
-//    [self layoutIfNeeded];
-//    NSLog(@"纳尼");
-//    UITableView *tableView = [self tableView];
-//    [tableView beginUpdates];
-//    [tableView endUpdates];
-    
-    
+    if (isDown == YES) {
+        [UIView animateWithDuration:0.3 animations:^{
+            self.triangleView.hidden = NO;
+
+            self.arrowBtn.transform = CGAffineTransformMakeRotation(M_PI);
+        } completion:^(BOOL finished) {
+        }];
+    }else{
+        [UIView animateWithDuration:0.3 animations:^{
+            self.arrowBtn.transform = CGAffineTransformMakeRotation(0);
+            self.triangleView.hidden = YES;
+
+        } completion:^(BOOL finished) {
+        }];
+        
+    }
+}
+
+//绘制三角形
+-(void)drawTriangle
+{
+    CAShapeLayer *layer = [CAShapeLayer new];
+    layer.frame = self.triangleView.bounds;
+    UIBezierPath *path = [UIBezierPath bezierPath];
+    CGFloat width = self.triangleView.bounds.size.width;
+    [path moveToPoint:CGPointMake(0, width)];
+    [path addLineToPoint:CGPointMake(width / 2.0, 2)];
+    [path addLineToPoint:CGPointMake(width, width)];
+    [path addLineToPoint:CGPointMake(0, width)];
+    layer.fillColor = GridViewCell_backColor.CGColor;
+    layer.path = path.CGPath;
+    [self.triangleView.layer addSublayer:layer];
+    self.triangleView.hidden = YES;
 }
 
 @end
