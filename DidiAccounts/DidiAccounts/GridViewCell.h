@@ -8,6 +8,14 @@
 
 #import <UIKit/UIKit.h>
 
+@protocol GridViewDelegate <NSObject>
+
+-(void)categoryBtnClickWithTag:(NSInteger)tag;
+
+@end
+
 @interface GridViewCell : UITableViewCell
+
+@property (nonatomic, assign) id<GridViewDelegate> delegate;
 
 @end

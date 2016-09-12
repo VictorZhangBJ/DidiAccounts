@@ -40,5 +40,10 @@
 
 +(UIImage*) createImageWithColor:(UIColor*) color;
 
++(NSArray *)gridViewButtonNameArray;
+
++(NSArray *)giridViewLabelNameArray;
+
++(NSArray *)gridViewBigButtonNameArray;
 
 @end

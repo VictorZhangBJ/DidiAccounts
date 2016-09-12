@@ -7,6 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "GridViewCell.h"
 
 @protocol PopViewDelegate <NSObject>
 
@@ -19,7 +20,7 @@
 
 @end
 
-@interface PopView : UIView<UITableViewDelegate, UITableViewDataSource>
+@interface PopView : UIView<UITableViewDelegate, UITableViewDataSource, GridViewDelegate>
 
 @property (nonatomic, assign) id<PopViewDelegate> delegate;
 

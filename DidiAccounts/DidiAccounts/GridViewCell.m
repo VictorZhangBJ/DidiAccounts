@@ -45,13 +45,8 @@
     }];
 
     //创建按钮
-    NSArray *btnNameArray = @[@"catering_H",@"clothes_H",@"home_H",@"traffic_H",@"shopping_H",
-                              @"education_H",@"sport_H",@"relationship_H",@"health_H",@"finance_H",
-                              @"other_H"];
-    
-    NSArray *labelNameArray = @[@"餐饮娱乐", @"服饰美容", @"居家物业", @"交通出行", @"购物",
-                                @"教育培训", @"运动休闲", @"人情往来", @"医疗健康", @"财务管理",
-                                @"其他"];
+    NSArray *btnNameArray = [AppConfig gridViewButtonNameArray];
+    NSArray *labelNameArray = [AppConfig giridViewLabelNameArray];
     CGFloat btnWidth = 26;
     CGFloat offsetY = 10;
     CGFloat offsetX = btnWidth - 2 ;
@@ -69,6 +64,8 @@
         btn.backgroundColor = icon_green_color;
         btn.layer.cornerRadius = btnWidth / 2.0;
         [backView addSubview:btn];
+        [btn setTag:i];
+        [btn addTarget:self action:@selector(btnClick:) forControlEvents:UIControlEventTouchUpInside];
         
         //label
         UILabel *label = [UILabel new];
@@ -82,6 +79,12 @@
         
     }
     
-    
 }
+-(void)btnClick:(UIButton *)btn
+{
+    if ([_delegate respondsToSelector:@selector(categoryBtnClickWithTag:)]) {
+        [_delegate categoryBtnClickWithTag:btn.tag];
+    }
+}
+
 @end

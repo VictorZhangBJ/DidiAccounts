@@ -11,7 +11,7 @@
 #import "AppConfigure/AppConfig.h"
 #import "PopViewFirstCell.h"
 #import "PopViewSecondCell.h"
-#import "GridViewCell.h"
+
 
 @implementation PopView
 
@@ -212,12 +212,24 @@
     }else{
         GridViewCell *cell = (GridViewCell *)[tableView dequeueReusableCellWithIdentifier:@"GridViewCell" forIndexPath:indexPath];
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
+        cell.delegate = self;
         return cell;
 
     }
    
     
 }
+
+#pragma  mark - GridViewDelegate
+
+-(void)categoryBtnClickWithTag:(NSInteger)tag
+{
+    PopViewFirstCell *cell = (PopViewFirstCell *)[self.tableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:0]];
+    
+    [cell.categoryBtn setImage:[UIImage imageNamed:[[AppConfig gridViewBigButtonNameArray] objectAtIndex:tag]] forState:UIControlStateNormal];
+    cell.categoryLabel.text = [[AppConfig giridViewLabelNameArray] objectAtIndex:tag];
+}
+
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     if (indexPath.row == 0) {

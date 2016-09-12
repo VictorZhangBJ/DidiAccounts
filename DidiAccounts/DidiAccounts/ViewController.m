@@ -354,10 +354,6 @@
 
 
 #pragma mark - InputViewDelegate
--(void)rightBtnClick
-{
-    [self showPopView];
-}
 
 -(void)endRecord
 {
@@ -368,6 +364,15 @@
 {
     
 }
+
+-(void)returnKeyClick
+{
+    [self.inputView.textField resignFirstResponder];
+    [self showPopView];
+    self.inputView.textField.text = @"";
+    
+}
+
 
 
 -(void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event

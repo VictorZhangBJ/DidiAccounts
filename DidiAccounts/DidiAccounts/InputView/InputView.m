@@ -44,6 +44,8 @@
 -(void)configureInputView
 {
     self.isInputTextMode = YES;
+    self.inputViewType = InputViewTypePay;    //默认支出模式
+    
     self.backgroundColor = [UIColor colorWithRed:0.95 green:0.95 blue:0.96 alpha:1.00];
     
     self.textField = [UITextField new];
@@ -51,6 +53,8 @@
     [self addSubview:self.textField];
     self.textField.borderStyle = UITextBorderStyleRoundedRect;
     self.textField.backgroundColor = [UIColor whiteColor];
+    self.textField.returnKeyType = UIReturnKeySend;
+    self.textField.delegate = self;
     
     [self.textField mas_makeConstraints:^(MASConstraintMaker *make) {
         make.height.equalTo(@38);
@@ -94,20 +98,28 @@
     }];
     
     //右边按钮
-    UIButton *rightBtn = [UIButton buttonWithType:UIButtonTypeCustom];
-    [rightBtn setImage:[UIImage imageNamed:@"payBtn"] forState:UIControlStateNormal];
-    [rightBtn addTarget:self action:@selector(rightBtnClick) forControlEvents:UIControlEventTouchUpInside];
-    [self addSubview:rightBtn];
-    [rightBtn mas_makeConstraints:^(MASConstraintMaker *make) {
+    self.rightButton = [UIButton buttonWithType:UIButtonTypeCustom];
+    [self.rightButton setImage:[UIImage imageNamed:@"payBtn"] forState:UIControlStateNormal];
+    [self.rightButton addTarget:self action:@selector(rightBtnClick) forControlEvents:UIControlEventTouchUpInside];
+    [self addSubview:self.rightButton];
+    [self.rightButton mas_makeConstraints:^(MASConstraintMaker *make) {
         make.width.equalTo(@60);
         make.height.equalTo(@40);
         make.centerY.equalTo(self.mas_centerY);
         make.right.equalTo(self.mas_right);
         
     }];
-    
 }
 
+//发送键按下
+-(BOOL)textFieldShouldReturn:(UITextField *)textField
+{
+    NSLog(@"return 按下");
+    if ([_delegate respondsToSelector:@selector(returnKeyClick)]) {
+        [_delegate returnKeyClick];
+    }
+    return true;
+}
 -(void)leftBtnClick
 {
     if (self.isInputTextMode) {
@@ -129,10 +141,14 @@
 
 -(void)rightBtnClick
 {
-    
-    
-    if ([_delegate respondsToSelector:@selector(rightBtnClick)]) {
-        [_delegate rightBtnClick];
+    NSLog(@"改变右边按钮");
+    //改变右边按钮的图片
+    if (self.inputViewType == InputViewTypePay) {
+        [self.rightButton setImage:[UIImage imageNamed:@"incomeBtn"] forState:UIControlStateNormal];
+        self.inputViewType = InputViewTypeIncome;
+    }else{
+        [self.rightButton setImage:[UIImage imageNamed:@"payBtn"] forState:UIControlStateNormal];
+        self.inputViewType = InputViewTypePay;
     }
 }
 

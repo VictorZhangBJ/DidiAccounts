@@ -9,18 +9,23 @@
 #import <UIKit/UIKit.h>
 #import <AVFoundation/AVFoundation.h>
 
+typedef NS_ENUM(NSInteger, InputViewType){
+    InputViewTypePay,
+    InputViewTypeIncome
+};
+
 
 @protocol InputViewDelegate <NSObject>
-
--(void)rightBtnClick;
 
 -(void)endRecord;
 
 -(void)startRecord;
 
+-(void)returnKeyClick;
+
 @end
 
-@interface InputView : UIView<AVAudioRecorderDelegate>
+@interface InputView : UIView<AVAudioRecorderDelegate, UITextFieldDelegate>
 
 @property (nonatomic, strong) UITextField *textField;
 @property (nonatomic, strong) UIButton *leftButton;
@@ -30,4 +35,7 @@
 @property (nonatomic, weak) id<InputViewDelegate> delegate;
 @property (nonatomic, strong) AVAudioRecorder *audioRecorder;
 @property (nonatomic, strong) NSURL* audioPlayURL;
+
+@property (nonatomic) InputViewType inputViewType;     //支出还是 收入模式
+
 @end
