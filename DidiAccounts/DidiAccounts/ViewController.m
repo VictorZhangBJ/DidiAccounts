@@ -17,6 +17,7 @@
 #import "TableHeaderView/TableHeaderView.h"
 #import "MessageItem.h"
 #import "AppDelegate.h"
+#import "Model/ModelManager.h"
 @interface ViewController ()
 {
     NSURL *_audioPlayURL;
@@ -29,6 +30,8 @@
 @property (nonatomic, strong) HeaderView *headerView;
 @property (nonatomic, strong) PopView *popView;
 @property (nonatomic, strong) UIView *grayBackControl;
+@property (nonatomic, strong) ModelManager *modelManager;
+
 
 @end
 
@@ -39,6 +42,7 @@
     [super viewDidLoad];
     self.view.backgroundColor = tableViewBcakColor_1;
     self.title = @"滴滴记账";
+    [self initModel];
     [self initHeaderView];
     [self initTableView];
     [self initInputView];
@@ -59,6 +63,11 @@
 {
     [super viewDidDisappear:animated];
     [[BaiduMobStat defaultStat] pageviewEndWithName:@"记账页面"];
+}
+
+-(void)initModel
+{
+    self.modelManager = [ModelManager sharedInstance];
 }
 
 -(void)initNavigation
@@ -116,10 +125,10 @@
     [self.tableView registerNib:[UINib nibWithNibName:@"SelfTextCell" bundle:nil] forCellReuseIdentifier:@"SelfTextCell"];
     self.dataSource = [[NSMutableArray alloc]init];
     MessageItem *item1 = [MessageItem new];
-    item1.createDate = [NSDate date];
+    item1.message_create_date = [NSDate date];
     item1.content = @"星巴克拿铁";
     item1.amounts = 293.00;
-    item1.categoryName = @"餐饮娱乐";
+    item1.category_name = @"餐饮娱乐";
     
     [self.dataSource addObject:@[item1, item1,item1]];
     
@@ -367,6 +376,8 @@
 
 -(void)returnKeyClick
 {
+    //解析字符串
+    [self.modelManager parseStringToMessage:self.inputView.textField.text];
     [self.inputView.textField resignFirstResponder];
     [self showPopView];
     self.inputView.textField.text = @"";

@@ -2,18 +2,34 @@
 //  MessageItem.h
 //  DidiAccounts
 //
-//  Created by 张佳宾 on 16/9/6.
+//  Created by victor on 16/9/6.
 //  Copyright © 2016年 victor. All rights reserved.
 //
 
 #import <Foundation/Foundation.h>
+#import <Realm/Realm.h>
 
-@interface MessageItem : NSObject
+@class User;
+@interface MessageItem : RLMObject
 
-@property (nonatomic, strong) NSDate *createDate;
-@property (nonatomic, strong) NSString *content;
-@property (nonatomic, strong) NSString *categoryName;
-@property (nonatomic, assign) NSInteger categoryNumber;
-@property (nonatomic, assign) NSInteger type;           //0 - 支出，1 - 收入
-@property (nonatomic, assign) double amounts;          //支出 或 收入金额
+@property  NSDate *message_create_date;
+@property  NSString *content;
+@property  NSString *category_name;
+@property  NSInteger category_number;
+@property  NSInteger type;           //0 - 支出，1 - 收入
+@property  double amounts;          //支出 或 收入金额
+@property  NSInteger message_id;    //primary key 自增
+@property User *owner;
+
+@end
+RLM_ARRAY_TYPE(MessageItem)
+
+
+@interface User : RLMObject
+
+@property NSDate *user_create_date;
+@property NSInteger user_id;
+@property NSString *user_name;
+@property RLMArray<MessageItem *><MessageItem> *messages;
+
 @end

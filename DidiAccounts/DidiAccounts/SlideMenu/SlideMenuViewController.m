@@ -87,8 +87,7 @@
     
     _centerViewController.view.transform = tranfrom;
     _prevX = translationPointX;
-    
-    
+        
     if (pan.state == UIGestureRecognizerStateEnded) {
         CGFloat velocity = [pan velocityInView:self.view].x;
         if (velocity > 0) {
