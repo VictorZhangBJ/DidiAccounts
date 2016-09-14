@@ -11,8 +11,11 @@
 
 @interface ModelManager : NSObject
 
+@property (nonatomic, strong) RLMRealm *realm;
+@property (nonatomic, strong) User *user;
+
 +(instancetype)sharedInstance;
 
--(MessageItem *)parseStringToMessage:(NSString *)inputText;
+-(MessageItem *)parseStringToMessage:(NSString *)inputText withType:(NSInteger)type;
 
 @end

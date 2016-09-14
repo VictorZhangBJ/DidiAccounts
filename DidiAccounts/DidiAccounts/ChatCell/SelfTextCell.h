@@ -7,7 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
-
+#import "MessageItem.h"
 @interface SelfTextCell : UITableViewCell
 
 @property (weak, nonatomic) IBOutlet UIImageView *headImageView;
@@ -16,5 +16,7 @@
 @property (weak, nonatomic) IBOutlet UIButton *headerBtn;
 @property (weak, nonatomic) IBOutlet UILabel *categoryNameLabel;
 @property (weak, nonatomic) IBOutlet UILabel *amountLabel;
+
+-(void)configureCellWithMessage:(MessageItem *)message;
 
 @end

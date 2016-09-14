@@ -37,5 +37,22 @@
 
     // Configure the view for the selected state
 }
+-(void)configureCellWithMessage:(MessageItem *)message
+{
+    self.categoryNameLabel.text = message.category_name;
+    self.contentLabel.text = message.content;
+    [self.headerBtn setImage:[UIImage imageNamed:[[AppConfig gridViewButtonNameArray] objectAtIndex:message.category_number]] forState:UIControlStateNormal];
+    if (message.type == 0) {
+        //支出模式
+        [self.headerBtn setBackgroundColor: icon_green_color];
+        self.amountLabel.textColor = icon_green_color;
+        self.amountLabel.text = [NSString stringWithFormat:@"-%.2f",message.amounts];
+    }else{
+        //收入模式
+        [self.headerBtn setBackgroundColor: icon_red_color];
+        self.amountLabel.textColor = icon_red_color;
+        self.amountLabel.text = [NSString stringWithFormat:@"+%.2f",message.amounts];
+    }
+}
 
 @end

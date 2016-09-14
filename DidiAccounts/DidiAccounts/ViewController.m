@@ -31,6 +31,7 @@
 @property (nonatomic, strong) PopView *popView;
 @property (nonatomic, strong) UIView *grayBackControl;
 @property (nonatomic, strong) ModelManager *modelManager;
+@property RLMArray<MessageItem *><MessageItem> *messages;
 
 
 @end
@@ -48,9 +49,7 @@
     [self initInputView];
     [self initNavigation];
     [self initPopView];
-
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillChangeFrame:) name:UIKeyboardWillChangeFrameNotification object:nil];
-    
+    [self initNotification];
 }
 
 -(void)viewDidAppear:(BOOL)animated
@@ -63,6 +62,19 @@
 {
     [super viewDidDisappear:animated];
     [[BaiduMobStat defaultStat] pageviewEndWithName:@"记账页面"];
+}
+
+-(void)initNotification
+{
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillChangeFrame:) name:UIKeyboardWillChangeFrameNotification object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(insertMessage) name:NOTIFICATION_INSERT_MESSAGE object:nil];
+}
+
+-(void)insertMessage
+{
+    self.messages = _modelManager.user.messages;
+    [self.tableView reloadData];
+
 }
 
 -(void)initModel
@@ -120,8 +132,6 @@
     
     self.tableView.delegate = self;
     self.tableView.dataSource = self;
-    //[self.tableView registerClass:[MyTextCell class] forCellReuseIdentifier:@"MyTextCell"];
-    //[self.tableView registerNib:[[[NSBundle mainBundle] loadNibNamed:@"SelfTextCell" owner:nil options:nil] lastObject] forCellReuseIdentifier:@"SelfTextCell"];
     [self.tableView registerNib:[UINib nibWithNibName:@"SelfTextCell" bundle:nil] forCellReuseIdentifier:@"SelfTextCell"];
     self.dataSource = [[NSMutableArray alloc]init];
     MessageItem *item1 = [MessageItem new];
@@ -130,10 +140,8 @@
     item1.amounts = 293.00;
     item1.category_name = @"餐饮娱乐";
     
-    [self.dataSource addObject:@[item1, item1,item1]];
     
-    [self.dataSource addObject:@[item1, item1,item1]];
-
+    self.messages = _modelManager.user.messages;
 
 }
 
@@ -152,20 +160,21 @@
 
 -(NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
-    return  self.dataSource.count;
+    return 1;
 }
 
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    return  [[self.dataSource objectAtIndex:section] count];
+    return  self.messages.count;
 }
 
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     SelfTextCell *cell = (SelfTextCell *)[tableView dequeueReusableCellWithIdentifier:@"SelfTextCell" forIndexPath:indexPath];
    
-    MessageItem* item = [[self.dataSource objectAtIndex:indexPath.section] objectAtIndex:indexPath.row];
-    //cell.contentLabel.text = item.content;
+    MessageItem *message = [self.messages objectAtIndex:indexPath.row];
+    [cell configureCellWithMessage:message];
+    
     if (indexPath.section % 2 ==0) {
         cell.backgroundColor = tableViewBackColor_2;
     }else{
@@ -197,8 +206,6 @@
 
 -(void)initPopView
 {
-    
-        
     self.grayBackControl = [[UIView alloc]initWithFrame:self.view.bounds];
     AppDelegate *delegate = [[UIApplication sharedApplication] delegate];
     UIWindow *window = delegate.window;
@@ -210,8 +217,6 @@
     [window addSubview:self.grayBackControl];
     self.grayBackControl.hidden = YES;
     self.grayBackControl.backgroundColor = [UIColor colorWithWhite:0 alpha:0.0];
-    
-    
     
     self.popView = [PopView new];
     self.popView.delegate = self;
@@ -225,14 +230,14 @@
     }];
     self.popView.hidden = YES;
     
-   
 }
 
 -(void)grayBackControlClick
 {
     NSLog(@"隐藏");
-    //放心键盘
+    //放下键盘
     [self.popView endEditing:YES];
+    [self hidePopView];
 }
 -(void)updateHeight:(CGFloat)height
 {
@@ -240,6 +245,12 @@
     
 }
 
+#pragma - mark PopViewDelegate
+
+-(void)deleteBtnClick
+{
+    
+}
 -(void)closePopView{
     [self hidePopView];
 }
@@ -266,12 +277,9 @@
     
     animation.duration = 0.5;
     
-    
     animation.removedOnCompletion = NO;
     
     animation.fillMode = kCAFillModeForwards;
-    
-    
     
     NSMutableArray *values = [NSMutableArray array];
     
@@ -282,8 +290,6 @@
     [values addObject:[NSValue valueWithCATransform3D:CATransform3DMakeScale(0.9, 0.9, 0.9)]];
     
     [values addObject:[NSValue valueWithCATransform3D:CATransform3DMakeScale(1.0, 1.0, 1.0)]];
-    
-    
     
     animation.values = values;
     
@@ -318,12 +324,7 @@
     
     animation.fillMode = kCAFillModeForwards;
     
-    
-    
     NSMutableArray *values = [NSMutableArray array];
-    
-    
-    
     
     [values addObject:[NSValue valueWithCATransform3D:CATransform3DMakeScale(1.0, 1.0, 1.0)]];
     
@@ -333,7 +334,6 @@
     [values addObject:[NSValue valueWithCATransform3D:CATransform3DMakeScale(1.1, 1.1, 1.1)]];
 
     [values addObject:[NSValue valueWithCATransform3D:CATransform3DMakeScale(0.01, 0.01, 0.01)]];
-
 
     animation.values = values;
     
@@ -360,8 +360,6 @@
     
 }
 
-
-
 #pragma mark - InputViewDelegate
 
 -(void)endRecord
@@ -377,7 +375,14 @@
 -(void)returnKeyClick
 {
     //解析字符串
-    [self.modelManager parseStringToMessage:self.inputView.textField.text];
+    int type = 0;
+    if (self.inputView.inputViewType == InputViewTypePay) {
+        type = 0;
+    }else{
+        type = 1;
+    }
+        
+    [self.modelManager parseStringToMessage:self.inputView.textField.text withType:type];
     [self.inputView.textField resignFirstResponder];
     [self showPopView];
     self.inputView.textField.text = @"";

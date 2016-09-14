@@ -31,6 +31,8 @@
 #define GridViewCell_backColor [UIColor colorWithRed:0.96 green:0.97 blue:0.98 alpha:1.00]
 #define PopViewSepratorLine_color [UIColor colorWithRed:0.88 green:0.89 blue:0.90 alpha:1.00]
 
+#define NOTIFICATION_INSERT_MESSAGE @"NOTIFICATION_INSERT_MESSAGE"
+
 @interface AppConfig : NSObject
 
 //navigationBar tintColor

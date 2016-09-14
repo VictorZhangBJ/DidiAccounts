@@ -51,6 +51,7 @@
 		579F1B981D81093F002E9631 /* PopViewSecondCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 579F1B961D81093F002E9631 /* PopViewSecondCell.xib */; };
 		579F1B9B1D8171D0002E9631 /* GridViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 579F1B9A1D8171D0002E9631 /* GridViewCell.m */; };
 		579F1B9E1D869EF5002E9631 /* ModelManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 579F1B9D1D869EF5002E9631 /* ModelManager.m */; };
+		579F1BA01D891575002E9631 /* category.json in Resources */ = {isa = PBXBuildFile; fileRef = 579F1B9F1D891575002E9631 /* category.json */; };
 		79721813456B6DA00AB5329D /* Pods_DidiAccounts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 12B25F37D5156238D9105565 /* Pods_DidiAccounts.framework */; };
 /* End PBXBuildFile section */
 
@@ -138,6 +139,7 @@
 		579F1B9A1D8171D0002E9631 /* GridViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GridViewCell.m; sourceTree = "<group>"; };
 		579F1B9C1D869EF5002E9631 /* ModelManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ModelManager.h; sourceTree = "<group>"; };
 		579F1B9D1D869EF5002E9631 /* ModelManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ModelManager.m; sourceTree = "<group>"; };
+		579F1B9F1D891575002E9631 /* category.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; name = category.json; path = ../../../../../category.json; sourceTree = "<group>"; };
 		8B942C258AB5B456C569AAE1 /* Pods-DidiAccounts.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-DidiAccounts.release.xcconfig"; path = "Pods/Target Support Files/Pods-DidiAccounts/Pods-DidiAccounts.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -324,6 +326,7 @@
 		579F1B801D7EC85A002E9631 /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				579F1B9F1D891575002E9631 /* category.json */,
 				579F1B811D7EC869002E9631 /* MessageItem.h */,
 				579F1B821D7EC869002E9631 /* MessageItem.m */,
 				579F1B9C1D869EF5002E9631 /* ModelManager.h */,
@@ -446,6 +449,7 @@
 				579F1AFF1D73E1A4002E9631 /* Info.plist in Resources */,
 				579F1AE71D70374F002E9631 /* LaunchScreen.storyboard in Resources */,
 				579F1AE41D70374F002E9631 /* Assets.xcassets in Resources */,
+				579F1BA01D891575002E9631 /* category.json in Resources */,
 				579F1B981D81093F002E9631 /* PopViewSecondCell.xib in Resources */,
 				579F1B301D75917F002E9631 /* SelfTextCell.xib in Resources */,
 				579F1AE21D70374F002E9631 /* Main.storyboard in Resources */,
