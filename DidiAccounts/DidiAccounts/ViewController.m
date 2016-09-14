@@ -48,7 +48,6 @@
     [self initTableView];
     [self initInputView];
     [self initNavigation];
-    [self initPopView];
     [self initNotification];
 }
 
@@ -206,10 +205,10 @@
 
 -(void)initPopView
 {
-    self.grayBackControl = [[UIView alloc]initWithFrame:self.view.bounds];
     AppDelegate *delegate = [[UIApplication sharedApplication] delegate];
     UIWindow *window = delegate.window;
-    
+    self.grayBackControl = [[UIView alloc]initWithFrame:window.bounds];
+
     UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(grayBackControlClick)];
     [self.grayBackControl addGestureRecognizer:tap];
     self.grayBackControl.userInteractionEnabled = YES;
@@ -255,9 +254,29 @@
     [self hidePopView];
 }
 
-//弹出视图
--(void)showPopView
+-(void)saveMessage:(MessageItem *)message
 {
+    [self hidePopView];
+    [_modelManager.realm beginWriteTransaction];
+    [_modelManager.user.messages addObject:message];
+    [_modelManager.realm commitWriteTransaction];
+    self.messages = _modelManager.user.messages;
+    [self.tableView reloadData];
+    NSIndexPath *indexPath = [NSIndexPath indexPathForRow:self.messages.count-1 inSection:0];
+    [self.tableView scrollToRowAtIndexPath:indexPath atScrollPosition:UITableViewScrollPositionBottom animated:YES];
+}
+//弹出视图
+-(void)showPopViewWithMessage:(MessageItem *)message
+{
+    
+    if (self.popView) {
+        [self.popView removeFromSuperview];
+        self.popView = nil;
+    }
+    
+    [self initPopView];
+    [self.popView configureViewWithMessage:message];
+    
     self.grayBackControl.hidden = NO;
     [UIView animateWithDuration:0.2 delay:0 options:UIViewAnimationOptionCurveEaseInOut animations:^{
         [self.popView mas_updateConstraints:^(MASConstraintMaker *make) {
@@ -382,11 +401,10 @@
         type = 1;
     }
         
-    [self.modelManager parseStringToMessage:self.inputView.textField.text withType:type];
+    MessageItem* message = [self.modelManager parseStringToMessage:self.inputView.textField.text withType:type];
     [self.inputView.textField resignFirstResponder];
-    [self showPopView];
     self.inputView.textField.text = @"";
-    
+    [self showPopViewWithMessage:message];
 }
 
 

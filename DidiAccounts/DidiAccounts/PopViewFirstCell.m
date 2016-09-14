@@ -102,4 +102,21 @@
     self.triangleView.hidden = YES;
 }
 
+-(void)setCellWithMessage:(MessageItem *)message
+{
+    if (message.type == 0) {
+        //支出模式
+        self.amountTextView.textColor = icon_green_color;
+        self.amountTextView.text = [NSString stringWithFormat:@"-%.2f",message.amounts];
+        self.categoryBtn.backgroundColor = icon_green_color;
+    }else{
+        self.amountTextView.textColor = icon_red_color;
+        self.amountTextView.text = [NSString stringWithFormat:@"+%.2f",message.amounts];
+        self.categoryBtn.backgroundColor = icon_red_color;
+    }
+    self.categoryLabel.text = message.category_name;
+    self.contentTextView.text = message.content;
+    [self.categoryBtn setImage:[UIImage imageNamed:[[AppConfig gridViewBigButtonNameArray] objectAtIndex:message.category_number]] forState:UIControlStateNormal];
+}
+
 @end

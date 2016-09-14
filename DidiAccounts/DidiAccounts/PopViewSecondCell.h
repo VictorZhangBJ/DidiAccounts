@@ -7,7 +7,11 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "Model/MessageItem.h"
 
 @interface PopViewSecondCell : UITableViewCell
+
+-(void)setCellWithMessage:(MessageItem *)message;
+@property (weak, nonatomic) IBOutlet UILabel *calenderLabel;
 
 @end

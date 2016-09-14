@@ -8,7 +8,7 @@
 
 #import <UIKit/UIKit.h>
 #import "GridViewCell.h"
-
+#import "Model/MessageItem.h"
 @protocol PopViewDelegate <NSObject>
 
 
@@ -17,6 +17,8 @@
 -(void)deleteBtnClick;
 
 -(void)updateHeight:(CGFloat)height;
+
+-(void)saveMessage:(MessageItem *)message;
 
 @end
 
@@ -29,4 +31,9 @@
 
 @property (nonatomic, strong) UITableView *tableView;
 @property (nonatomic, strong) NSMutableArray *dataSource;
+
+@property (nonatomic, strong) MessageItem *message;
+
+-(void)configureViewWithMessage:(MessageItem *)message;
+
 @end

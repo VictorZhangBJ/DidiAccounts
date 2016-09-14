@@ -7,7 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
-
+#import "Model/MessageItem.h"
 @interface PopViewFirstCell : UITableViewCell<UITextViewDelegate>
 @property (weak, nonatomic) IBOutlet UILabel *amountLabel;
 @property (weak, nonatomic) IBOutlet UIButton *categoryBtn;
@@ -20,5 +20,6 @@
 @property (weak, nonatomic) IBOutlet UIView *triangleView;
 
 -(void)configureCellWithDirecton:(BOOL)isDown;
+-(void)setCellWithMessage:(MessageItem *)message;
 
 @end

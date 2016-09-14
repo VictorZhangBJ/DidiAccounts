@@ -36,6 +36,9 @@
                     <constraint firstItem="Wc6-pc-1NP" firstAttribute="leading" secondItem="7if-wQ-7DS" secondAttribute="trailing" constant="13" id="Xgw-i6-DSu"/>
                 </constraints>
             </tableViewCellContentView>
+            <connections>
+                <outlet property="calenderLabel" destination="Wc6-pc-1NP" id="QOx-tc-fia"/>
+            </connections>
             <point key="canvasLocation" x="565" y="495.5"/>
         </tableViewCell>
     </objects>

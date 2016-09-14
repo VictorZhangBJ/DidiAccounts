@@ -113,14 +113,14 @@ static ModelManager* _instance = nil;
     message.type = type;
     NSLog(@"messageId = %ld",message.message_id);
     
-    [self.realm beginWriteTransaction];
-    [self.user.messages addObject:message];
-    [self.realm commitWriteTransaction];
+//    [self.realm beginWriteTransaction];
+//    [self.user.messages addObject:message];
+//    [self.realm commitWriteTransaction];
+//    
+//    NSLog(@"messges count = %lu",self.user.messages.count);
+//    [[NSNotificationCenter defaultCenter] postNotificationName:NOTIFICATION_INSERT_MESSAGE object:nil];
     
-    NSLog(@"messges count = %lu",self.user.messages.count);
-    [[NSNotificationCenter defaultCenter] postNotificationName:NOTIFICATION_INSERT_MESSAGE object:nil];
-    
-    return nil;
+    return message;
 }
 
 //读取json文件

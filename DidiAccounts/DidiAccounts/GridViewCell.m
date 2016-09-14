@@ -27,12 +27,11 @@
 {
     self = [super initWithStyle:style reuseIdentifier:reuseIdentifier];
     if (self) {
-        [self configureCell];
     }
     return self;
 }
 
--(void)configureCell
+-(void)setCellWithMessage:(MessageItem *)message
 {
     UIView *backView = [UIView new];
     backView.backgroundColor = GridViewCell_backColor;
@@ -61,7 +60,12 @@
         CGFloat pointX = (i % 5) * (spaceWidth + btnWidth) + offsetX + 7;       //修正
         CGFloat pointY = (i / 5) * (spaceHeight + btnWidth) + offsetY;
         btn.frame = CGRectMake(pointX, pointY, btnWidth, btnWidth);
-        btn.backgroundColor = icon_green_color;
+        if (message.type == 0) {
+            btn.backgroundColor = icon_green_color;
+        }else{
+            btn.backgroundColor = icon_red_color;
+        }
+        
         btn.layer.cornerRadius = btnWidth / 2.0;
         [backView addSubview:btn];
         [btn setTag:i];

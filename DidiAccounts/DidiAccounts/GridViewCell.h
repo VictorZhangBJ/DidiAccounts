@@ -7,6 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "Model/MessageItem.h"
 
 @protocol GridViewDelegate <NSObject>
 
@@ -17,5 +18,7 @@
 @interface GridViewCell : UITableViewCell
 
 @property (nonatomic, assign) id<GridViewDelegate> delegate;
+
+-(void)setCellWithMessage:(MessageItem *)message;
 
 @end

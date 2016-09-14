@@ -27,13 +27,14 @@
 {
     self = [super init];
     if (self) {
-        [self configureView];
+        
     }
     return self;
 }
 
--(void)configureView
+-(void)configureViewWithMessage:(MessageItem *)message
 {
+    self.message = message;
     //记账title
     UILabel *titleLabel = [UILabel new];
     titleLabel.textAlignment = NSTextAlignmentCenter;
@@ -145,9 +146,9 @@
         make.bottom.greaterThanOrEqualTo(self.mas_bottom).offset(3);
     }];
     self.dataSource = [NSMutableArray new];
-    [self.dataSource addObject:@"1"];
-    [self.dataSource addObject:@"2"];
-    [self.dataSource addObject:@"3"];
+    [self.dataSource addObject:@[@"0"]];
+    [self.dataSource addObject:@[@"0"]];
+    [self.dataSource addObject:@[@"0"]];
     
     UIView *hLine = [UIView new];
     hLine.backgroundColor = PopViewSepratorLine_color;
@@ -167,30 +168,40 @@
 
 -(NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
-    return 1;
+    return self.dataSource.count;
 }
 
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    return self.dataSource.count;
+    return [[self.dataSource objectAtIndex:section] count];
 }
 
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    NSUInteger offset = 0;
-    if (self.dataSource.count >= 3) {
-        offset = self.dataSource.count - 3;
-    }
-    if (indexPath.row == 0) {
+   
+    if (indexPath.section == 0) {
+        if (indexPath.row == 0) {
+            PopViewFirstCell *cell = (PopViewFirstCell *)[tableView dequeueReusableCellWithIdentifier:@"PopViewFirstCell" forIndexPath:indexPath];
+            cell.selectionStyle = UITableViewCellSelectionStyleNone;
+            [cell setCellWithMessage:self.message];
+            return cell;
+        }else{
+            GridViewCell *cell = (GridViewCell *)[tableView dequeueReusableCellWithIdentifier:@"GridViewCell" forIndexPath:indexPath];
+            cell.selectionStyle = UITableViewCellSelectionStyleNone;
+            cell.delegate = self;
+            [cell setCellWithMessage:self.message];
+            return cell;
+        }
         
-        PopViewFirstCell *cell = (PopViewFirstCell *)[tableView dequeueReusableCellWithIdentifier:@"PopViewFirstCell" forIndexPath:indexPath];
-        cell.selectionStyle = UITableViewCellSelectionStyleNone;
-        return cell;
-        
-    }else if(indexPath.row == 1 + offset){
-        PopViewSecondCell *cell = (PopViewSecondCell *)[tableView dequeueReusableCellWithIdentifier:@"PopViewSecondCell" forIndexPath:indexPath];
-        return  cell;
-    }else if(indexPath.row == self.dataSource.count - 1){
+    }else if (indexPath.section == 1){
+        if (indexPath.row == 0) {
+            PopViewSecondCell *cell = (PopViewSecondCell *)[tableView dequeueReusableCellWithIdentifier:@"PopViewSecondCell" forIndexPath:indexPath];
+            [cell setCellWithMessage:self.message];
+            return  cell;
+        }else{
+            return nil;
+        }
+    }else{
         UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"Cell" forIndexPath:indexPath];
         
         //保存按钮
@@ -209,14 +220,7 @@
             make.bottom.equalTo(cell.contentView.mas_bottom).offset(-20);
         }];
         return cell;
-    }else{
-        GridViewCell *cell = (GridViewCell *)[tableView dequeueReusableCellWithIdentifier:@"GridViewCell" forIndexPath:indexPath];
-        cell.selectionStyle = UITableViewCellSelectionStyleNone;
-        cell.delegate = self;
-        return cell;
-
     }
-   
     
 }
 
@@ -232,11 +236,11 @@
 
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    if (indexPath.row == 0) {
+    if (indexPath.row == 0 && indexPath.section == 0) {
         
         PopViewFirstCell *cell = (PopViewFirstCell *)[tableView cellForRowAtIndexPath:indexPath];
         cell.separatorInset = UIEdgeInsetsZero;
-        if (self.dataSource.count > 3) {
+        if ([[self.dataSource firstObject] count] == 2) {
             //删除操作
             
             self.tableView.separatorColor = PopViewSepratorLine_color;
@@ -244,7 +248,7 @@
             [cell configureCellWithDirecton:NO];
             
             [self.tableView beginUpdates];
-            [self.dataSource removeLastObject];
+            [self.dataSource setObject:@[@"0"] atIndexedSubscript:0];
             NSIndexPath *indexPath = [NSIndexPath indexPathForRow:1 inSection:0];
             [self.tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationTop];
             [self.tableView endUpdates];
@@ -283,14 +287,13 @@
             }];
             
             [self.tableView beginUpdates];
-            [self.dataSource addObject:@"100"];
+            [self.dataSource setObject:@[@"0", @"1"] atIndexedSubscript:0];
             NSIndexPath *indexPath = [NSIndexPath indexPathForRow:1 inSection:0];
             [self.tableView insertRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationTop];
             [self.tableView endUpdates];
             
         }
         
-        //[self.tableView reloadData];
     }
 }
 
@@ -301,7 +304,9 @@
 
 -(void)saveBtnClick
 {
-    
+    if ([_delegate respondsToSelector:@selector(saveMessage:)]) {
+        [_delegate saveMessage:self.message];
+    }
 }
 
 -(void)deleteBtnClick
@@ -314,4 +319,11 @@
 {
     [_delegate closePopView];
 }
+
+-(void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event
+{
+    [self endEditing:YES];
+    
+}
+
 @end
