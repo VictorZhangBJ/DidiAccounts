@@ -34,7 +34,7 @@
 -(void)setCellWithMessage:(MessageItem *)message
 {
     UIView *backView = [UIView new];
-    backView.backgroundColor = GridViewCell_backColor;
+    backView.backgroundColor = COLOR_GRIDVIEW_CELL;
     [self.contentView addSubview:backView];
     [backView mas_makeConstraints:^(MASConstraintMaker *make) {
         
@@ -61,9 +61,9 @@
         CGFloat pointY = (i / 5) * (spaceHeight + btnWidth) + offsetY;
         btn.frame = CGRectMake(pointX, pointY, btnWidth, btnWidth);
         if (message.type == 0) {
-            btn.backgroundColor = icon_green_color;
+            btn.backgroundColor = COLOR_ICON_GREEN;
         }else{
-            btn.backgroundColor = icon_red_color;
+            btn.backgroundColor = COLOR_ICON_RED;
         }
         
         btn.layer.cornerRadius = btnWidth / 2.0;

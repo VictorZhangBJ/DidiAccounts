@@ -85,11 +85,11 @@
     [self.payBtn setTitle:@"支出" forState:UIControlStateNormal];
     self.payBtn.titleLabel.font = [UIFont systemFontOfSize:12];
     
-    self.payBtn.layer.borderColor = icon_red_color.CGColor;
+    self.payBtn.layer.borderColor = COLOR_ICON_RED.CGColor;
     self.payBtn.layer.borderWidth = 1.0;
     self.payBtn.layer.cornerRadius = 12;
     
-    [self.payBtn setTitleColor:icon_red_color forState:UIControlStateNormal];
+    [self.payBtn setTitleColor:COLOR_ICON_RED forState:UIControlStateNormal];
     [self addSubview:self.payBtn];
     [self.payBtn mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.equalTo(spaceOne.mas_right);
@@ -100,11 +100,11 @@
     //收入按钮
     self.incomeBtn = [UIButton buttonWithType:UIButtonTypeSystem];
     self.incomeBtn.titleLabel.font = [UIFont systemFontOfSize:12];
-    [self.incomeBtn setTitleColor:icon_green_color forState:UIControlStateNormal];
+    [self.incomeBtn setTitleColor:COLOR_ICON_GREEN forState:UIControlStateNormal];
     [self.incomeBtn setTitle:@"收入" forState:UIControlStateNormal];
     
     self.incomeBtn.layer.borderWidth = 1.0f;
-    self.incomeBtn.layer.borderColor = icon_green_color.CGColor;
+    self.incomeBtn.layer.borderColor = COLOR_ICON_GREEN.CGColor;
     self.incomeBtn.layer.cornerRadius = 12;
     
     [self addSubview:self.incomeBtn];
@@ -151,7 +151,7 @@
     [self.dataSource addObject:@[@"0"]];
     
     UIView *hLine = [UIView new];
-    hLine.backgroundColor = PopViewSepratorLine_color;
+    hLine.backgroundColor = COLOR_POPVIEW_SEPARATOR_LINE;
     [self addSubview:hLine];
     [hLine mas_makeConstraints:^(MASConstraintMaker *make) {
         make.height.equalTo(@1);
@@ -162,7 +162,7 @@
     
     
     UIView *footerView = [UIView new];
-    footerView.frame = CGRectMake(0, 1, screen_width - 40, 1);
+    footerView.frame = CGRectMake(0, 1, SCREEN_WIDTH - 40, 1);
     self.tableView.tableFooterView = footerView;
 }
 
@@ -243,7 +243,7 @@
         if ([[self.dataSource firstObject] count] == 2) {
             //删除操作
             
-            self.tableView.separatorColor = PopViewSepratorLine_color;
+            self.tableView.separatorColor = COLOR_POPVIEW_SEPARATOR_LINE;
             //改变cell箭头方向，改为向下
             [cell configureCellWithDirecton:NO];
             
@@ -275,7 +275,7 @@
             
            
             
-            self.tableView.separatorColor = GridViewCell_backColor;
+            self.tableView.separatorColor = COLOR_GRIDVIEW_CELL;
             [UIView animateWithDuration:0.3 delay:0 options:UIViewAnimationOptionCurveEaseOut animations:^{
                 [self mas_updateConstraints:^(MASConstraintMaker *make) {
                     make.height.equalTo(@472);

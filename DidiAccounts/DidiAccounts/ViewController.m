@@ -41,7 +41,7 @@
 - (void)viewDidLoad {
     
     [super viewDidLoad];
-    self.view.backgroundColor = tableViewBcakColor_1;
+    self.view.backgroundColor = COLOR_SELF_TEXT_CELL_ODD_COLOR;
     self.title = @"滴滴记账";
     [self initModel];
     [self initHeaderView];
@@ -84,7 +84,7 @@
 -(void)initNavigation
 {
     //设置背景颜色
-    [self.navigationController.navigationBar setBackgroundImage:[AppConfig createImageWithColor:[AppConfig navigationTintColor]] forBarMetrics:UIBarMetricsDefault];
+    [self.navigationController.navigationBar setBackgroundImage:[AppConfig createImageWithColor:COLOR_NAVIGATION_BAR] forBarMetrics:UIBarMetricsDefault];
     //去除navigationBar底部线
     [self.navigationController.navigationBar setShadowImage:[[UIImage alloc]init]];
     //menu按钮颜色
@@ -117,7 +117,7 @@
 
 -(void)initTableView{
     self.tableView = [[UITableView alloc]initWithFrame:CGRectZero style:UITableViewStyleGrouped];
-    self.tableView.backgroundColor = tableViewBcakColor_1  ;
+    self.tableView.backgroundColor = COLOR_SELF_TEXT_CELL_ODD_COLOR  ;
     [self.view addSubview:self.tableView];
     [self.tableView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.equalTo(self.view.mas_left);
@@ -175,9 +175,9 @@
     [cell configureCellWithMessage:message];
     
     if (indexPath.section % 2 ==0) {
-        cell.backgroundColor = tableViewBackColor_2;
+        cell.backgroundColor = COLOR_SELF_TEXT_CELL_EVEN_COLOR;
     }else{
-        cell.backgroundColor = tableViewBcakColor_1;
+        cell.backgroundColor = COLOR_SELF_TEXT_CELL_ODD_COLOR;
     }
     cell.selectionStyle = UITableViewCellSelectionStyleNone;
     return  cell;

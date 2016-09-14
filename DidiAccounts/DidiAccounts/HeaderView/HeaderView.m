@@ -40,7 +40,7 @@
 {
     self.backgroundColor = [UIColor clearColor];
     self.topView = [UIView new];
-    self.topView.backgroundColor = [AppConfig navigationTintColor];
+    self.topView.backgroundColor = COLOR_NAVIGATION_BAR;
     [self addSubview:self.topView];
     [self.topView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.equalTo(self.mas_left);
@@ -60,7 +60,7 @@
     }];
     
     UIView *line = [UIView new];
-    line.backgroundColor = [AppConfig headerLineColor];
+    line.backgroundColor = COLOR_HEADERVIEW_VERTICAL_LINE;
     [self.topView addSubview:line];
     [line mas_makeConstraints:^(MASConstraintMaker *make) {
         make.width.equalTo(@0.5);
@@ -74,7 +74,7 @@
     [payView addSubview: payTitleLabel];
     payTitleLabel.text = @"本月支出";
     payTitleLabel.font = [UIFont systemFontOfSize:13];
-    payTitleLabel.textColor = payLabel_color;
+    payTitleLabel.textColor = COLOR_HEADERVIEW_PAY_LABEL;
     payTitleLabel.textAlignment = NSTextAlignmentLeft;
     [payTitleLabel mas_makeConstraints:^(MASConstraintMaker *make) {
         make.centerX.equalTo(payView.mas_centerX);
@@ -109,7 +109,7 @@
     
     UILabel *incomeTitleLabel = [UILabel new];
     incomeTitleLabel.textAlignment = NSTextAlignmentLeft;
-    incomeTitleLabel.textColor = payLabel_color;
+    incomeTitleLabel.textColor = COLOR_HEADERVIEW_PAY_LABEL;
     incomeTitleLabel.font = [UIFont systemFontOfSize:13];
     incomeTitleLabel.text = @"本月收入";
     [incomeView addSubview:incomeTitleLabel];
@@ -153,7 +153,7 @@
     }];
     //绘制梯形
     self.scoresView = [UIView new];
-    self.scoresView.frame = CGRectMake(11, 0, trapezium_upperLine, 24);
+    self.scoresView.frame = CGRectMake(11, 0, TRAPEZIUM_UPPER_LINE, 24);
     self.scoresView.backgroundColor = [UIColor clearColor];
     [self.bottomView addSubview:self.scoresView];
     
@@ -175,7 +175,7 @@
     [path addLineToPoint:leftBottomPoint];
     [path addLineToPoint:leftTopPoint];
     shapeLayer.path = path.CGPath;
-    shapeLayer.fillColor = [AppConfig navigationTintColor].CGColor;
+    shapeLayer.fillColor = COLOR_NAVIGATION_BAR.CGColor;
     [self.scoresView.layer addSublayer:shapeLayer];
     [self.scoresView layoutIfNeeded];
    
@@ -204,7 +204,7 @@
     }];
     
     self.scoresLabel = [UILabel new];
-    self.scoresLabel.textColor = [AppConfig headerLineColor];
+    self.scoresLabel.textColor = COLOR_HEADERVIEW_PAY_LABEL;
     self.scoresLabel.font = [UIFont systemFontOfSize:11];
     self.scoresLabel.textAlignment = NSTextAlignmentLeft;
     self.scoresLabel.text = @"积分: 128494";

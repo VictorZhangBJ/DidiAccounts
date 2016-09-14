@@ -18,7 +18,7 @@
     [super awakeFromNib];
     // Initialization code
     self.categoryBtn.layer.cornerRadius = self.categoryBtn.frame.size.width / 2.0;
-    self.categoryBtn.layer.backgroundColor = icon_green_color.CGColor;
+    self.categoryBtn.layer.backgroundColor = COLOR_ICON_GREEN.CGColor;
     
     self.contentTextView.delegate = self;
     //设置页边距
@@ -96,7 +96,7 @@
     [path addLineToPoint:CGPointMake(width / 2.0, 2)];
     [path addLineToPoint:CGPointMake(width, width)];
     [path addLineToPoint:CGPointMake(0, width)];
-    layer.fillColor = GridViewCell_backColor.CGColor;
+    layer.fillColor = COLOR_GRIDVIEW_CELL.CGColor;
     layer.path = path.CGPath;
     [self.triangleView.layer addSublayer:layer];
     self.triangleView.hidden = YES;
@@ -106,13 +106,13 @@
 {
     if (message.type == 0) {
         //支出模式
-        self.amountTextView.textColor = icon_green_color;
+        self.amountTextView.textColor = COLOR_ICON_GREEN;
         self.amountTextView.text = [NSString stringWithFormat:@"-%.2f",message.amounts];
-        self.categoryBtn.backgroundColor = icon_green_color;
+        self.categoryBtn.backgroundColor = COLOR_ICON_GREEN;
     }else{
-        self.amountTextView.textColor = icon_red_color;
+        self.amountTextView.textColor = COLOR_ICON_RED;
         self.amountTextView.text = [NSString stringWithFormat:@"+%.2f",message.amounts];
-        self.categoryBtn.backgroundColor = icon_red_color;
+        self.categoryBtn.backgroundColor = COLOR_ICON_RED;
     }
     self.categoryLabel.text = message.category_name;
     self.contentTextView.text = message.content;

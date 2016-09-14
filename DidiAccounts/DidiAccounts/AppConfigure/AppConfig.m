@@ -10,16 +10,6 @@
 
 @implementation AppConfig
 
-+(UIColor *)navigationTintColor
-{
-    return [UIColor colorWithRed:1.00 green:0.29 blue:0.29 alpha:1.00];
-}
-
-+(UIColor *)headerLineColor
-{
-    //return [UIColor colorWithRed:0.53 green:0.54 blue:0.56 alpha:1.00];
-    return [UIColor colorWithWhite:0.8 alpha:0.8];
-}
 
 +(UIImage*) createImageWithColor:(UIColor*) color
 {

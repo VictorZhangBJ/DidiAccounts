@@ -28,34 +28,34 @@
 
 -(void)configureViewWith:(NSInteger)section;
 {
-    self.frame = CGRectMake(0, 0, screen_width, tableHeader_height);
+    self.frame = CGRectMake(0, 0, SCREEN_WIDTH, TABLEVIEW_HEADER_HEIGHT);
     //绘制梯形
     CAShapeLayer *trapeziumLayer = [CAShapeLayer new];
-    trapeziumLayer.frame = CGRectMake(0, 0, screen_width, tableHeader_height);
+    trapeziumLayer.frame = CGRectMake(0, 0, SCREEN_WIDTH, TABLEVIEW_HEADER_HEIGHT);
     UIBezierPath *bezierPath = [UIBezierPath bezierPath];
     [bezierPath moveToPoint:CGPointMake(0, 30)];
     [bezierPath addLineToPoint:CGPointMake(11, 30)];
-    [bezierPath addArcWithCenter:CGPointMake(11 + header_radius, 30) radius:header_radius startAngle:M_PI endAngle:M_PI_4 * 7 clockwise:YES];
+    [bezierPath addArcWithCenter:CGPointMake(11 + HEADER_RADIUS, 30) radius:HEADER_RADIUS startAngle:M_PI endAngle:M_PI_4 * 7 clockwise:YES];
     
-    [bezierPath addLineToPoint:CGPointMake(11 + trapezium_upperLine - 12, 15)];
-    [bezierPath addLineToPoint:CGPointMake(11 + trapezium_upperLine, 30)];
+    [bezierPath addLineToPoint:CGPointMake(11 + TRAPEZIUM_UPPER_LINE - 12, 15)];
+    [bezierPath addLineToPoint:CGPointMake(11 + TRAPEZIUM_UPPER_LINE, 30)];
     
-    [bezierPath addLineToPoint:CGPointMake(screen_width - right_trapezium_upperLine - 11, 30)];
-    [bezierPath addLineToPoint:CGPointMake(screen_width - right_trapezium_upperLine - 11 + 15, 15)];
-    [bezierPath addLineToPoint:CGPointMake(screen_width - 15 -11, 15)];
-    [bezierPath addLineToPoint:CGPointMake(screen_width - 11, 30)];
+    [bezierPath addLineToPoint:CGPointMake(SCREEN_WIDTH - RIGHT_TRAPEZIUM_UPPER_LINE - 11, 30)];
+    [bezierPath addLineToPoint:CGPointMake(SCREEN_WIDTH - RIGHT_TRAPEZIUM_UPPER_LINE - 11 + 15, 15)];
+    [bezierPath addLineToPoint:CGPointMake(SCREEN_WIDTH - 15 -11, 15)];
+    [bezierPath addLineToPoint:CGPointMake(SCREEN_WIDTH - 11, 30)];
     
-    [bezierPath addLineToPoint:CGPointMake(screen_width, 30)];
-    [bezierPath addLineToPoint:CGPointMake(screen_width, tableHeader_height)];
-    [bezierPath addLineToPoint:CGPointMake(0, tableHeader_height)];
-    [bezierPath addLineToPoint:CGPointMake(0, tableHeader_height)];
+    [bezierPath addLineToPoint:CGPointMake(SCREEN_WIDTH, 30)];
+    [bezierPath addLineToPoint:CGPointMake(SCREEN_WIDTH, TABLEVIEW_HEADER_HEIGHT)];
+    [bezierPath addLineToPoint:CGPointMake(0, TABLEVIEW_HEADER_HEIGHT)];
+    [bezierPath addLineToPoint:CGPointMake(0, TABLEVIEW_HEADER_HEIGHT)];
     
     if (section % 2 == 0) {
-        self.backgroundColor = tableViewBcakColor_1;
-        trapeziumLayer.fillColor = tableViewBackColor_2.CGColor;
+        self.backgroundColor = COLOR_SELF_TEXT_CELL_ODD_COLOR;
+        trapeziumLayer.fillColor = COLOR_SELF_TEXT_CELL_EVEN_COLOR.CGColor;
     }else{
-        self.backgroundColor = tableViewBackColor_2;
-        trapeziumLayer.fillColor = tableViewBcakColor_1.CGColor;
+        self.backgroundColor = COLOR_SELF_TEXT_CELL_EVEN_COLOR;
+        trapeziumLayer.fillColor = COLOR_SELF_TEXT_CELL_ODD_COLOR.CGColor;
     }
     trapeziumLayer.path = bezierPath.CGPath;
     
@@ -68,7 +68,7 @@
     
     calenderBtn.frame = CGRectMake(11 + 6, 13, 32, 32);
     [self addSubview:calenderBtn];
-    calenderBtn.backgroundColor = icon_red_color;
+    calenderBtn.backgroundColor = COLOR_ICON_RED;
     calenderBtn.layer.cornerRadius = 16;
     
     //日历 label
@@ -92,7 +92,7 @@
         make.height.equalTo(@17);
         make.top.equalTo(self.mas_top).offset(15);
         make.right.equalTo(self.mas_right).offset(-11);
-        make.width.mas_equalTo(right_trapezium_upperLine);
+        make.width.mas_equalTo(RIGHT_TRAPEZIUM_UPPER_LINE);
     }];
     
     UIView *spaceOne = [UIView new];

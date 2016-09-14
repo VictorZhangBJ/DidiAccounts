@@ -9,6 +9,7 @@
 #import "SlideMenuViewController.h"
 #import "LeftViewController.h"
 #import "ViewController.h"
+#import "AppConfig.h"
 
 
 
@@ -50,7 +51,7 @@
     [_centerViewController.view addGestureRecognizer:tap];
     
     _prevX = 0;
-    _maxOffsetX = self.view.frame.size.width / 3.0 * 2.0;
+    _maxOffsetX = self.view.frame.size.width * LEFTVIEW_SCALE;
     self.isHidden = YES;
 }
 

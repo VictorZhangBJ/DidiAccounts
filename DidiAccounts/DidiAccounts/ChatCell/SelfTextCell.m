@@ -17,7 +17,7 @@
     // Initialization code
     self.headerBtn.layer.cornerRadius = self.headerBtn.bounds.size.width / 2.0;
     self.headerBtn.adjustsImageWhenHighlighted = NO;
-    self.headerBtn.backgroundColor = icon_red_color;
+    self.headerBtn.backgroundColor = COLOR_ICON_RED;
     
     //分割线
     UIView *line = [UIView new];
@@ -44,13 +44,13 @@
     [self.headerBtn setImage:[UIImage imageNamed:[[AppConfig gridViewButtonNameArray] objectAtIndex:message.category_number]] forState:UIControlStateNormal];
     if (message.type == 0) {
         //支出模式
-        [self.headerBtn setBackgroundColor: icon_green_color];
-        self.amountLabel.textColor = icon_green_color;
+        [self.headerBtn setBackgroundColor: COLOR_ICON_GREEN];
+        self.amountLabel.textColor = COLOR_ICON_GREEN;
         self.amountLabel.text = [NSString stringWithFormat:@"-%.2f",message.amounts];
     }else{
         //收入模式
-        [self.headerBtn setBackgroundColor: icon_red_color];
-        self.amountLabel.textColor = icon_red_color;
+        [self.headerBtn setBackgroundColor: COLOR_ICON_RED];
+        self.amountLabel.textColor = COLOR_ICON_RED;
         self.amountLabel.text = [NSString stringWithFormat:@"+%.2f",message.amounts];
     }
 }
