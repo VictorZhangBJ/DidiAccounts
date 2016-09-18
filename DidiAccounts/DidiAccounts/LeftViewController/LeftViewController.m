@@ -8,13 +8,16 @@
 
 #import "LeftViewController.h"
 #import "AppConfig.h"
-#import "RootViewController.h"
-
+#import "AdviceViewController.h"
+#import "AboutViewController.h"
+#import "SettingViewController.h"
+#import "SlideMenuViewController.h"
 @interface LeftViewController ()<UITableViewDelegate, UITableViewDataSource>
 @property (nonatomic, strong) UIImageView *userImageView;
 @property (nonatomic, strong) UILabel *userNameLabel;
 @property (nonatomic, strong) UITableView *tableView;
 @property (nonatomic, strong) NSArray *dataSource;
+@property (nonatomic, strong) NSArray *imageNameArray;
 
 
 @end
@@ -76,7 +79,7 @@
     self.tableView.backgroundColor = COLOR_LEFTVIEW_BACKGROUND;
     self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
     self.tableView.bounces = NO;
-    
+    self.imageNameArray = @[@"about", @"advice", @"setting"];
 }
 
 -(NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
@@ -111,7 +114,7 @@
     }];
     
     label.text = [self.dataSource objectAtIndex:indexPath.row];
-    headImageView.image = [UIImage imageNamed:@"calender_gray"];
+    headImageView.image = [UIImage imageNamed:[self.imageNameArray objectAtIndex:indexPath.row]];
     
     cell.backgroundColor = COLOR_LEFTVIEW_BACKGROUND;
     UIView *view = [UIView new];
@@ -119,6 +122,26 @@
     cell.selectedBackgroundView = view;
     
     return cell;
+}
+
+-(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    if (indexPath.row == 0) {
+        [self showView:[AboutViewController new]];
+        
+    }else if (indexPath.row == 1){
+        [self showView:[AdviceViewController new]];
+    }else{
+        [self showView:[SettingViewController new]];
+    }
+}
+
+-(void)showView:(UIViewController *)vc
+{
+    [self.slider hideSideView];
+    [self.slider.centerViewController pushViewController:vc animated:YES];
+    
+
 }
 
 - (void)didReceiveMemoryWarning {

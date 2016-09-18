@@ -2,7 +2,7 @@
 //  AppConfig.h
 //  DidiAccounts
 //
-//  Created by 张佳宾 on 16/9/5.
+//  Created by victor on 16/9/5.
 //  Copyright © 2016年 victor. All rights reserved.
 //
 
@@ -32,6 +32,7 @@
 #define TABLEVIEW_HEADER_HEIGHT 50    //tableview header 高度
 
 #define NOTIFICATION_INSERT_MESSAGE @"NOTIFICATION_INSERT_MESSAGE"
+#define NOTIFICATION_SHOW_LEFTVIEW @"NOTIFICATION_SHOW_LEFTVIEW"
 
 @interface AppConfig : NSObject
 

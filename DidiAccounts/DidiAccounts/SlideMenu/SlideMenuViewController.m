@@ -34,6 +34,7 @@
     
     LeftViewController *lvc = [[LeftViewController alloc]init];
     self.leftViewController = lvc;
+    lvc.slider = self;
     [lvc.view setTag:2];
 
     
@@ -53,6 +54,12 @@
     _prevX = 0;
     _maxOffsetX = self.view.frame.size.width * LEFTVIEW_SCALE;
     self.isHidden = YES;
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(showLeftView) name:NOTIFICATION_SHOW_LEFTVIEW object:nil];
+}
+
+-(void)showLeftView
+{
+    [self showSideView];
 }
 
 -(UIStatusBarStyle)preferredStatusBarStyle

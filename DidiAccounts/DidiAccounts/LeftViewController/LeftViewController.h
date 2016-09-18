@@ -8,7 +8,10 @@
 
 #import <UIKit/UIKit.h>
 #import "RootViewController.h"
+@class SlideMenuViewController;
 
 @interface LeftViewController : RootViewController
+
+@property (nonatomic, strong) SlideMenuViewController *slider;
 
 @end

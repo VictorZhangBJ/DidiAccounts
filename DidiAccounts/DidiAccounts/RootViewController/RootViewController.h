@@ -8,6 +8,7 @@
 
 #import <UIKit/UIKit.h>
 #import <Masonry/Masonry.h>
+#import "AppConfig.h"
 
 #define MAS_SHORTHAND
 

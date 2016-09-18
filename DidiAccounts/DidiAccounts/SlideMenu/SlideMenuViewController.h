@@ -11,7 +11,7 @@
 @interface SlideMenuViewController : UIViewController<UIGestureRecognizerDelegate>
 
 @property (nonatomic, strong) UIViewController *leftViewController;
-@property (nonatomic, strong) UIViewController *centerViewController;
+@property (nonatomic, strong) UINavigationController *centerViewController;
 @property (nonatomic, assign) BOOL isHidden;
 
 -(void)showSideView;
