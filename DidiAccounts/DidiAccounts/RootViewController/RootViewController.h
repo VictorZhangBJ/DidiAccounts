@@ -16,4 +16,6 @@
 #define MAS_SHORTHAND_GLOBALS
 @interface RootViewController : UIViewController
 
+-(void)initBackBtn;
+
 @end

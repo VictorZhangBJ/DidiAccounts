@@ -23,6 +23,7 @@
     self.title = @"账号管理";
     [self initTableView];
     self.view.backgroundColor = COLOR_ADVICEVIEW_BACKGROUND;
+    [self initBackBtn];
     // Do any additional setup after loading the view.
 }
 

@@ -17,9 +17,8 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.title = @"关于我们";
-    self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc]initWithImage:[UIImage imageNamed:@"back_arrow"] style:UIBarButtonItemStylePlain target:self action:@selector(backBtnClick)];
     self.view.backgroundColor = [UIColor whiteColor];
-
+    [self initBackBtn];
     // Do any additional setup after loading the view.
 }
 
@@ -28,6 +27,7 @@
     [self.navigationController popViewControllerAnimated:YES];
     [[NSNotificationCenter defaultCenter] postNotificationName:NOTIFICATION_SHOW_LEFTVIEW object:nil];
 }
+
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
