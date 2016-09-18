@@ -22,7 +22,7 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     // Override point for customization after application launch.
-    SlideMenuViewController *svc = [[SlideMenuViewController alloc]init];
+    SlideMenuViewController *svc = [SlideMenuViewController sharedInstance];
     self.window.rootViewController = svc;
     [self.window makeKeyAndVisible];
     

@@ -13,6 +13,10 @@
 @property (nonatomic, strong) UIViewController *leftViewController;
 @property (nonatomic, strong) UINavigationController *centerViewController;
 @property (nonatomic, assign) BOOL isHidden;
+@property (nonatomic, strong) UIPanGestureRecognizer *pan;
+@property (nonatomic, strong) UITapGestureRecognizer *tap;
+
++(instancetype)sharedInstance;
 
 -(void)showSideView;
 

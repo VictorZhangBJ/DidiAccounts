@@ -9,7 +9,7 @@
 #import <Foundation/Foundation.h>
 #import <UIKit/UIKit.h>
 
-#define COLOR_NAVIGATION_BAR [UIColor colorWithRed:0.80 green:0.60 blue:0.29 alpha:1.00]
+#define COLOR_NAVIGATION_BAR [UIColor colorWithRed:0.93 green:0.31 blue:0.33 alpha:1.00]
 #define COLOR_HEADERVIEW_VERTICAL_LINE [UIColor colorWithWhite:0.8 alpha:0.8]
 #define COLOR_HEADERVIEW_PAY_LABEL [UIColor colorWithWhite: 0.95 alpha: 1.0]
 #define COLOR_ICON_RED [UIColor colorWithRed:0.91 green:0.60 blue:0.60 alpha:1.00]
@@ -20,6 +20,9 @@
 #define COLOR_POPVIEW_SEPARATOR_LINE [UIColor colorWithRed:0.88 green:0.89 blue:0.90 alpha:1.00]
 #define COLOR_LEFTVIEW_BACKGROUND [UIColor colorWithRed:0.16 green:0.18 blue:0.24 alpha:1.00]
 #define COLOR_LEFTVIEW_CELL_SELECTED [UIColor colorWithRed:0.11 green:0.12 blue:0.20 alpha:1.00]
+#define COLOR_ADVICEVIEW_BACKGROUND [UIColor colorWithRed:0.96 green:0.97 blue:0.98 alpha:1.00]
+#define COLOR_SETTINGVIEW_CELL_SEPARATOR [UIColor colorWithRed:0.96 green:0.97 blue:0.98 alpha:1.00]
+
 
 #define SCREEN_WIDTH [UIScreen mainScreen].bounds.size.width  
 #define LEFTVIEW_SCALE 2.0/3.0

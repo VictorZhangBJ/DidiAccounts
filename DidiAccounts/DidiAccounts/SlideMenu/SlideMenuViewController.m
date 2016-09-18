@@ -23,6 +23,16 @@
 
 @implementation SlideMenuViewController
 
+static SlideMenuViewController* _instance = nil;
+
++(instancetype)sharedInstance
+{
+    static dispatch_once_t onceToken;
+    dispatch_once(&onceToken, ^{
+        _instance = [[super allocWithZone:NULL]init];
+    });
+    return _instance;
+}
 - (void)viewDidLoad {
     [super viewDidLoad];
     ViewController *vc = [[ViewController alloc]init];
@@ -42,14 +52,14 @@
     [self.view addSubview:self.centerViewController.view];
     
     //添加滑动手势
-    UIPanGestureRecognizer *pan = [[UIPanGestureRecognizer alloc]initWithTarget:self action:@selector(handlePan:)];
-    [_centerViewController.view addGestureRecognizer:pan];
-    pan.delegate = self;
+     self.pan = [[UIPanGestureRecognizer alloc]initWithTarget:self action:@selector(handlePan:)];
+    [_centerViewController.view addGestureRecognizer:self.pan];
+    self.pan.delegate = self;
     
     
     //添加点击手势
-    UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(handleTap)];
-    [_centerViewController.view addGestureRecognizer:tap];
+     self.tap = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(handleTap)];
+    [_centerViewController.view addGestureRecognizer:self.tap];
     
     _prevX = 0;
     _maxOffsetX = self.view.frame.size.width * LEFTVIEW_SCALE;
@@ -60,6 +70,7 @@
 -(void)showLeftView
 {
     [self showSideView];
+    self.pan.enabled = YES;
 }
 
 -(UIStatusBarStyle)preferredStatusBarStyle
@@ -117,6 +128,7 @@
         
     }];
     self.isHidden = NO;
+    self.tap.enabled = YES;
 }
 
 -(void)hideSideView
@@ -129,6 +141,7 @@
         
     }];
     self.isHidden = YES;
+    self.tap.enabled = NO;
 }
 
 

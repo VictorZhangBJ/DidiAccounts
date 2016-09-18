@@ -140,7 +140,7 @@
 {
     [self.slider hideSideView];
     [self.slider.centerViewController pushViewController:vc animated:YES];
-    
+    self.slider.pan.enabled = NO;
 
 }
 
