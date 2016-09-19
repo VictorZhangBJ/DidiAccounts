@@ -9,7 +9,6 @@
 #import "InputView.h"
 #import "RootViewController.h"
 #define speechBtnColor
-#import "IFlyManager.h"
 @implementation InputView
 {
     NSTimer* _timer;
@@ -35,12 +34,20 @@
 -(void)configureIFlyManager
 {
     _iFlyManager = [[IFlyManager alloc]init];
-    __weak typeof(self) weakSelf = self;
+    _iFlyManager.delegate = self;
     
-    _iFlyManager.resultBlcok = ^(NSString *resultString){
-        NSLog(@"语言回调的 resultString = %@",resultString);
-    };
 }
+
+#pragma mark - IFlyManagerDelegate
+-(void)endListengingWithString:(NSString *)resultString
+{
+    NSLog(@"回调 resultString = %@",resultString);
+    
+    if ([_delegate respondsToSelector:@selector(didSendVoiceString:)]) {
+        [_delegate didSendVoiceString:resultString];
+    }
+}
+
 -(void)configureInputView
 {
     self.isInputTextMode = YES;
@@ -157,6 +164,7 @@
     NSLog(@"录音按下");
     [self startAudio];
     [_iFlyManager startListening];
+    [[[SlideMenuViewController sharedInstance] pan] setEnabled:NO];
     
 }
 
@@ -166,7 +174,8 @@
     [self endAudio];
     
     [_iFlyManager stopListening];
-    
+    [[[SlideMenuViewController sharedInstance] pan] setEnabled:YES];
+
     
 }
 
@@ -175,6 +184,7 @@
     NSLog(@"录音取消");
     [self endAudio];
     [_iFlyManager cancelListening];
+    [[[SlideMenuViewController sharedInstance] pan] setEnabled:YES];
     
 }
 

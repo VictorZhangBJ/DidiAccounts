@@ -9,7 +9,6 @@
 #import "PopView.h"
 #import "RootViewController/RootViewController.h"
 #import "AppConfigure/AppConfig.h"
-#import "PopViewFirstCell.h"
 #import "PopViewSecondCell.h"
 
 
@@ -137,6 +136,7 @@
     [self.tableView registerNib:[UINib nibWithNibName:@"PopViewFirstCell" bundle:nil] forCellReuseIdentifier:@"PopViewFirstCell"];
     [self.tableView registerNib:[UINib nibWithNibName:@"PopViewSecondCell" bundle:nil] forCellReuseIdentifier:@"PopViewSecondCell"];
     [self.tableView registerClass:[GridViewCell class] forCellReuseIdentifier:@"GridViewCell"];
+    [self.tableView registerClass:[DatePickerCell class] forCellReuseIdentifier:@"DatePickerCell"];
     
     [self addSubview:self.tableView];
     [self.tableView mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -183,6 +183,7 @@
         if (indexPath.row == 0) {
             PopViewFirstCell *cell = (PopViewFirstCell *)[tableView dequeueReusableCellWithIdentifier:@"PopViewFirstCell" forIndexPath:indexPath];
             cell.selectionStyle = UITableViewCellSelectionStyleNone;
+            cell.delegate = self;
             [cell setCellWithMessage:self.message];
             return cell;
         }else{
@@ -199,7 +200,9 @@
             [cell setCellWithMessage:self.message];
             return  cell;
         }else{
-            return nil;
+            DatePickerCell *cell = (DatePickerCell *)[tableView dequeueReusableCellWithIdentifier:@"DatePickerCell" forIndexPath:indexPath];
+            cell.delegate = self;
+            return cell;
         }
     }else{
         UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"Cell" forIndexPath:indexPath];
@@ -224,18 +227,41 @@
     
 }
 
-#pragma  mark - GridViewDelegate
+#pragma mark - PopViewFirstCellDelegate
+-(void)contentDidChange:(NSString *)content
+{
+    self.message.content = content;
+}
+
+-(void)amountDidChange:(NSString *)amount
+{
+    self.message.amounts = [amount doubleValue];
+}
+
+#pragma mark - DatePickerCellDelegate
+-(void)dateDidChange:(NSDate *)date
+{
+    self.message.message_create_date = date;
+    PopViewSecondCell *cell = (PopViewSecondCell *)[self.tableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:1]];
+    [cell setCellWithMessage:self.message];
+}
+
+#pragma mark - GridViewDelegate
 
 -(void)categoryBtnClickWithTag:(NSInteger)tag
 {
     PopViewFirstCell *cell = (PopViewFirstCell *)[self.tableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:0]];
     
     [cell.categoryBtn setImage:[UIImage imageNamed:[[AppConfig gridViewBigButtonNameArray] objectAtIndex:tag]] forState:UIControlStateNormal];
-    cell.categoryLabel.text = [[AppConfig giridViewLabelNameArray] objectAtIndex:tag];
+    self.message.category_number = tag;
+    self.message.category_name = [[AppConfig giridViewLabelNameArray ] objectAtIndex:tag];
+    cell.categoryLabel.text = self.message.category_name;
+
 }
 
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
+    [tableView deselectRowAtIndexPath:indexPath animated:YES];
     if (indexPath.row == 0 && indexPath.section == 0) {
         
         PopViewFirstCell *cell = (PopViewFirstCell *)[tableView cellForRowAtIndexPath:indexPath];
@@ -255,7 +281,7 @@
 
             [UIView animateWithDuration:0.3 delay:0 options:UIViewAnimationOptionCurveEaseOut animations:^{
                 [self mas_updateConstraints:^(MASConstraintMaker *make) {
-                    make.height.equalTo(@300);
+                    make.height.mas_equalTo(self.frame.size.height-172);
                 }];
                 [self layoutIfNeeded];
             } completion:^(BOOL finished) {
@@ -263,22 +289,16 @@
             }];
             
             
-            [_delegate updateHeight:300];
-            
         }else{
             //插入操作
-            
-            [_delegate updateHeight:472];
             
             //改变cell箭头方向，改为向上
             [cell configureCellWithDirecton:YES];
             
-           
-            
             self.tableView.separatorColor = COLOR_GRIDVIEW_CELL;
             [UIView animateWithDuration:0.3 delay:0 options:UIViewAnimationOptionCurveEaseOut animations:^{
                 [self mas_updateConstraints:^(MASConstraintMaker *make) {
-                    make.height.equalTo(@472);
+                    make.height.mas_equalTo(self.frame.size.height+172);
                     
                 }];
                 [self layoutIfNeeded];
@@ -294,6 +314,48 @@
             
         }
         
+    }
+    if (indexPath.section == 1 && indexPath.row == 0) {
+        if ([[self.dataSource objectAtIndex:1] count] == 2) {
+            //删除操作
+            self.tableView.separatorColor = COLOR_POPVIEW_SEPARATOR_LINE;
+
+            
+            [self.tableView beginUpdates];
+            [self.dataSource setObject:@[@"0"] atIndexedSubscript:1];
+            NSIndexPath *indexPath = [NSIndexPath indexPathForRow:1 inSection:1];
+            [self.tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationTop];
+            [self.tableView endUpdates];
+            
+            [UIView animateWithDuration:0.3 delay:0 options:UIViewAnimationOptionCurveEaseOut animations:^{
+                [self mas_updateConstraints:^(MASConstraintMaker *make) {
+                    make.height.mas_equalTo(self.frame.size.height - 216);
+                }];
+                [self layoutIfNeeded];
+            } completion:^(BOOL finished) {
+                
+            }];
+
+        }else{
+            //插入操作
+            self.tableView.separatorColor = COLOR_GRIDVIEW_CELL;
+
+            [UIView animateWithDuration:0.3 delay:0 options:UIViewAnimationOptionCurveEaseOut animations:^{
+                [self mas_updateConstraints:^(MASConstraintMaker *make) {
+                    make.height.mas_equalTo(self.frame.size.height+216);
+                    
+                }];
+                [self layoutIfNeeded];
+            } completion:^(BOOL finished) {
+                
+            }];
+            
+            [self.tableView beginUpdates];
+            [self.dataSource setObject:@[@"0", @"1"] atIndexedSubscript:1];
+            NSIndexPath *indexPath = [NSIndexPath indexPathForRow:1 inSection:1];
+            [self.tableView insertRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationTop];
+            [self.tableView endUpdates];
+        }
     }
 }
 

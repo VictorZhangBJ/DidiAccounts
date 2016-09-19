@@ -17,5 +17,6 @@
 +(instancetype)sharedInstance;
 
 -(MessageItem *)parseStringToMessage:(NSString *)inputText withType:(NSInteger)type;
+-(MessageItem *)parseVoiceStringToMessage:(NSString *)inputText withType:(NSInteger)type;
 
 @end

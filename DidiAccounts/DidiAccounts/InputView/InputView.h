@@ -8,6 +8,9 @@
 
 #import <UIKit/UIKit.h>
 #import <AVFoundation/AVFoundation.h>
+#import "IFlyManager.h"
+#import "SlideMenuViewController.h"
+
 
 typedef NS_ENUM(NSInteger, InputViewType){
     InputViewTypePay,
@@ -23,9 +26,11 @@ typedef NS_ENUM(NSInteger, InputViewType){
 
 -(void)returnKeyClick;
 
+-(void)didSendVoiceString:(NSString *)voiceString;
+
 @end
 
-@interface InputView : UIView<AVAudioRecorderDelegate, UITextFieldDelegate>
+@interface InputView : UIView<AVAudioRecorderDelegate, UITextFieldDelegate, IFlyManagerDelegate>
 
 @property (nonatomic, strong) UITextField *textField;
 @property (nonatomic, strong) UIButton *leftButton;

@@ -407,7 +407,21 @@
     [self showPopViewWithMessage:message];
 }
 
-
+-(void)didSendVoiceString:(NSString *)voiceString
+{
+    //解析字符串
+    int type = 0;
+    if (self.inputView.inputViewType == InputViewTypePay) {
+        type = 0;
+    }else{
+        type = 1;
+    }
+    
+    MessageItem* message = [self.modelManager parseVoiceStringToMessage:voiceString withType:type];
+    [self.inputView.textField resignFirstResponder];
+    self.inputView.textField.text = @"";
+    [self showPopViewWithMessage:message];
+}
 
 -(void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event
 {

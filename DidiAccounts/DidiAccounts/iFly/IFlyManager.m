@@ -127,11 +127,11 @@
     self.result = [self.result stringByAppendingString:resultFromJson];
     if (isLast){
         NSLog(@"听写结果(json)：%@测试",  self.result);
-        _resultBlcok(self.result);
+        if ([_delegate respondsToSelector:@selector(endListengingWithString:)]) {
+            [_delegate endListengingWithString:self.result];
+        }
     }
-//    NSLog(@"=====================================_result=%@",_result);
-//    NSLog(@"=====================================resultFromJson=%@",resultFromJson);
-//    NSLog(@"=====================================isLast=%d",isLast);
+
 }
 
 -(void)onBeginOfSpeech

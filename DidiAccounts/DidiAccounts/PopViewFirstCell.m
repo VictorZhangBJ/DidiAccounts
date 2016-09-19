@@ -26,6 +26,7 @@
     self.contentTextView.contentInset = UIEdgeInsetsMake(0, 0, 0, 0);
     
     self.amountTextView.textContainerInset = UIEdgeInsetsMake(0, 0, 0, 0);
+    self.amountTextView.delegate = self;
     
     [self drawTriangle];
 }
@@ -34,17 +35,28 @@
 
 -(void)textViewDidChange:(UITextView *)textView
 {
-    //计算textView高度
-    CGRect bounds = textView.bounds;
-    CGSize maxSize = CGSizeMake(bounds.size.width, CGFLOAT_MAX);
-    CGSize newSize = [textView sizeThatFits:maxSize];
-    bounds.size = newSize;
-    textView.bounds = bounds;
+    if (textView == self.contentTextView) {
+        //计算textView高度
+        CGRect bounds = textView.bounds;
+        CGSize maxSize = CGSizeMake(bounds.size.width, CGFLOAT_MAX);
+        CGSize newSize = [textView sizeThatFits:maxSize];
+        bounds.size = newSize;
+        textView.bounds = bounds;
+        
+        //让tableView重新计算高度
+        UITableView *tableView = [self tableView];
+        [tableView beginUpdates];
+        [tableView endUpdates];
+        if ([_delegate respondsToSelector:@selector(contentDidChange:)]) {
+            [_delegate contentDidChange:textView.text];
+        }
+    }else{
+        //amount textview
+        if ([_delegate respondsToSelector:@selector(amountDidChange:)]) {
+            [_delegate amountDidChange:textView.text];
+        }
+    }
     
-    //让tableView重新计算高度
-    UITableView *tableView = [self tableView];
-    [tableView beginUpdates];
-    [tableView endUpdates];
 }
 
 -(UITableView *)tableView
@@ -107,11 +119,11 @@
     if (message.type == 0) {
         //支出模式
         self.amountTextView.textColor = COLOR_ICON_GREEN;
-        self.amountTextView.text = [NSString stringWithFormat:@"-%.2f",message.amounts];
+        self.amountTextView.text = [NSString stringWithFormat:@"%.2f",message.amounts];
         self.categoryBtn.backgroundColor = COLOR_ICON_GREEN;
     }else{
         self.amountTextView.textColor = COLOR_ICON_RED;
-        self.amountTextView.text = [NSString stringWithFormat:@"+%.2f",message.amounts];
+        self.amountTextView.text = [NSString stringWithFormat:@"%.2f",message.amounts];
         self.categoryBtn.backgroundColor = COLOR_ICON_RED;
     }
     self.categoryLabel.text = message.category_name;

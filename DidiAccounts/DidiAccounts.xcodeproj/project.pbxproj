@@ -11,6 +11,7 @@
 		5726D1721D8E52C800E8171E /* SettingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5726D1711D8E52C800E8171E /* SettingViewController.m */; };
 		5726D1751D8E568400E8171E /* AdviceViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5726D1741D8E568400E8171E /* AdviceViewController.m */; };
 		5726D1781D8E8C3F00E8171E /* AccountViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5726D1771D8E8C3F00E8171E /* AccountViewController.m */; };
+		5726D17B1D8EA74400E8171E /* DatePickerCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 5726D17A1D8EA74400E8171E /* DatePickerCell.m */; };
 		579F1AD91D70374F002E9631 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 579F1AD81D70374F002E9631 /* main.m */; };
 		579F1ADF1D70374F002E9631 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 579F1ADE1D70374F002E9631 /* ViewController.m */; };
 		579F1AE21D70374F002E9631 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 579F1AE01D70374F002E9631 /* Main.storyboard */; };
@@ -84,6 +85,8 @@
 		5726D1741D8E568400E8171E /* AdviceViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AdviceViewController.m; sourceTree = "<group>"; };
 		5726D1761D8E8C3F00E8171E /* AccountViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AccountViewController.h; sourceTree = "<group>"; };
 		5726D1771D8E8C3F00E8171E /* AccountViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AccountViewController.m; sourceTree = "<group>"; };
+		5726D1791D8EA74400E8171E /* DatePickerCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DatePickerCell.h; sourceTree = "<group>"; };
+		5726D17A1D8EA74400E8171E /* DatePickerCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DatePickerCell.m; sourceTree = "<group>"; };
 		579F1AD41D70374F002E9631 /* DidiAccounts.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = DidiAccounts.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		579F1AD81D70374F002E9631 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		579F1ADD1D70374F002E9631 /* ViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
@@ -368,6 +371,8 @@
 				579F1B961D81093F002E9631 /* PopViewSecondCell.xib */,
 				579F1B991D8171D0002E9631 /* GridViewCell.h */,
 				579F1B9A1D8171D0002E9631 /* GridViewCell.m */,
+				5726D1791D8EA74400E8171E /* DatePickerCell.h */,
+				5726D17A1D8EA74400E8171E /* DatePickerCell.m */,
 			);
 			name = PopView;
 			sourceTree = "<group>";
@@ -570,6 +575,7 @@
 				579F1B5A1D783D48002E9631 /* ISRDataHelper.m in Sources */,
 				579F1B9B1D8171D0002E9631 /* GridViewCell.m in Sources */,
 				579F1B541D7833CF002E9631 /* IFlyManager.m in Sources */,
+				5726D17B1D8EA74400E8171E /* DatePickerCell.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

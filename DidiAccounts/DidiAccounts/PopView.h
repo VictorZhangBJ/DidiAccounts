@@ -9,6 +9,10 @@
 #import <UIKit/UIKit.h>
 #import "GridViewCell.h"
 #import "Model/MessageItem.h"
+#import "DatePickerCell.h"
+#import "PopViewFirstCell.h"
+
+
 @protocol PopViewDelegate <NSObject>
 
 
@@ -22,7 +26,7 @@
 
 @end
 
-@interface PopView : UIView<UITableViewDelegate, UITableViewDataSource, GridViewDelegate>
+@interface PopView : UIView<UITableViewDelegate, UITableViewDataSource, GridViewDelegate, DatePickerCellDelegate, PopViewFirstCellDelegate>
 
 @property (nonatomic, assign) id<PopViewDelegate> delegate;
 

@@ -11,13 +11,18 @@
 #import "IATConfig.h"
 #import "ISRDataHelper.h"
 
+@protocol IFlyManagerDelegate <NSObject>
+
+-(void)endListengingWithString:(NSString *)resultString;
+
+@end
+
 @interface IFlyManager : NSObject<IFlySpeechRecognizerDelegate>
 
 @property (nonatomic, strong) NSString *pcmFilePath;    //音频文件路径
 @property (nonatomic, strong) IFlySpeechRecognizer *iFlySpeechRecognizer;       //不带界面的语音识别对象
 @property (nonatomic, strong) NSString *result;
-
-@property (nonatomic, assign) void (^resultBlcok)(NSString *resultString);
+@property (nonatomic, assign) id<IFlyManagerDelegate> delegate;
 
 //启动听写
 -(void)startListening;
