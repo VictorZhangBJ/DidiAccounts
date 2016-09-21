@@ -24,9 +24,15 @@ typedef NS_ENUM(NSInteger, InputViewType){
 
 -(void)startRecord;
 
+-(void)cancelRecord;
+
 -(void)returnKeyClick;
 
+-(void)volumeDidChange:(NSInteger)volume;
+
 -(void)didSendVoiceString:(NSString *)voiceString;
+
+-(void)speechBtnTouchUpOutside;
 
 @end
 

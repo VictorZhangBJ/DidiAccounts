@@ -20,8 +20,6 @@
 
 -(void)deleteBtnClick;
 
--(void)updateHeight:(CGFloat)height;
-
 -(void)saveMessage:(MessageItem *)message;
 
 @end

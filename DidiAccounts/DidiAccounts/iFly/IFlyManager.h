@@ -15,6 +15,8 @@
 
 -(void)endListengingWithString:(NSString *)resultString;
 
+-(void)volumeDidChange:(NSInteger)volume;
+
 @end
 
 @interface IFlyManager : NSObject<IFlySpeechRecognizerDelegate>

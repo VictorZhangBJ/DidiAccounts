@@ -8,12 +8,17 @@
 
 #import "InputView.h"
 #import "RootViewController.h"
-#define speechBtnColor
+#import "Math.h"
+@interface InputView()
+
+@end
+
 @implementation InputView
 {
     NSTimer* _timer;
     IFlyManager* _iFlyManager;
-    
+    NSInteger _volume;
+    BOOL _isCanceled;
 }
 
 /*
@@ -42,10 +47,18 @@
 -(void)endListengingWithString:(NSString *)resultString
 {
     NSLog(@"回调 resultString = %@",resultString);
-    
     if ([_delegate respondsToSelector:@selector(didSendVoiceString:)]) {
         [_delegate didSendVoiceString:resultString];
     }
+}
+
+-(void)volumeDidChange:(NSInteger)volume
+{
+    NSInteger newVolume = round(volume / 4.285);
+    if (newVolume >= 7) {
+        newVolume = 7;
+    }
+    [_delegate volumeDidChange:newVolume];
 }
 
 -(void)configureInputView
@@ -77,6 +90,7 @@
     [self.speechButton addTarget:self action:@selector(speechBtnTouchDown) forControlEvents:UIControlEventTouchDown];
     [self.speechButton addTarget:self action:@selector(speechBtnTouchUpInside) forControlEvents:UIControlEventTouchUpInside];
     [self.speechButton addTarget:self action:@selector(speechBtnTouchDragExit) forControlEvents:UIControlEventTouchDragExit];
+    [self.speechButton addTarget:self action:@selector(speechBtnTouchUpOutside) forControlEvents:UIControlEventTouchUpOutside];
     
     UIColor *borderColor = [UIColor colorWithRed:0.72 green:0.73 blue:0.75 alpha:1.00];
     self.speechButton.layer.borderColor = borderColor.CGColor;
@@ -165,7 +179,10 @@
     [self startAudio];
     [_iFlyManager startListening];
     [[[SlideMenuViewController sharedInstance] pan] setEnabled:NO];
-    
+    if ([_delegate respondsToSelector:@selector(startRecord)]) {
+        [_delegate startRecord];
+    }
+    _isCanceled = NO;
 }
 
 -(void)speechBtnTouchUpInside
@@ -176,27 +193,30 @@
     [_iFlyManager stopListening];
     [[[SlideMenuViewController sharedInstance] pan] setEnabled:YES];
 
-    
+    if ([_delegate respondsToSelector:@selector(endRecord)]) {
+        [_delegate endRecord];
+    }
+    _isCanceled = NO;
 }
 
 -(void)speechBtnTouchDragExit
 {
     NSLog(@"录音取消");
+    _isCanceled = YES;
     [self endAudio];
     [_iFlyManager cancelListening];
     [[[SlideMenuViewController sharedInstance] pan] setEnabled:YES];
-    
+    if ([_delegate respondsToSelector:@selector(cancelRecord)]) {
+        [_delegate cancelRecord];
+    }
 }
 
-
--(void)detectionVoice
+-(void)speechBtnTouchUpOutside
 {
-    //刷新音量数据
-    [self.audioRecorder updateMeters];
-    
-    //声音的音量
-    CGFloat lowPassResults = pow(10, (0.05 * [self.audioRecorder peakPowerForChannel:0]));
-    //NSLog(@"音量 = %f",lowPassResults);
+    NSLog(@"手松开");
+    if (_isCanceled) {
+        [_delegate speechBtnTouchUpOutside];
+    }
 }
 
 -(void)startAudio
@@ -211,58 +231,6 @@
 {
     [self.speechButton setTitle:@"按住 说话" forState:UIControlStateNormal];
     self.speechButton.backgroundColor = [UIColor colorWithRed:0.95 green:0.95 blue:0.96 alpha:1.00];
-}
-
-//录音部分初始化
--(void)initAudio
-{
-    NSError *error = nil;
-    
-    AVAudioSession *audioSession = [AVAudioSession sharedInstance];
-    [audioSession setCategory:AVAudioSessionCategoryPlayAndRecord error:&error];
-    if (error) {
-        NSLog(@"audioSesson %@ %ld %@",[error domain], [error code], [[error userInfo] description]);
-    }
-    
-    [audioSession setActive:YES error:&error];
-    if (error) {
-        NSLog(@"audioSesson %@ %ld %@",[error domain], [error code], [[error userInfo] description]);
-    }
-    
-    //通过可变字典进行配置项的加载
-    NSMutableDictionary *setAudioDic = [NSMutableDictionary new];
-    
-    //设置录音格式
-    [setAudioDic setValue:@(kAudioFormatMPEG4AAC) forKey:AVFormatIDKey];
-    
-    //设置录音采样率
-    [setAudioDic setValue:@(44100) forKey:AVSampleRateKey];
-    
-    //设置录音通道数
-    [setAudioDic setValue:@(2) forKey:AVNumberOfChannelsKey];
-    
-    //线性采样位数
-    [setAudioDic setValue:@(24) forKey:AVLinearPCMBitDepthKey];
-    
-    //录音的质量
-    [setAudioDic setValue:@(AVAudioQualityHigh) forKey:AVEncoderAudioQualityKey];
-    
-    NSString *cachesURLString = [NSSearchPathForDirectoriesInDomains(NSCachesDirectory, NSUserDomainMask, YES) objectAtIndex:0];
-    NSLog(@"caches = %@",cachesURLString);
-    
-    NSString *filePath = [cachesURLString stringByAppendingPathComponent:@"asreview.pcm"];
-    NSLog(@"filePath = %@",filePath);
-    
-    self.audioPlayURL = [NSURL URLWithString:filePath];
-    self.audioRecorder = [[AVAudioRecorder alloc]initWithURL:_audioPlayURL settings:setAudioDic error:&error];
-    if (error) {
-        NSLog(@"error = %@",error.description);
-    }
-    
-    //开启音量检测
-    _audioRecorder.meteringEnabled = YES;
-    _audioRecorder.delegate = self;
-    
 }
 
 @end

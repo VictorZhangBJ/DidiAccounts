@@ -134,6 +134,13 @@
 
 }
 
+-(void)onVolumeChanged:(int)volume
+{
+    if ([_delegate respondsToSelector:@selector(volumeDidChange:)]) {
+        [_delegate volumeDidChange:volume];
+    }
+}
+
 -(void)onBeginOfSpeech
 {
     NSLog(@"语言听写开始");

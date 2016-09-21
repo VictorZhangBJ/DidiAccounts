@@ -18,6 +18,7 @@
 #import "MessageItem.h"
 #import "AppDelegate.h"
 #import "Model/ModelManager.h"
+#import "VoiceView.h"
 @interface ViewController ()
 {
     NSURL *_audioPlayURL;
@@ -32,7 +33,7 @@
 @property (nonatomic, strong) UIView *grayBackControl;
 @property (nonatomic, strong) ModelManager *modelManager;
 @property RLMArray<MessageItem *><MessageItem> *messages;
-
+@property (nonatomic, strong) VoiceView *voiceView;
 
 @end
 
@@ -139,7 +140,6 @@
     item1.amounts = 293.00;
     item1.category_name = @"餐饮娱乐";
     
-    
     self.messages = _modelManager.user.messages;
 
 }
@@ -237,11 +237,6 @@
     //放下键盘
     [self.popView endEditing:YES];
     [self hidePopView];
-}
--(void)updateHeight:(CGFloat)height
-{
-    
-    
 }
 
 #pragma - mark PopViewDelegate
@@ -379,16 +374,45 @@
     
 }
 
+-(void)initVoiceView
+{
+    self.voiceView = [[VoiceView alloc] init];
+    [self.view addSubview:self.voiceView];
+    [self.voiceView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.size.mas_equalTo(CGSizeMake(150, 150));
+        make.centerX.equalTo(self.view.mas_centerX);
+        make.centerY.equalTo(self.view.mas_centerY);
+    }];
+}
+
 #pragma mark - InputViewDelegate
 
 -(void)endRecord
 {
-    
+    NSLog(@"自然，录音结束");
+    [self.voiceView removeFromSuperview];
 }
 
 -(void)startRecord
 {
-    
+    [self initVoiceView];
+}
+
+-(void)cancelRecord
+{
+    [self.voiceView cancelRecord];
+}
+
+-(void)volumeDidChange:(NSInteger)volume
+{
+    [self.voiceView volumeDidChange:volume];
+}
+
+-(void)speechBtnTouchUpOutside
+{
+    [self.voiceView speechBtnTouchUpOutside];
+    NSLog(@"上滑动取消录音，结束");
+    [self.voiceView removeFromSuperview];
 }
 
 -(void)returnKeyClick
