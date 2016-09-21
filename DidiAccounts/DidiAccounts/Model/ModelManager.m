@@ -154,13 +154,13 @@ static ModelManager* _instance = nil;
     }
     
     MessageItem *message = [[MessageItem alloc]init];
+    [message setDate:[NSDate date]];
     message.category_name = category_name;
     message.category_number = [[AppConfig giridViewLabelNameArray] indexOfObject:category_name];
     message.content = contentString;
     message.amounts = [amountsString doubleValue];
-    message.message_id = [message.message_create_date timeIntervalSince1970];
+    message.message_id = [[NSDate date] timeIntervalSince1970];
     message.type = type;
-    [message setDate:[NSDate date]];
     NSLog(@"messageId = %ld",message.message_id);
     
     return message;

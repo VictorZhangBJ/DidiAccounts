@@ -13,6 +13,6 @@
 @property (nonatomic, strong) UILabel *calenderLabel;
 @property (nonatomic, strong) UILabel *totalLabel;
 
--(void)configureViewWith:(NSInteger)section;
+-(void)configureViewWith:(NSInteger)section meesageArray:(NSArray *)messages;
 
 @end

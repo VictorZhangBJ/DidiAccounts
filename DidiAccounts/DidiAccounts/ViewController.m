@@ -146,15 +146,38 @@
     item1.content = @"星巴克拿铁";
     item1.amounts = 293.00;
     item1.category_name = @"餐饮娱乐";
+    [self configureDataSource];
     
+}
+
+-(void)configureDataSource
+{
     self.messages = [MessageItem allObjects];
+    self.messages = [self.messages sortedResultsUsingProperty:@"dateString" ascending:YES];
+    
+    self.dataSource = [[NSMutableArray alloc]init];
+    NSMutableArray *array = [NSMutableArray new];
+    MessageItem *preMessage = [self.messages objectAtIndex:0];
+    for(MessageItem *message in self.messages){
+        NSLog(@"date = %@",message.dateString);
+        if ([preMessage.dateString isEqualToString:message.dateString]) {
+            [array addObject:message];
+        }else{
+            [self.dataSource addObject:array];
+            array = [NSMutableArray new];
+            [array addObject:message];
+        }
+        preMessage = message;
+    }
+    [self.dataSource addObject:array];
+    
 
 }
 
 -(UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section
 {
     TableHeaderView *headerView = [[TableHeaderView alloc]init];
-    [headerView configureViewWith:section];
+    [headerView configureViewWith:section meesageArray:[self.dataSource objectAtIndex:section]];
     return headerView;
 }
 
@@ -163,22 +186,21 @@
     [self.inputView.textField resignFirstResponder];
 }
 
-
 -(NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
-    return 1;
+    return self.dataSource.count;
 }
 
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    return  self.messages.count;
+    return  [[self.dataSource objectAtIndex:section] count];
 }
 
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     SelfTextCell *cell = (SelfTextCell *)[tableView dequeueReusableCellWithIdentifier:@"SelfTextCell" forIndexPath:indexPath];
    
-    MessageItem *message = [self.messages objectAtIndex:indexPath.row];
+    MessageItem *message = [[self.dataSource objectAtIndex:indexPath.section] objectAtIndex:indexPath.row];
     [cell configureCellWithMessage:message];
     
     if (indexPath.section % 2 ==0) {
@@ -258,13 +280,17 @@
 
 -(void)saveMessage:(MessageItem *)message
 {
+    NSLog(@"保存的message.date = %@",message.dateString);
     [self hidePopView];
     [_modelManager.realm beginWriteTransaction];
     [_modelManager.realm addOrUpdateObject:message];
     [_modelManager.realm commitWriteTransaction];
+    [self configureDataSource];
     [self.tableView reloadData];
-    NSIndexPath *indexPath = [NSIndexPath indexPathForRow:self.messages.count-1 inSection:0];
-    [self.tableView scrollToRowAtIndexPath:indexPath atScrollPosition:UITableViewScrollPositionBottom animated:YES];
+    NSInteger section = self.dataSource.count - 1;
+    NSInteger row = [[self.dataSource objectAtIndex:section] count] - 1;
+    
+    [self.tableView scrollToRowAtIndexPath:[NSIndexPath indexPathForRow:row inSection:section] atScrollPosition:UITableViewScrollPositionBottom animated:YES];
     [self refreshHeaderView];
 }
 //弹出视图

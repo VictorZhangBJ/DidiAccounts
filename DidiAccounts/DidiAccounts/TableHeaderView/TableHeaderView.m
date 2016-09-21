@@ -9,6 +9,8 @@
 #import "TableHeaderView.h"
 #import "AppConfig.h"
 #import "RootViewController.h"
+#import "MessageItem.h"
+#import "ModelManager.h"
 @implementation TableHeaderView
 
 /*
@@ -26,7 +28,7 @@
     return self;
 }
 
--(void)configureViewWith:(NSInteger)section;
+-(void)configureViewWith:(NSInteger)section meesageArray:(NSArray *)messages;
 {
     self.frame = CGRectMake(0, 0, SCREEN_WIDTH, TABLEVIEW_HEADER_HEIGHT);
     //绘制梯形
@@ -75,11 +77,11 @@
     self.calenderLabel = [UILabel new];
     self.calenderLabel.textColor = [UIColor lightGrayColor];
     self.calenderLabel.textAlignment = NSTextAlignmentCenter;
-    self.calenderLabel.font = [UIFont systemFontOfSize:12];
+    self.calenderLabel.font = [UIFont systemFontOfSize:10];
     self.calenderLabel.text = @"09月05日";
     [self addSubview:self.calenderLabel];
     [self.calenderLabel mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.equalTo(calenderBtn.mas_right).offset(3);
+        make.left.equalTo(calenderBtn.mas_right).offset(1);
         make.centerY.equalTo(calenderBtn.mas_centerY).offset(-3);
         make.width.equalTo(@70);
     }];
@@ -134,8 +136,21 @@
         make.right.equalTo(totalView.mas_right);
     }];
     
+    //计算收入总和
+    MessageItem *message = [messages firstObject];
+    RLMResults<MessageItem *> *payResults = [MessageItem objectsWhere:@"dateString = %@ AND type == 0",message.dateString];
+    double payAmounts = [[payResults sumOfProperty:@"amounts"] doubleValue];
     
+    RLMResults<MessageItem *> *incomeResults = [MessageItem objectsWhere:@"dateString = %@ AND type == 1",message.dateString];
+    double incomeAmounts = [[incomeResults sumOfProperty:@"amounts"] doubleValue];
     
+    double totalNumber = incomeAmounts - payAmounts;
+    if (totalNumber >= 0) {
+        self.totalLabel.text = [NSString stringWithFormat:@"+%.2f",totalNumber];
+    }else{
+        self.totalLabel.text = [NSString stringWithFormat:@"%.2f",totalNumber];
+    }
+    self.calenderLabel.text = message.dateString;
     
 }
 
