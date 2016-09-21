@@ -32,7 +32,7 @@
 @property (nonatomic, strong) PopView *popView;
 @property (nonatomic, strong) UIView *grayBackControl;
 @property (nonatomic, strong) ModelManager *modelManager;
-@property RLMArray<MessageItem *><MessageItem> *messages;
+@property RLMResults<MessageItem*> *messages;
 @property (nonatomic, strong) VoiceView *voiceView;
 
 @end
@@ -72,7 +72,6 @@
 
 -(void)insertMessage
 {
-    self.messages = _modelManager.user.messages;
     [self.tableView reloadData];
 
 }
@@ -114,6 +113,14 @@
         make.right.equalTo(self.view.mas_right);
         make.height.mas_equalTo(106);
     }];
+    [self refreshHeaderView];
+}
+
+//刷新支出，收入数据
+-(void)refreshHeaderView
+{
+    self.headerView.payLabel.text = [NSString stringWithFormat:@"%.2f",[_modelManager monthPayWithDate:[NSDate date]]];
+    self.headerView.incomeLabel.text = [NSString stringWithFormat:@"%.2f",[_modelManager monthIncomeWithDate:[NSDate date]]];
 }
 
 -(void)initTableView{
@@ -140,7 +147,7 @@
     item1.amounts = 293.00;
     item1.category_name = @"餐饮娱乐";
     
-    self.messages = _modelManager.user.messages;
+    self.messages = [MessageItem allObjects];
 
 }
 
@@ -253,12 +260,12 @@
 {
     [self hidePopView];
     [_modelManager.realm beginWriteTransaction];
-    [_modelManager.user.messages addObject:message];
+    [_modelManager.realm addOrUpdateObject:message];
     [_modelManager.realm commitWriteTransaction];
-    self.messages = _modelManager.user.messages;
     [self.tableView reloadData];
     NSIndexPath *indexPath = [NSIndexPath indexPathForRow:self.messages.count-1 inSection:0];
     [self.tableView scrollToRowAtIndexPath:indexPath atScrollPosition:UITableViewScrollPositionBottom animated:YES];
+    [self refreshHeaderView];
 }
 //弹出视图
 -(void)showPopViewWithMessage:(MessageItem *)message

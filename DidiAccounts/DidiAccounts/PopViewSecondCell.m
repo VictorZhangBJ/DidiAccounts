@@ -23,10 +23,7 @@
 
 -(void)setCellWithMessage:(MessageItem *)message
 {
-    NSDateFormatter *formatter = [[NSDateFormatter alloc]init];
-    [formatter setDateFormat:@"yyyy-MM-dd"];
-    NSString *dateString = [formatter stringFromDate:message.message_create_date];
-    self.calenderLabel.text = dateString;
+    self.calenderLabel.text = message.dateString;
 }
 
 @end

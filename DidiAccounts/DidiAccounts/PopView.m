@@ -83,12 +83,11 @@
     self.payBtn = [UIButton buttonWithType:UIButtonTypeSystem];
     [self.payBtn setTitle:@"支出" forState:UIControlStateNormal];
     self.payBtn.titleLabel.font = [UIFont systemFontOfSize:12];
+    [self.payBtn addTarget:self action:@selector(payBtnClick) forControlEvents:UIControlEventTouchUpInside];
     
-    self.payBtn.layer.borderColor = COLOR_ICON_RED.CGColor;
     self.payBtn.layer.borderWidth = 1.0;
     self.payBtn.layer.cornerRadius = 12;
     
-    [self.payBtn setTitleColor:COLOR_ICON_RED forState:UIControlStateNormal];
     [self addSubview:self.payBtn];
     [self.payBtn mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.equalTo(spaceOne.mas_right);
@@ -99,11 +98,10 @@
     //收入按钮
     self.incomeBtn = [UIButton buttonWithType:UIButtonTypeSystem];
     self.incomeBtn.titleLabel.font = [UIFont systemFontOfSize:12];
-    [self.incomeBtn setTitleColor:COLOR_ICON_GREEN forState:UIControlStateNormal];
     [self.incomeBtn setTitle:@"收入" forState:UIControlStateNormal];
+    [self.incomeBtn addTarget:self action:@selector(incomeBtnClick) forControlEvents:UIControlEventTouchUpInside];
     
     self.incomeBtn.layer.borderWidth = 1.0f;
-    self.incomeBtn.layer.borderColor = COLOR_ICON_GREEN.CGColor;
     self.incomeBtn.layer.cornerRadius = 12;
     
     [self addSubview:self.incomeBtn];
@@ -114,6 +112,9 @@
         make.height.equalTo(self.payBtn.mas_height);
     }];
     
+    //配置payBtn、incomeBtn 颜色
+    [self configureBtnColorWithType:message.type];
+    
     [spaceTwo mas_makeConstraints:^(MASConstraintMaker *make) {
         make.width.equalTo(spaceOne.mas_width);
         make.centerY.equalTo(self.mas_centerY);
@@ -122,6 +123,35 @@
     }];
     
     [self initTableView];
+}
+-(void)configureBtnColorWithType:(NSInteger)type
+{
+    if (type == 0) {
+        //支持
+        self.payBtn.layer.borderColor = COLOR_ICON_GREEN.CGColor;
+        [self.payBtn setTitleColor:COLOR_ICON_GREEN forState:UIControlStateNormal];
+        self.incomeBtn.layer.borderColor = [UIColor lightGrayColor].CGColor;
+        [self.incomeBtn setTitleColor:[UIColor lightGrayColor] forState:UIControlStateNormal];
+    }else{
+        self.payBtn.layer.borderColor = [UIColor lightGrayColor].CGColor;
+        [self.payBtn setTitleColor:[UIColor lightGrayColor] forState:UIControlStateNormal];
+        self.incomeBtn.layer.borderColor = COLOR_ICON_RED.CGColor;
+        [self.incomeBtn setTitleColor:COLOR_ICON_RED forState:UIControlStateNormal];
+    }
+}
+
+-(void)payBtnClick
+{
+    self.message.type = 0;
+    [self configureBtnColorWithType:self.message.type];
+    [self.tableView reloadData];
+}
+
+-(void)incomeBtnClick
+{
+    self.message.type = 1;
+    [self configureBtnColorWithType:self.message.type];
+    [self.tableView reloadData];
 }
 
 -(void)initTableView
@@ -241,7 +271,7 @@
 #pragma mark - DatePickerCellDelegate
 -(void)dateDidChange:(NSDate *)date
 {
-    self.message.message_create_date = date;
+    [self.message setDate:date];
     PopViewSecondCell *cell = (PopViewSecondCell *)[self.tableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:1]];
     [cell setCellWithMessage:self.message];
 }

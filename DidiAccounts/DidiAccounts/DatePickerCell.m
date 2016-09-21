@@ -44,7 +44,9 @@
     self.datePicker.maximumDate = [NSDate date];
     self.datePicker.minimumDate = [NSDate dateWithTimeIntervalSince1970:0];
     [self.datePicker addTarget:self action:@selector(dateDidChange) forControlEvents:UIControlEventValueChanged];
-    
+    [self.datePicker setCalendar:[NSCalendar currentCalendar]];
+    [self.datePicker setTimeZone:[NSTimeZone defaultTimeZone]];
+
 }
 
 -(void)dateDidChange

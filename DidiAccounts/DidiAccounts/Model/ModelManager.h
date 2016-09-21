@@ -18,5 +18,7 @@
 
 -(MessageItem *)parseStringToMessage:(NSString *)inputText withType:(NSInteger)type;
 -(MessageItem *)parseVoiceStringToMessage:(NSString *)inputText withType:(NSInteger)type;
+-(double)monthPayWithDate:(NSDate *)date;
+-(double)monthIncomeWithDate:(NSDate *)date;
 
 @end
