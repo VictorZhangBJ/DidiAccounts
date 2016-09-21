@@ -23,6 +23,8 @@
 {
     NSURL *_audioPlayURL;
     AVAudioRecorder *_audioRecorder;
+    BOOL _isEditMode;
+    NSIndexPath *_deletedIndexPath;
 }
 
 @property (nonatomic, strong) InputView *inputView;
@@ -130,7 +132,7 @@
     [self.tableView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.equalTo(self.view.mas_left);
         make.right.equalTo(self.view.mas_right);
-        make.top.equalTo(self.headerView.mas_bottom);
+        make.top.equalTo(self.headerView.mas_bottom).offset(0);
         make.bottom.mas_equalTo(self.view.mas_bottom).offset(-50);
     }];
 
@@ -229,7 +231,23 @@
 
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
+    _isEditMode = YES;
+    _deletedIndexPath = indexPath;
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
+    MessageItem *message = [[self.dataSource objectAtIndex:indexPath.section] objectAtIndex:indexPath.row];
+    MessageItem *newMessage = [[MessageItem alloc]init];
+    newMessage.category_name = message.category_name;
+    newMessage.category_number = message.category_number;
+    newMessage.amounts = message.amounts;
+    newMessage.message_id = message.message_id;
+    newMessage.message_create_date = message.message_create_date;
+    newMessage.dateString = message.dateString;
+    newMessage.month = message.month;
+    newMessage.type = message.type;
+    newMessage.content = message.content;
+    newMessage.owner = message.owner;
+    [self showPopViewWithMessage:newMessage];
+    
 }
 
 -(void)initPopView
@@ -272,7 +290,21 @@
 
 -(void)deleteBtnClick
 {
-    
+    if (_isEditMode) {
+        [self hidePopView];
+        RLMResults<MessageItem *> *results = [MessageItem objectsWhere:@"message_id == %d",self.popView.message.message_id];
+        MessageItem *deletedMessage = [results firstObject];
+        [_modelManager.realm beginWriteTransaction];
+        [_modelManager.realm deleteObject:deletedMessage];
+        [_modelManager.realm commitWriteTransaction];
+        [self.tableView beginUpdates];
+        [self configureDataSource];
+        [self.tableView deleteRowsAtIndexPaths:@[_deletedIndexPath] withRowAnimation:UITableViewRowAnimationTop];
+        [self.tableView endUpdates];
+        
+    }else{
+        [self hidePopView];
+    }
 }
 -(void)closePopView{
     [self hidePopView];
@@ -450,6 +482,7 @@
 
 -(void)returnKeyClick
 {
+    _isEditMode = NO;
     //解析字符串
     int type = 0;
     if (self.inputView.inputViewType == InputViewTypePay) {
@@ -466,6 +499,7 @@
 
 -(void)didSendVoiceString:(NSString *)voiceString
 {
+    _isEditMode = NO;
     //解析字符串
     int type = 0;
     if (self.inputView.inputViewType == InputViewTypePay) {
@@ -513,14 +547,14 @@
 //        [UIView setAnimationCurve:curve];
 //        self.view.frame = frame;
         NSLog(@"tranfromY = %f",transformY);
-        [self.inputView mas_updateConstraints:^(MASConstraintMaker *make) {
-            make.height.equalTo(@50);
-            make.bottom.equalTo(self.view.mas_bottom).offset(transformY);
-            make.centerX.equalTo(self.view.mas_centerX);
-            make.left.equalTo(self.view.mas_left);
-        }];
+//        [self.inputView mas_updateConstraints:^(MASConstraintMaker *make) {
+//            make.height.equalTo(@50);
+//            make.bottom.equalTo(self.view.mas_bottom).offset(transformY);
+//            make.centerX.equalTo(self.view.mas_centerX);
+//            make.left.equalTo(self.view.mas_left);
+//        }];
+        self.view.transform = CGAffineTransformMakeTranslation(0, transformY);
         
-        //self.tableView.contentOffset = CGPointMake(0, -transformY);
         [self.view layoutIfNeeded];
     }];
     
