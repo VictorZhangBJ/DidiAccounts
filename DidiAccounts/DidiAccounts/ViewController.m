@@ -19,6 +19,7 @@
 #import "AppDelegate.h"
 #import "Model/ModelManager.h"
 #import "VoiceView.h"
+#import "BillsViewController.h"
 @interface ViewController ()
 {
     NSURL *_audioPlayURL;
@@ -116,6 +117,14 @@
         make.height.mas_equalTo(106);
     }];
     [self refreshHeaderView];
+    [self.headerView.detailBtn addTarget:self action:@selector(detailBtnClick) forControlEvents:UIControlEventTouchUpInside];
+}
+
+-(void)detailBtnClick
+{
+    BillsViewController *bvc = [[BillsViewController alloc]init];
+    [self.navigationController pushViewController:bvc animated:YES];
+    [self.slide.pan setEnabled:NO];
 }
 
 //刷新支出，收入数据

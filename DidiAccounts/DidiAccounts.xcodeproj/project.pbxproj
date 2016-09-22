@@ -13,6 +13,8 @@
 		5726D1781D8E8C3F00E8171E /* AccountViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5726D1771D8E8C3F00E8171E /* AccountViewController.m */; };
 		5726D17B1D8EA74400E8171E /* DatePickerCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 5726D17A1D8EA74400E8171E /* DatePickerCell.m */; };
 		5726D17E1D91128000E8171E /* VoiceView.m in Sources */ = {isa = PBXBuildFile; fileRef = 5726D17D1D91128000E8171E /* VoiceView.m */; };
+		5726D1851D93AEC500E8171E /* BillsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5726D1841D93AEC500E8171E /* BillsViewController.m */; };
+		5726D1881D93B55300E8171E /* BillsHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 5726D1871D93B55300E8171E /* BillsHeaderView.m */; };
 		579F1AD91D70374F002E9631 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 579F1AD81D70374F002E9631 /* main.m */; };
 		579F1ADF1D70374F002E9631 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 579F1ADE1D70374F002E9631 /* ViewController.m */; };
 		579F1AE21D70374F002E9631 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 579F1AE01D70374F002E9631 /* Main.storyboard */; };
@@ -90,6 +92,10 @@
 		5726D17A1D8EA74400E8171E /* DatePickerCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DatePickerCell.m; sourceTree = "<group>"; };
 		5726D17C1D91128000E8171E /* VoiceView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VoiceView.h; sourceTree = "<group>"; };
 		5726D17D1D91128000E8171E /* VoiceView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VoiceView.m; sourceTree = "<group>"; };
+		5726D1831D93AEC500E8171E /* BillsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BillsViewController.h; sourceTree = "<group>"; };
+		5726D1841D93AEC500E8171E /* BillsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BillsViewController.m; sourceTree = "<group>"; };
+		5726D1861D93B55300E8171E /* BillsHeaderView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BillsHeaderView.h; sourceTree = "<group>"; };
+		5726D1871D93B55300E8171E /* BillsHeaderView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BillsHeaderView.m; sourceTree = "<group>"; };
 		579F1AD41D70374F002E9631 /* DidiAccounts.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = DidiAccounts.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		579F1AD81D70374F002E9631 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		579F1ADD1D70374F002E9631 /* ViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
@@ -188,6 +194,17 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		5726D1821D93AEB700E8171E /* Bills */ = {
+			isa = PBXGroup;
+			children = (
+				5726D1831D93AEC500E8171E /* BillsViewController.h */,
+				5726D1841D93AEC500E8171E /* BillsViewController.m */,
+				5726D1861D93B55300E8171E /* BillsHeaderView.h */,
+				5726D1871D93B55300E8171E /* BillsHeaderView.m */,
+			);
+			name = Bills;
+			sourceTree = "<group>";
+		};
 		579F1ACB1D70374F002E9631 = {
 			isa = PBXGroup;
 			children = (
@@ -211,6 +228,7 @@
 		579F1AD61D70374F002E9631 /* DidiAccounts */ = {
 			isa = PBXGroup;
 			children = (
+				5726D1821D93AEB700E8171E /* Bills */,
 				579F1B8B1D7FF6E1002E9631 /* PopView */,
 				579F1B801D7EC85A002E9631 /* Model */,
 				579F1B7C1D7E67A9002E9631 /* TableHeaderView */,
@@ -571,6 +589,7 @@
 				579F1B2F1D75917F002E9631 /* SelfTextCell.m in Sources */,
 				579F1B7B1D7D5583002E9631 /* HeaderView.m in Sources */,
 				579F1AD91D70374F002E9631 /* main.m in Sources */,
+				5726D1881D93B55300E8171E /* BillsHeaderView.m in Sources */,
 				579F1B6A1D7953DA002E9631 /* LeftViewController.m in Sources */,
 				579F1B9E1D869EF5002E9631 /* ModelManager.m in Sources */,
 				579F1B721D7D49A4002E9631 /* AppConfig.m in Sources */,
@@ -580,6 +599,7 @@
 				5726D1751D8E568400E8171E /* AdviceViewController.m in Sources */,
 				579F1B5A1D783D48002E9631 /* ISRDataHelper.m in Sources */,
 				579F1B9B1D8171D0002E9631 /* GridViewCell.m in Sources */,
+				5726D1851D93AEC500E8171E /* BillsViewController.m in Sources */,
 				579F1B541D7833CF002E9631 /* IFlyManager.m in Sources */,
 				5726D17B1D8EA74400E8171E /* DatePickerCell.m in Sources */,
 			);
