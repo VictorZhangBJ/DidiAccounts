@@ -167,10 +167,12 @@
     self.messages = [self.messages sortedResultsUsingProperty:@"dateString" ascending:YES];
     
     self.dataSource = [[NSMutableArray alloc]init];
+    if (self.messages.count == 0) {
+        return;
+    }
     NSMutableArray *array = [NSMutableArray new];
     MessageItem *preMessage = [self.messages objectAtIndex:0];
     for(MessageItem *message in self.messages){
-        NSLog(@"date = %@",message.dateString);
         if ([preMessage.dateString isEqualToString:message.dateString]) {
             [array addObject:message];
         }else{

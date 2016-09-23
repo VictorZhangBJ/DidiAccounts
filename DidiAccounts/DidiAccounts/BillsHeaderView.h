@@ -15,4 +15,6 @@
 @property (nonatomic, strong) UILabel *payPropertionLabel;
 @property (nonatomic, strong) UILabel *incomePropertionLabel;
 @property (nonatomic, strong) UIButton *triangleBtn;
+@property (nonatomic, strong) UIView *dateView;
+
 @end

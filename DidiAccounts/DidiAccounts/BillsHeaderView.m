@@ -13,7 +13,6 @@
 @property (nonatomic, strong) UIView *topView;
 @property (nonatomic, strong) UIView *bottomView;
 @property (nonatomic, strong) UIView *scoresView;
-@property (nonatomic, strong) UIView *dateView;
 
 @end
 
