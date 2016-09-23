@@ -12,9 +12,10 @@
 #import "ViewController.h"
 #import "SlideMenuViewController.h"
 #define IFLY_APPID @"57c64650"
+#import "GuideView.h"
 
 @interface AppDelegate ()
-
+@property (nonatomic, strong) GuideView *guideView;
 @end
 
 @implementation AppDelegate
@@ -28,9 +29,26 @@
     
     [self initiFlyMSC];
     [self initBaiduMob];
+    [self initGuideView];
     return YES;
 }
 
+-(void)initGuideView
+{
+    NSDictionary *isLaunched = [[NSUserDefaults standardUserDefaults] objectForKey:@"isLaunched"];
+    if (isLaunched && 0) {
+        NSLog(@"已经启动过，不用加载引导页");
+        return;
+    }
+    NSLog(@"第一次启动");
+    [[NSUserDefaults standardUserDefaults] setObject:@"YES" forKey:@"isLaunched"];
+    [[NSUserDefaults standardUserDefaults] synchronize];
+    self.guideView = [[GuideView alloc] initWithFrame:[UIScreen mainScreen].bounds registerClick:^{
+    } skipClick:^{
+        [self.guideView dissmissFromSuperView];
+    }];
+    [self.window addSubview:self.guideView];
+}
 /**
  * 启动科大讯飞SDK
  */
