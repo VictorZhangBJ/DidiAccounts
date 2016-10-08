@@ -36,7 +36,7 @@
 -(void)initGuideView
 {
     NSDictionary *isLaunched = [[NSUserDefaults standardUserDefaults] objectForKey:@"isLaunched"];
-    if (isLaunched && 0) {
+    if (isLaunched) {
         NSLog(@"已经启动过，不用加载引导页");
         return;
     }

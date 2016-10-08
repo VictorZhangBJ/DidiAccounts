@@ -46,7 +46,7 @@
     
     [super viewDidLoad];
     self.view.backgroundColor = COLOR_SELF_TEXT_CELL_ODD_COLOR;
-    self.title = @"滴滴记账";
+    self.title = @"嘀嗒记账";
     [self initModel];
     [self initHeaderView];
     [self initTableView];

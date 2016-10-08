@@ -8,6 +8,7 @@
 
 #import "SettingViewController.h"
 #import "AccountViewController.h"
+#import "BudgetViewController.h"
 
 @interface SettingViewController ()<UITableViewDelegate, UITableViewDataSource>
 
@@ -108,7 +109,9 @@
         [self.navigationController pushViewController:avc animated:YES];
     }else{
         if (indexPath.row == 0) {
-            
+            //预算
+            BudgetViewController *bvc = [[BudgetViewController alloc]init];
+            [self.navigationController pushViewController:bvc animated:YES];
         }else{
             
         }
