@@ -8,6 +8,7 @@
 
 #import <Foundation/Foundation.h>
 #import "MessageItem.h"
+#import "CategoryItem.h"
 
 @interface ModelManager : NSObject
 

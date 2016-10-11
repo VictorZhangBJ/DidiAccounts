@@ -54,7 +54,7 @@
     CGFloat spaceWidth = (self.frame.size.width - btnWidth * 5 - offsetX * 2) / 4.0;
     
     
-    for(int i = 0; i < 11; i++){
+    for(int i = 0; i < btnNameArray.count; i++){
         UIButton *btn = [UIButton buttonWithType:UIButtonTypeCustom];
         [btn setImage:[UIImage imageNamed:[btnNameArray objectAtIndex:i]] forState:UIControlStateNormal];
         CGFloat pointX = (i % 5) * (spaceWidth + btnWidth) + offsetX + 7;       //修正

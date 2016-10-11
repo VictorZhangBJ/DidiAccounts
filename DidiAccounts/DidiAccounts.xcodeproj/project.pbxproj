@@ -17,6 +17,9 @@
 		5726D1881D93B55300E8171E /* BillsHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 5726D1871D93B55300E8171E /* BillsHeaderView.m */; };
 		5726D18C1D95232400E8171E /* GuideView.m in Sources */ = {isa = PBXBuildFile; fileRef = 5726D18B1D95232400E8171E /* GuideView.m */; };
 		5726D18F1DA8E66C00E8171E /* BudgetViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5726D18E1DA8E66C00E8171E /* BudgetViewController.m */; };
+		5726D1921DA9E32A00E8171E /* CategoryItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 5726D1911DA9E32A00E8171E /* CategoryItem.m */; };
+		5726D1951DAA391800E8171E /* CategoryViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5726D1941DAA391800E8171E /* CategoryViewController.m */; };
+		5726D1981DACD93F00E8171E /* AddCategoryViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5726D1971DACD93F00E8171E /* AddCategoryViewController.m */; };
 		579F1AD91D70374F002E9631 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 579F1AD81D70374F002E9631 /* main.m */; };
 		579F1ADF1D70374F002E9631 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 579F1ADE1D70374F002E9631 /* ViewController.m */; };
 		579F1AE21D70374F002E9631 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 579F1AE01D70374F002E9631 /* Main.storyboard */; };
@@ -102,6 +105,12 @@
 		5726D18B1D95232400E8171E /* GuideView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = GuideView.m; path = ../../../Shenxianyoucai/Shenxianyoucai/CustomWidget/GuideView/GuideView.m; sourceTree = "<group>"; };
 		5726D18D1DA8E66C00E8171E /* BudgetViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BudgetViewController.h; sourceTree = "<group>"; };
 		5726D18E1DA8E66C00E8171E /* BudgetViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BudgetViewController.m; sourceTree = "<group>"; };
+		5726D1901DA9E32A00E8171E /* CategoryItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CategoryItem.h; sourceTree = "<group>"; };
+		5726D1911DA9E32A00E8171E /* CategoryItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CategoryItem.m; sourceTree = "<group>"; };
+		5726D1931DAA391800E8171E /* CategoryViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CategoryViewController.h; sourceTree = "<group>"; };
+		5726D1941DAA391800E8171E /* CategoryViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CategoryViewController.m; sourceTree = "<group>"; };
+		5726D1961DACD93F00E8171E /* AddCategoryViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AddCategoryViewController.h; sourceTree = "<group>"; };
+		5726D1971DACD93F00E8171E /* AddCategoryViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AddCategoryViewController.m; sourceTree = "<group>"; };
 		579F1AD41D70374F002E9631 /* DidiAccounts.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = DidiAccounts.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		579F1AD81D70374F002E9631 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		579F1ADD1D70374F002E9631 /* ViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
@@ -365,6 +374,10 @@
 				5726D1771D8E8C3F00E8171E /* AccountViewController.m */,
 				5726D18D1DA8E66C00E8171E /* BudgetViewController.h */,
 				5726D18E1DA8E66C00E8171E /* BudgetViewController.m */,
+				5726D1931DAA391800E8171E /* CategoryViewController.h */,
+				5726D1941DAA391800E8171E /* CategoryViewController.m */,
+				5726D1961DACD93F00E8171E /* AddCategoryViewController.h */,
+				5726D1971DACD93F00E8171E /* AddCategoryViewController.m */,
 			);
 			path = LeftViewController;
 			sourceTree = "<group>";
@@ -395,6 +408,8 @@
 				579F1B821D7EC869002E9631 /* MessageItem.m */,
 				579F1B9C1D869EF5002E9631 /* ModelManager.h */,
 				579F1B9D1D869EF5002E9631 /* ModelManager.m */,
+				5726D1901DA9E32A00E8171E /* CategoryItem.h */,
+				5726D1911DA9E32A00E8171E /* CategoryItem.m */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -597,6 +612,7 @@
 				579F1B971D81093F002E9631 /* PopViewSecondCell.m in Sources */,
 				579F1B501D76DA20002E9631 /* InputView.m in Sources */,
 				579F1B571D783420002E9631 /* IATConfig.m in Sources */,
+				5726D1981DACD93F00E8171E /* AddCategoryViewController.m in Sources */,
 				579F1ADF1D70374F002E9631 /* ViewController.m in Sources */,
 				579F1B921D8022DB002E9631 /* PopViewFirstCell.m in Sources */,
 				579F1B8E1D7FF6EE002E9631 /* PopView.m in Sources */,
@@ -613,8 +629,10 @@
 				579F1B6A1D7953DA002E9631 /* LeftViewController.m in Sources */,
 				579F1B9E1D869EF5002E9631 /* ModelManager.m in Sources */,
 				579F1B721D7D49A4002E9631 /* AppConfig.m in Sources */,
+				5726D1921DA9E32A00E8171E /* CategoryItem.m in Sources */,
 				579F1B831D7EC869002E9631 /* MessageItem.m in Sources */,
 				5726D1781D8E8C3F00E8171E /* AccountViewController.m in Sources */,
+				5726D1951DAA391800E8171E /* CategoryViewController.m in Sources */,
 				579F1B6D1D7957B7002E9631 /* SlideMenuViewController.m in Sources */,
 				5726D1751D8E568400E8171E /* AdviceViewController.m in Sources */,
 				579F1B5A1D783D48002E9631 /* ISRDataHelper.m in Sources */,

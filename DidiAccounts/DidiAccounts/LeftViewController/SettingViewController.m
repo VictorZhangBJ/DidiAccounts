@@ -9,6 +9,7 @@
 #import "SettingViewController.h"
 #import "AccountViewController.h"
 #import "BudgetViewController.h"
+#import "CategoryViewController.h"
 
 @interface SettingViewController ()<UITableViewDelegate, UITableViewDataSource>
 
@@ -113,7 +114,8 @@
             BudgetViewController *bvc = [[BudgetViewController alloc]init];
             [self.navigationController pushViewController:bvc animated:YES];
         }else{
-            
+            CategoryViewController *cvc = [[CategoryViewController alloc]init];
+            [self.navigationController pushViewController:cvc animated:YES];
         }
     }
 }
