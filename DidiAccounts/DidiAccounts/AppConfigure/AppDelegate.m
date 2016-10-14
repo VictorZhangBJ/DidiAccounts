@@ -11,10 +11,14 @@
 #import "BaiduMobStat.h"
 #import "ViewController.h"
 #import "SlideMenuViewController.h"
-#define IFLY_APPID @"57c64650"
 #import "GuideView.h"
+#import "WXApi.h"
+#import "AppConfig.h"
 
-@interface AppDelegate ()
+#define WeiXin_APPID @"wx50a2226f3e8b59a9"
+#define IFLY_APPID @"57c64650"
+
+@interface AppDelegate ()<WXApiDelegate>
 @property (nonatomic, strong) GuideView *guideView;
 @end
 
@@ -30,9 +34,14 @@
     [self initiFlyMSC];
     [self initBaiduMob];
     [self initGuideView];
+    [self initWeiXin];
     return YES;
 }
 
+-(void)initWeiXin
+{
+    [WXApi registerApp:WeiXin_APPID];
+}
 -(void)initGuideView
 {
     NSDictionary *isLaunched = [[NSUserDefaults standardUserDefaults] objectForKey:@"isLaunched"];
@@ -69,6 +78,36 @@
     statTracker.shortAppVersion = [[[NSBundle mainBundle] infoDictionary] objectForKey:@"CFBundleShortVersionString"];
     [statTracker startWithAppId:@"42852e1b8b"];
 }
+
+-(BOOL)application:(UIApplication *)application handleOpenURL:(NSURL *)url
+{
+    return [WXApi handleOpenURL:url delegate:self];
+}
+
+-(BOOL)application:(UIApplication *)app openURL:(NSURL *)url options:(NSDictionary<NSString *,id> *)options
+{
+    return [WXApi handleOpenURL:url delegate:self];
+}
+
+//授权后回调
+-(void)onResp:(BaseResp *)resp
+{
+    if([resp isKindOfClass:[SendMessageToWXResp class]])
+    {
+        NSLog(@"分享到微信回调");
+    }else{
+        SendAuthResp *aresp = (SendAuthResp *)resp;
+        NSLog(@"erroCode = %d",aresp.errCode);
+        if (aresp.errCode == 0) {
+            NSDictionary *codeDic = @{@"code": aresp.code,
+                                      @"lang":[[NSLocale preferredLanguages] objectAtIndex:0],
+                                      @"country": [NSLocale currentLocale].localeIdentifier};
+            [[NSNotificationCenter defaultCenter] postNotificationName:NOTIFICATION_CODE_RESPONSE object:codeDic];
+        }
+    }
+    
+}
+
 
 - (void)applicationWillResignActive:(UIApplication *)application {
     // Sent when the application is about to move from active to inactive state. This can occur for certain types of temporary interruptions (such as an incoming phone call or SMS message) or when the user quits the application and it begins the transition to the background state.

@@ -20,6 +20,10 @@
 		5726D1921DA9E32A00E8171E /* CategoryItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 5726D1911DA9E32A00E8171E /* CategoryItem.m */; };
 		5726D1951DAA391800E8171E /* CategoryViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5726D1941DAA391800E8171E /* CategoryViewController.m */; };
 		5726D1981DACD93F00E8171E /* AddCategoryViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5726D1971DACD93F00E8171E /* AddCategoryViewController.m */; };
+		5726D19B1DAE3F8700E8171E /* LoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5726D19A1DAE3F8700E8171E /* LoginViewController.m */; };
+		5726D1A01DAF489E00E8171E /* libWeChatSDK.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 5726D19D1DAF489E00E8171E /* libWeChatSDK.a */; };
+		5726D1A21DAF77CE00E8171E /* libsqlite3.0.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 5726D1A11DAF77CE00E8171E /* libsqlite3.0.tbd */; };
+		5726D1A51DAF7B7300E8171E /* APIManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 5726D1A41DAF7B7300E8171E /* APIManager.m */; };
 		579F1AD91D70374F002E9631 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 579F1AD81D70374F002E9631 /* main.m */; };
 		579F1ADF1D70374F002E9631 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 579F1ADE1D70374F002E9631 /* ViewController.m */; };
 		579F1AE21D70374F002E9631 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 579F1AE01D70374F002E9631 /* Main.storyboard */; };
@@ -111,6 +115,14 @@
 		5726D1941DAA391800E8171E /* CategoryViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CategoryViewController.m; sourceTree = "<group>"; };
 		5726D1961DACD93F00E8171E /* AddCategoryViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AddCategoryViewController.h; sourceTree = "<group>"; };
 		5726D1971DACD93F00E8171E /* AddCategoryViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AddCategoryViewController.m; sourceTree = "<group>"; };
+		5726D1991DAE3F8700E8171E /* LoginViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoginViewController.h; sourceTree = "<group>"; };
+		5726D19A1DAE3F8700E8171E /* LoginViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LoginViewController.m; sourceTree = "<group>"; };
+		5726D19D1DAF489E00E8171E /* libWeChatSDK.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libWeChatSDK.a; sourceTree = "<group>"; };
+		5726D19E1DAF489E00E8171E /* WXApi.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WXApi.h; sourceTree = "<group>"; };
+		5726D19F1DAF489E00E8171E /* WXApiObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WXApiObject.h; sourceTree = "<group>"; };
+		5726D1A11DAF77CE00E8171E /* libsqlite3.0.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libsqlite3.0.tbd; path = usr/lib/libsqlite3.0.tbd; sourceTree = SDKROOT; };
+		5726D1A31DAF7B7300E8171E /* APIManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = APIManager.h; sourceTree = "<group>"; };
+		5726D1A41DAF7B7300E8171E /* APIManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = APIManager.m; sourceTree = "<group>"; };
 		579F1AD41D70374F002E9631 /* DidiAccounts.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = DidiAccounts.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		579F1AD81D70374F002E9631 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		579F1ADD1D70374F002E9631 /* ViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
@@ -187,7 +199,9 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				5726D1A21DAF77CE00E8171E /* libsqlite3.0.tbd in Frameworks */,
 				579F1B641D792B1E002E9631 /* Security.framework in Frameworks */,
+				5726D1A01DAF489E00E8171E /* libWeChatSDK.a in Frameworks */,
 				579F1B621D792B14002E9631 /* libstdc++.tbd in Frameworks */,
 				579F1B601D792B06002E9631 /* JavaScriptCore.framework in Frameworks */,
 				579F1B4C1D76B7ED002E9631 /* iflyMSC.framework in Frameworks */,
@@ -229,6 +243,25 @@
 			name = UserGuide;
 			sourceTree = "<group>";
 		};
+		5726D19C1DAF489E00E8171E /* Weixin */ = {
+			isa = PBXGroup;
+			children = (
+				5726D19D1DAF489E00E8171E /* libWeChatSDK.a */,
+				5726D19E1DAF489E00E8171E /* WXApi.h */,
+				5726D19F1DAF489E00E8171E /* WXApiObject.h */,
+			);
+			path = Weixin;
+			sourceTree = "<group>";
+		};
+		5726D1A61DB081BB00E8171E /* APIMananger */ = {
+			isa = PBXGroup;
+			children = (
+				5726D1A31DAF7B7300E8171E /* APIManager.h */,
+				5726D1A41DAF7B7300E8171E /* APIManager.m */,
+			);
+			name = APIMananger;
+			sourceTree = "<group>";
+		};
 		579F1ACB1D70374F002E9631 = {
 			isa = PBXGroup;
 			children = (
@@ -252,6 +285,7 @@
 		579F1AD61D70374F002E9631 /* DidiAccounts */ = {
 			isa = PBXGroup;
 			children = (
+				5726D19C1DAF489E00E8171E /* Weixin */,
 				5726D1891D95230300E8171E /* UserGuide */,
 				5726D1821D93AEB700E8171E /* Bills */,
 				579F1B8B1D7FF6E1002E9631 /* PopView */,
@@ -265,6 +299,7 @@
 				579F1B4D1D76DA0D002E9631 /* InputView */,
 				579F1B041D743B97002E9631 /* ChatCell */,
 				579F1AFD1D73E11F002E9631 /* RootViewController */,
+				5726D1A61DB081BB00E8171E /* APIMananger */,
 				579F1AF51D73E117002E9631 /* AppConfigure */,
 				579F1ADD1D70374F002E9631 /* ViewController.h */,
 				579F1ADE1D70374F002E9631 /* ViewController.m */,
@@ -378,6 +413,8 @@
 				5726D1941DAA391800E8171E /* CategoryViewController.m */,
 				5726D1961DACD93F00E8171E /* AddCategoryViewController.h */,
 				5726D1971DACD93F00E8171E /* AddCategoryViewController.m */,
+				5726D1991DAE3F8700E8171E /* LoginViewController.h */,
+				5726D19A1DAE3F8700E8171E /* LoginViewController.m */,
 			);
 			path = LeftViewController;
 			sourceTree = "<group>";
@@ -445,6 +482,7 @@
 		DF102870FAF5B14981AF18CE /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				5726D1A11DAF77CE00E8171E /* libsqlite3.0.tbd */,
 				579F1B631D792B1E002E9631 /* Security.framework */,
 				579F1B611D792B14002E9631 /* libstdc++.tbd */,
 				579F1B5F1D792B06002E9631 /* JavaScriptCore.framework */,
@@ -610,6 +648,7 @@
 				5726D17E1D91128000E8171E /* VoiceView.m in Sources */,
 				579F1B071D752BBA002E9631 /* MyTextCell.m in Sources */,
 				579F1B971D81093F002E9631 /* PopViewSecondCell.m in Sources */,
+				5726D19B1DAE3F8700E8171E /* LoginViewController.m in Sources */,
 				579F1B501D76DA20002E9631 /* InputView.m in Sources */,
 				579F1B571D783420002E9631 /* IATConfig.m in Sources */,
 				5726D1981DACD93F00E8171E /* AddCategoryViewController.m in Sources */,
@@ -625,6 +664,7 @@
 				579F1B2F1D75917F002E9631 /* SelfTextCell.m in Sources */,
 				579F1B7B1D7D5583002E9631 /* HeaderView.m in Sources */,
 				579F1AD91D70374F002E9631 /* main.m in Sources */,
+				5726D1A51DAF7B7300E8171E /* APIManager.m in Sources */,
 				5726D1881D93B55300E8171E /* BillsHeaderView.m in Sources */,
 				579F1B6A1D7953DA002E9631 /* LeftViewController.m in Sources */,
 				579F1B9E1D869EF5002E9631 /* ModelManager.m in Sources */,
@@ -767,6 +807,7 @@
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/DidiAccounts/BaiduMob",
+					"$(PROJECT_DIR)/DidiAccounts/Weixin",
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.shenxian.DidiAccounts;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -792,6 +833,7 @@
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/DidiAccounts/BaiduMob",
+					"$(PROJECT_DIR)/DidiAccounts/Weixin",
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.shenxian.DidiAccounts;
 				PRODUCT_NAME = "$(TARGET_NAME)";

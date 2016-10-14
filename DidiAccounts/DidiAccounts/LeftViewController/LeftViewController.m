@@ -12,13 +12,13 @@
 #import "AboutViewController.h"
 #import "SettingViewController.h"
 #import "SlideMenuViewController.h"
+#import "LoginViewController.h"
 @interface LeftViewController ()<UITableViewDelegate, UITableViewDataSource>
 @property (nonatomic, strong) UIImageView *userImageView;
 @property (nonatomic, strong) UILabel *userNameLabel;
 @property (nonatomic, strong) UITableView *tableView;
 @property (nonatomic, strong) NSArray *dataSource;
 @property (nonatomic, strong) NSArray *imageNameArray;
-
 
 @end
 
@@ -52,6 +52,9 @@
         make.top.equalTo(backView.mas_top).offset(90);
         make.size.mas_equalTo(CGSizeMake(66, 66));
     }];
+    UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(userClick)];
+    self.userImageView.userInteractionEnabled = YES;
+    [self.userImageView addGestureRecognizer:tap];
     
     self.userNameLabel = [UILabel new];
     self.userNameLabel.textAlignment = NSTextAlignmentCenter;
@@ -80,6 +83,12 @@
     self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
     self.tableView.bounces = NO;
     self.imageNameArray = @[@"about", @"advice", @"setting"];
+}
+
+-(void)userClick
+{
+    LoginViewController *lvc = [[LoginViewController alloc]init];
+    [self.slider presentViewController:lvc animated:YES completion:nil];
 }
 
 -(NSInteger)numberOfSectionsInTableView:(UITableView *)tableView

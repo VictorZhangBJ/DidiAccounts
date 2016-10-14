@@ -75,7 +75,7 @@ static SlideMenuViewController* _instance = nil;
 
 -(UIStatusBarStyle)preferredStatusBarStyle
 {
-    return UIStatusBarStyleLightContent;
+    return UIStatusBarStyleDefault;
 }
 
 -(void)handleTap

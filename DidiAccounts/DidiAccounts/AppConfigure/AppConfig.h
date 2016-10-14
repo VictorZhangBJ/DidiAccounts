@@ -23,7 +23,6 @@
 #define COLOR_ADVICEVIEW_BACKGROUND [UIColor colorWithRed:0.96 green:0.97 blue:0.98 alpha:1.00]
 #define COLOR_SETTINGVIEW_CELL_SEPARATOR [UIColor colorWithRed:0.96 green:0.97 blue:0.98 alpha:1.00]
 
-
 #define SCREEN_WIDTH [UIScreen mainScreen].bounds.size.width  
 #define LEFTVIEW_SCALE 2.0/3.0
 
@@ -36,6 +35,7 @@
 
 #define NOTIFICATION_INSERT_MESSAGE @"NOTIFICATION_INSERT_MESSAGE"
 #define NOTIFICATION_SHOW_LEFTVIEW @"NOTIFICATION_SHOW_LEFTVIEW"
+#define NOTIFICATION_CODE_RESPONSE @"NOTIFICATION_CODE_RESPONSE"
 
 @interface AppConfig : NSObject
 
