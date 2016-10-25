@@ -20,6 +20,7 @@
 #import "Model/ModelManager.h"
 #import "VoiceView.h"
 #import "BillsViewController.h"
+#import "APIManager.h"
 @interface ViewController ()
 {
     NSURL *_audioPlayURL;
@@ -53,6 +54,7 @@
     [self initInputView];
     [self initNavigation];
     [self initNotification];
+    //[self createUser];
 }
 
 -(void)viewDidAppear:(BOOL)animated
@@ -67,6 +69,12 @@
     [[BaiduMobStat defaultStat] pageviewEndWithName:@"记账页面"];
 }
 
+-(void)createUser
+{
+    [[APIManager sharedInstance] createUser:^(BOOL isSuccess) {
+        
+    }];
+}
 -(void)initNotification
 {
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillChangeFrame:) name:UIKeyboardWillChangeFrameNotification object:nil];
@@ -76,7 +84,12 @@
 -(void)insertMessage
 {
     [self.tableView reloadData];
+    [self refreshPoints];
+}
 
+-(void)refreshPoints
+{
+    self.headerView.scoresLabel.text = [[ModelManager sharedInstance] getPoints];
 }
 
 -(void)initModel
@@ -118,6 +131,7 @@
     }];
     [self refreshHeaderView];
     [self.headerView.detailBtn addTarget:self action:@selector(detailBtnClick) forControlEvents:UIControlEventTouchUpInside];
+    self.headerView.scoresLabel.text = [[ModelManager sharedInstance] getPoints];
 }
 
 -(void)detailBtnClick
@@ -335,6 +349,7 @@
     
     [self.tableView scrollToRowAtIndexPath:[NSIndexPath indexPathForRow:row inSection:section] atScrollPosition:UITableViewScrollPositionBottom animated:YES];
     [self refreshHeaderView];
+    [self refreshPoints];
 }
 //弹出视图
 -(void)showPopViewWithMessage:(MessageItem *)message

@@ -27,9 +27,10 @@ static ModelManager* _instance = nil;
 {
     static dispatch_once_t onceToken;
     dispatch_once(&onceToken, ^{
-        _instance = [[super allocWithZone:NULL]init];
+        _instance = [[super alloc]init];
         [_instance configureRealm];
     });
+
     return _instance;
 }
 
@@ -46,23 +47,50 @@ static ModelManager* _instance = nil;
                         @"九": @"9",
                         @"两": @"2",
                         @"十": @"10"};
-    self.realm = [RLMRealm defaultRealm];
+   self.realm = [RLMRealm defaultRealm];
     RLMResults<User *>  *results = [User allObjects];
     if (results.count == 0) {
         NSLog(@"不存在user用户，创建一个");
         self.user = [[User alloc]init];
-        self.user.user_name = @"victor_test";
-        self.user.user_create_date = [NSDate date];
-        self.user.user_id = 1;
-        [self.realm beginWriteTransaction];
-        [self.realm addObject:self.user];
-        [self.realm commitWriteTransaction];
+        self.user.user_id = @"1";
+        self.user.isLogin = @"0";
+        [[RLMRealm defaultRealm] beginWriteTransaction];
+        [[RLMRealm defaultRealm]  addObject:self.user];
+        [[RLMRealm defaultRealm]  commitWriteTransaction];
     }else{
         NSLog(@"存在user用户");
         self.user = [results firstObject];
+        NSLog(@"user = %@",self.user);
     }
 }
 
+-(NSString *)defaultSid;
+{
+    NSMutableString *str = [NSMutableString new];
+    for(int i = 0; i< 32; i++){
+        [str appendString:@"1"];
+    }
+    return str;
+}
+
+-(NSString *)UUID
+{
+    NSString *UUID = [[NSUserDefaults standardUserDefaults] objectForKey:@"UUID"];
+    if (UUID == nil) {
+        UUID = [NSUUID UUID].UUIDString;
+        [[NSUserDefaults standardUserDefaults] setObject:UUID forKey:@"UUID"];
+        [[NSUserDefaults standardUserDefaults] synchronize];
+    }
+    return UUID;
+}
+
+//获取积分的方法
+-(NSString *)getPoints
+{
+    RLMResults<MessageItem *> *monthMessages = [MessageItem allObjects];
+    NSString *points = [NSString stringWithFormat:@"积分: %ld",monthMessages.count];
+    return points;
+}
 -(double)monthPayWithDate:(NSDate *)date
 {
     return [self monthNumberWithDate:date type:0];

@@ -16,10 +16,13 @@
 @property (nonatomic, strong) User *user;
 
 +(instancetype)sharedInstance;
+-(void)configureRealm;
+
 
 -(MessageItem *)parseStringToMessage:(NSString *)inputText withType:(NSInteger)type;
 -(MessageItem *)parseVoiceStringToMessage:(NSString *)inputText withType:(NSInteger)type;
 -(double)monthPayWithDate:(NSDate *)date;
 -(double)monthIncomeWithDate:(NSDate *)date;
+-(NSString *)getPoints;
 
 @end

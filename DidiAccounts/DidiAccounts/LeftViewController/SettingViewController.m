@@ -10,11 +10,13 @@
 #import "AccountViewController.h"
 #import "BudgetViewController.h"
 #import "CategoryViewController.h"
-
+#import <AFNetworking/UIImageView+AFNetworking.h>
+#import "ModelManager.h"
 @interface SettingViewController ()<UITableViewDelegate, UITableViewDataSource>
 
 @property (nonatomic, strong) UITableView *tableView;
 @property (nonatomic, strong) NSArray *dataSource;
+@property (nonatomic) BOOL isLogin;
 @end
 
 @implementation SettingViewController
@@ -24,7 +26,14 @@
     self.title = @"设置";
     self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc]initWithImage:[UIImage imageNamed:@"back_arrow"] style:UIBarButtonItemStylePlain target:self action:@selector(backBtnClick)];
     self.view.backgroundColor = [UIColor whiteColor];
+    NSString *login = [ModelManager sharedInstance].user.isLogin;
+    if ([login isEqualToString:@"1"]) {
+        self.isLogin = YES;
+    }else{
+        self.isLogin = NO;
+    }
     [self initTableView];
+
     // Do any additional setup after loading the view.
 }
 
@@ -39,52 +48,81 @@
         make.edges.equalTo(self.view);
     }];
     [self.tableView registerClass:[UITableViewCell class] forCellReuseIdentifier:@"Cell"];
-    self.dataSource = @[@[@"账号管理"],
-                        @[@"月预算设置", @"细分类目管理"]];
+    if (self.isLogin) {
+        self.dataSource = @[@[@"账号管理"],
+                            @[@"月预算设置", @"细分类目管理"]];
+    }else{
+        self.dataSource = @[@"月预算设置", @"细分类目管理"];
+        
+    }
+   
 }
 
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"Cell" forIndexPath:indexPath];
-    cell.textLabel.text = [[self.dataSource objectAtIndex:indexPath.section] objectAtIndex:indexPath.row];
+    if (self.isLogin) {
+        cell.textLabel.text = [[self.dataSource objectAtIndex:indexPath.section] objectAtIndex:indexPath.row];
+
+    }else{
+        cell.textLabel.text = [self.dataSource objectAtIndex:indexPath.row];
+    }
     cell.textLabel.textColor = [UIColor lightGrayColor];
     cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
-    if (indexPath.section == 0) {
-        UIImageView *headImageView = [[UIImageView alloc]initWithImage:[UIImage imageNamed:@"user"]];
-        [cell.contentView addSubview:headImageView];
-        [headImageView mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.size.mas_equalTo(CGSizeMake(28, 28));
-            make.centerY.equalTo(cell.contentView.mas_centerY);
-            make.right.equalTo(cell.contentView.mas_right).offset(-10);
-        }];
-        headImageView.layer.masksToBounds = YES;
-        headImageView.layer.cornerRadius = 14;
-    }else{
-        if (indexPath.row == 0) {
+    
+    if (self.isLogin) {
+        if (indexPath.section == 0) {
+            UIImageView *headImageView = [[UIImageView alloc]initWithImage:[UIImage imageNamed:@"user"]];
+            [cell.contentView addSubview:headImageView];
+            [headImageView mas_makeConstraints:^(MASConstraintMaker *make) {
+                make.size.mas_equalTo(CGSizeMake(28, 28));
+                make.centerY.equalTo(cell.contentView.mas_centerY);
+                make.right.equalTo(cell.contentView.mas_right).offset(-10);
+            }];
+            headImageView.layer.masksToBounds = YES;
+            headImageView.layer.cornerRadius = 14;
+            NSString *imageUrl = [ModelManager sharedInstance].user.avatar;
+            [headImageView setImageWithURL:[NSURL URLWithString:imageUrl] placeholderImage:[UIImage imageNamed:@"user"]];
             
         }else{
-            UIView *line = [UIView new];
-            line.backgroundColor = COLOR_SETTINGVIEW_CELL_SEPARATOR;
-            [cell addSubview:line];
-            [line mas_makeConstraints:^(MASConstraintMaker *make) {
-                make.top.equalTo(cell.mas_top).offset(0);
-                make.left.equalTo(cell.mas_left);
-                make.right.equalTo(cell.mas_right);
-                make.height.equalTo(@1);
-            }];
+            if (indexPath.row == 0) {
+                
+            }else{
+                UIView *line = [UIView new];
+                line.backgroundColor = COLOR_SETTINGVIEW_CELL_SEPARATOR;
+                [cell addSubview:line];
+                [line mas_makeConstraints:^(MASConstraintMaker *make) {
+                    make.top.equalTo(cell.mas_top).offset(0);
+                    make.left.equalTo(cell.mas_left);
+                    make.right.equalTo(cell.mas_right);
+                    make.height.equalTo(@1);
+                }];
+            }
         }
+
     }
+    
     return cell;
 }
 
 -(NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
-    return self.dataSource.count;
+    if (self.isLogin) {
+        return self.dataSource.count;
+
+    }else{
+        return 1;
+    }
 }
 
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    return [[self.dataSource objectAtIndex:section] count];
+    if (self.isLogin) {
+        return [[self.dataSource objectAtIndex:section] count];
+
+    }else{
+        return self.dataSource.count;
+    }
 }
 -(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {

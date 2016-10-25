@@ -33,7 +33,14 @@ RLM_ARRAY_TYPE(MessageItem)
 @interface User : RLMObject
 
 @property NSDate *user_create_date;
-@property NSInteger user_id;
-@property NSString *user_name;
+@property NSString *user_id;
+@property NSString *nick_name;
+@property NSString *token;
+@property NSString *avatar;
+@property NSString *userMode;
+@property NSString *points;
+@property NSString *sid;
+@property NSString *isLogin;
 
 @end
+

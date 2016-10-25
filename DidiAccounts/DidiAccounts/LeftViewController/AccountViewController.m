@@ -7,6 +7,8 @@
 //
 
 #import "AccountViewController.h"
+#import "ModelManager.h"
+#import <AFNetworking/UIImageView+AFNetworking.h>
 
 @interface AccountViewController ()<UITableViewDelegate, UITableViewDataSource>
 
@@ -39,6 +41,9 @@
     }];
     self.headImageView.layer.masksToBounds = YES;
     self.headImageView.layer.cornerRadius = 30;
+    
+    NSString *imageUrl = [ModelManager sharedInstance].user.avatar;
+    [self.headImageView setImageWithURL:[NSURL URLWithString:imageUrl] placeholderImage:[UIImage imageNamed:@"user"]];
     
     self.tableView = [[UITableView alloc]initWithFrame:CGRectZero style:UITableViewStyleGrouped];
     [self.tableView registerClass:[UITableViewCell class] forCellReuseIdentifier:@"Cell"];
@@ -86,6 +91,9 @@
 
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
+    
+    NSString *nickName = [ModelManager sharedInstance].user.nick_name;
+
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"Cell" forIndexPath:indexPath];
     if (indexPath.section == 0) {
         cell.textLabel.text = [[self.dataSource objectAtIndex:0] objectAtIndex:indexPath.row];
@@ -99,7 +107,7 @@
             make.right.equalTo(cell.contentView.mas_right).offset(-20);
         }];
         if (indexPath.row == 0) {
-            label.text = @"Victor";
+            label.text = nickName;
         }else{
             UIView *line = [UIView new];
             line.backgroundColor = COLOR_SETTINGVIEW_CELL_SEPARATOR;
@@ -110,13 +118,14 @@
                 make.right.equalTo(cell.mas_right);
                 make.height.equalTo(@1);
             }];
-            label.text = @"815998382@qq.com";
+            label.text = nickName;
         }
         
         
     }else{
         UIButton *logoutBtn = [UIButton buttonWithType:UIButtonTypeSystem];
         [logoutBtn setTitle:@"退出登录" forState:UIControlStateNormal];
+        [logoutBtn addTarget:self action:@selector(logoutBtnClick) forControlEvents:UIControlEventTouchUpInside];
         [logoutBtn setTitleColor:COLOR_NAVIGATION_BAR forState:UIControlStateNormal];
         [cell.contentView addSubview:logoutBtn];
         [logoutBtn mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -127,6 +136,16 @@
     
     
     return cell;
+}
+
+-(void)logoutBtnClick
+{
+    [[ModelManager sharedInstance].realm beginWriteTransaction];
+    [User createOrUpdateInRealm:[ModelManager sharedInstance].realm withValue:@{@"user_id": @"1",@"isLogin": @"0"}];
+    
+    [[ModelManager sharedInstance].realm commitWriteTransaction];
+    [self.navigationController popToRootViewControllerAnimated:YES];
+    [[NSNotificationCenter defaultCenter] postNotificationName:NOTIFICATION_LOGOUT object:nil];
 }
 
 - (void)didReceiveMemoryWarning {

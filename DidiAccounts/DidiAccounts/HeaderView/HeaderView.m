@@ -207,7 +207,7 @@
     self.scoresLabel.textColor = COLOR_HEADERVIEW_PAY_LABEL;
     self.scoresLabel.font = [UIFont systemFontOfSize:11];
     self.scoresLabel.textAlignment = NSTextAlignmentLeft;
-    self.scoresLabel.text = @"积分: 128494";
+    self.scoresLabel.text = @"积分: 0";
     [self.scoresView addSubview: self.scoresLabel];
     [self.scoresLabel mas_makeConstraints:^(MASConstraintMaker *make) {
         make.centerY.equalTo(self.scoresView.mas_centerY);

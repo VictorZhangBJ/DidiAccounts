@@ -19,7 +19,13 @@
     [super viewDidLoad];
     self.view.backgroundColor = [UIColor whiteColor];
     [self initView];
-    // Do any additional setup after loading the view.
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(loginSuccess) name:NOTIFICATION_LOGIN_SUCCESS object:nil];
+}
+
+-(void)loginSuccess
+{
+    NSLog(@"登录界面，收到通知，消失");
+    [self dismissViewControllerAnimated:YES completion:nil];
 }
 -(void)initView
 {
@@ -81,7 +87,7 @@
 -(void)loginBtnClick
 {
     [[APIManager sharedInstance] getCodeFromWeChat:^(NSDictionary *codeDic) {
-        NSLog(@"收到code = %@",codeDic);
+        
     }];
 }
 - (void)didReceiveMemoryWarning {

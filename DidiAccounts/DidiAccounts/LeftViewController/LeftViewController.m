@@ -13,6 +13,9 @@
 #import "SettingViewController.h"
 #import "SlideMenuViewController.h"
 #import "LoginViewController.h"
+#import "ModelManager.h"
+#import <AFNetworking/UIImageView+AFNetworking.h>
+
 @interface LeftViewController ()<UITableViewDelegate, UITableViewDataSource>
 @property (nonatomic, strong) UIImageView *userImageView;
 @property (nonatomic, strong) UILabel *userNameLabel;
@@ -29,6 +32,22 @@
     self.view.backgroundColor = COLOR_LEFTVIEW_BACKGROUND;
     // Do any additional setup after loading the view.
     [self initTableView];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(loginSuccess) name:NOTIFICATION_LOGIN_SUCCESS object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(logout) name:NOTIFICATION_LOGOUT object:nil];
+
+}
+
+-(void)logout
+{
+    [self refreshUser];
+}
+
+-(void)loginSuccess
+{
+    NSString *imageUrl = [ModelManager sharedInstance].user.avatar;
+    NSString *nickName = [ModelManager sharedInstance].user.nick_name;
+    [self.userImageView setImageWithURL:[NSURL URLWithString:imageUrl] placeholderImage:[UIImage imageNamed:@"user"]];
+    self.userNameLabel.text = nickName;
 }
 
 -(void)initTableView
@@ -43,7 +62,6 @@
     }];
     
     self.userImageView = [[UIImageView alloc]init];
-    [self.userImageView setImage:[UIImage imageNamed:@"user"]];
     self.userImageView.layer.masksToBounds = YES;
     self.userImageView.layer.cornerRadius = 33.0;
     [backView addSubview:self.userImageView];
@@ -60,12 +78,14 @@
     self.userNameLabel.textAlignment = NSTextAlignmentCenter;
     self.userNameLabel.font = [UIFont systemFontOfSize:17];
     self.userNameLabel.textColor = [UIColor whiteColor];
-    self.userNameLabel.text = @"Victor";
     [backView addSubview:self.userNameLabel];
     [self.userNameLabel mas_makeConstraints:^(MASConstraintMaker *make) {
         make.centerX.equalTo(backView.mas_centerX);
         make.top.equalTo(self.userImageView.mas_bottom).offset(3);
     }];
+    
+   
+    [self refreshUser];
     
     self.tableView = [[UITableView alloc]initWithFrame:CGRectZero style:UITableViewStylePlain];
     self.tableView.delegate = self;
@@ -83,6 +103,21 @@
     self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
     self.tableView.bounces = NO;
     self.imageNameArray = @[@"about", @"advice", @"setting"];
+}
+
+-(void)refreshUser
+{
+    NSString *imageUrl = [ModelManager sharedInstance].user.avatar;
+    NSString *nickName = [ModelManager sharedInstance].user.nick_name;
+    NSString *isLogin = [ModelManager sharedInstance].user.isLogin;
+    if ([isLogin isEqualToString:@"1"]) {
+        //登录状态
+        [self.userImageView setImageWithURL:[NSURL URLWithString:imageUrl] placeholderImage:[UIImage imageNamed:@"user"]];
+        self.userNameLabel.text = nickName;
+    }else{
+        self.userImageView.image = [UIImage imageNamed:@"user"];
+        self.userNameLabel.text = @"";
+    }
 }
 
 -(void)userClick
